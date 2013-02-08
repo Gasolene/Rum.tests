@@ -1,0 +1,184 @@
+<!--/*--><![CDATA[/*><!--*/
+
+.gridview {
+  width: 100%;
+  border-spacing: 0px;
+}
+
+.gridview a {
+  text-decoration: none;
+  color: #290e03;
+}
+
+.gridview caption {
+  text-align: center;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 54px;
+  height: 54px;
+  background-color: #290e03;
+}
+
+.gridview thead th,
+.gridview thead td {
+  height: 42px;
+  line-height: 16px;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  color: #290e03;
+  border-top: 1px solid #FFFFFF;
+  border-bottom: 1px solid #FFFFFF;
+  background-color: #cbcbcb;
+}
+
+.gridview thead td {
+  background-color: #eaeaea;
+  white-space: nowrap;
+  border-bottom: none;
+}
+
+.gridview tbody td {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-top: 1px solid #cecece;
+}
+
+.gridview thead tr,
+.gridview tbody tr {
+  border-left: 1px solid red;
+  border-right: 1px solid red;
+}
+
+.gridview tbody tr {
+  position: relative;
+  background-color: #FFFFFF;
+}
+
+.gridview tbody tr.row_alt {
+  background-color: #F7F7F7;
+}
+
+.gridview tfoot {
+  position: absolute;
+  bottom: -60px;
+  left: 50%;
+}
+
+.gridview tfoot tr {
+  height: 1px;
+}
+
+.gridview tfoot tr td {
+  height: 40px;
+  line-height: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background: none;
+  margin-left: -1px;
+}
+
+.gridview tfoot .pagenumbers {
+  height: 60px;
+}
+
+.gridview tfoot .pages {
+  display: block;
+  clear: left;
+  float: left;
+  position: relative;
+  right: 50%;
+}
+
+.gridview tfoot a,
+.gridview tfoot .page,
+.gridview tfoot .prev,
+.gridview tfoot .next {
+  display: block;
+  position: relative;
+  float: left;
+  line-height: 35px;
+  text-align: center;
+  color: #ffffff;
+  font-weight: bold;
+  background-image: url(images/button.png);
+  background-repeat: no-repeat;
+  background-position: left;
+  width: 34px;
+  height: 35px;
+  margin-left: 2px;
+  margin-right: 2px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.gridview tfoot a:hover,
+.gridview tfoot a:active,
+.gridview tfoot .current {
+  background-image: url(images/button_active.png);
+}
+
+.gridview tfoot a.disabled,
+.gridview tfoot a.disabled:before {
+  background-image: url(images/button.png);
+  cursor: default;
+  display: inline;
+  color: #999999;
+}
+
+.gridview tfoot .current {
+  cursor: default;
+}
+
+.gridview tfoot .prev:before {
+  color: #ffffff;
+  content: "<<           ";
+}
+
+.gridview tfoot .next:before {
+  color: #ffffff;
+  content: ">>           ";
+}
+
+.gridview .summary {
+  display: none;
+}
+
+/* Controls */
+
+.gridview .edit,
+.gridview .delete {
+  width: 56px;
+}
+
+.gridview .delete .button {
+  background-color: #b3210b;
+}
+
+.gridview thead .button {
+  display: inline;
+  float: none;
+  background: none;
+  border: 0px solid;
+  background-image: url(images/go.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  text-indent: -10000px;
+  margin: 0px;
+  width: 29px;
+  height: 24px;
+}
+
+.gridview thead .textbox {
+  margin: 0px;
+  width: 50%;
+  height: 22px;
+  border: none;
+  padding: 0px;
+  background-color: #ffffff;
+}
+
+/*]]>*/-->

@@ -1,0 +1,136 @@
+<!--/*--><![CDATA[/*><!--*/
+
+.gridview {
+  width: 100%;
+  border:1px solid #dcdcdc;
+  margin-bottom: 20px;
+  border-collapse: collapse;
+}
+
+.gridview thead a {
+  text-decoration: none;
+  color: #7F7F7F;
+}
+
+.gridview caption {
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+	background-image: -ms-linear-gradient(top, #ededed, #dfdfdf);
+	background-color:#ededed;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+	border:1px solid #dcdcdc;
+	border-bottom:0px solid;
+	color:#777777;
+	font-size:15px;
+	font-weight: bold;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #ffffff;
+	text-align: left;
+	padding-left: 20px;
+}
+
+.gridview thead th,
+.gridview thead td {
+  line-height: 18px;
+  font-size: 13px;
+  text-align: left;
+  color: #7F7F7F;
+  font-weight: normal;
+  border-bottom:1px dotted #a6a6a6;
+  white-space: nowrap;
+}
+
+.gridview th,
+.gridview td {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding: 0px;
+  font-size: 12px;
+  line-height: 18px;
+  padding-left: 10px;
+  
+}
+
+.gridview tbody tr:hover {
+  background-color: #DDDDDD;
+  cursor: pointer;
+}
+
+.gridview .row_alt {
+  background-color: #F7F7F7;
+}
+
+.gridview tfoot {
+  /*background-image: url(images/dot.png);*/
+  background-position: 0 80px;
+  background-repeat: repeat-x;
+}
+
+.gridview tfoot tr td {
+  line-height: 18px;
+  padding-left: 10px;
+  padding-right: 10px;
+  white-space: nowrap;
+}
+
+.gridview tfoot .footer td {
+  /* border-bottom:1px dotted #aac9ce; */
+}
+
+.gridview .pagenumbers {
+}
+
+.gridview tfoot .pages {
+}
+
+.gridview tfoot .page {
+}
+
+.gridview tfoot a.disabled {
+  display: inline;
+  color: #999999;
+}
+
+.gridview tfoot .prev {
+}
+
+.gridview tfoot .next {
+}
+
+.gridview .summary {
+}
+
+/* Controls */
+
+.gridview .checkbox {
+  width: 40px;
+}
+
+.gridview thead .button {
+  background: none;
+  border: none;
+  background-image: url(images/funnel.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  text-indent: -10000px;
+  width: 32px;
+  height: 32px;
+}
+
+.gridview thead .textbox {
+  margin: 0px;
+  width: 50%;
+  height: 20px;
+  text-shadow: #ffffff 0px 0px 4px;
+  border: 1px solid #677d81;
+  background: none;
+}
+
+/*]]>*/-->

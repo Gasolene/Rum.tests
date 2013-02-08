@@ -1,0 +1,170 @@
+<!--/*--><![CDATA[/*><!--*/
+
+.gridview {
+  width: 100%;
+  border:1px solid #a6a6a6;
+  margin-bottom: 20px;
+  border-collapse: collapse;
+}
+
+.gridview a {
+  text-decoration: none;
+  color: #7F7F7F;
+}
+
+.gridview caption {
+  text-align: left;
+  color: #1f497d;
+  font-size: 24px;
+  line-height: 32px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  border: 1px solid #a6a6a6;
+  border-bottom: 0px solid;
+  background-color: #c6d9f1;
+}
+
+.gridview thead th,
+.gridview thead td {
+  line-height: 18px;
+  font-size: 13px;
+  text-align: left;
+  color: #7F7F7F;
+  font-weight: normal;
+  border-bottom:1px dotted #a6a6a6;
+  white-space: nowrap;
+}
+
+.gridview th,
+.gridview td {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding: 0px;
+  line-height: 27px;
+  height: 40px;
+  padding-left: 20px;
+}
+
+.gridview tbody tr:hover {
+  background-color: #DDDDDD;
+  cursor: pointer;
+}
+
+.gridview .row_alt {
+  background-color: #F7F7F7;
+}
+
+.gridview tfoot {
+}
+
+.gridview tfoot tr td {
+  height: 40px;
+  line-height: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.gridview tfoot .footer td {
+  /* border-bottom:1px dotted #aac9ce; */
+}
+
+.gridview .pagenumbers {
+}
+
+.gridview tfoot .pages {
+}
+
+.gridview tfoot .page {
+}
+
+.gridview tfoot a.disabled {
+  display: inline;
+  color: #999999;
+}
+
+.gridview tfoot .prev {
+}
+
+.gridview tfoot .next {
+}
+
+.gridview .summary {
+}
+
+/* Controls */
+
+.gridview .checkbox {
+  width: 40px;
+}
+
+.gridview thead .button {
+  background: none;
+  border: none;
+  background-image: url(images/funnel.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  text-indent: -10000px;
+  width: 32px;
+  height: 32px;
+}
+
+.gridview thead .textbox {
+  margin: 0px;
+  width: 50%;
+  height: 20px;
+  text-shadow: #ffffff 0px 0px 4px;
+  border: 1px solid #677d81;
+  background: none;
+}
+
+/* Custom classes */
+
+.gridview .active {
+  width: 60px;
+}
+
+.gridview .edit {
+  width: 20px;
+}
+
+.gridview .delete {
+  width: 20px;
+}
+
+.gridview .button {
+  padding: 0px;
+}
+
+.gridview .edit .button {
+  background: none;
+  border: none;
+  background-image: url(icons/edit-icon.png);
+  background-position: center;
+  text-indent: -10000px;
+  width: 32px;
+  height: 32px;
+}
+
+.gridview .delete .button {
+  background: none;
+  border: none;
+  background-image: url(icons/delete-icon.png);
+  background-position: center;
+  text-indent: -10000px;
+  width: 32px;
+  height: 32px;
+}
+
+.gridview tfoot .button.new {
+  display: block;
+  background: none;
+  border: none;
+  background-image: url(icons/new-icon.png);
+  background-position: center;
+  text-indent: -10000px;
+  width: 32px;
+  height: 32px;
+}
+
+/*]]>*/-->

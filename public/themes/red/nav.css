@@ -1,0 +1,70 @@
+<!--/*--><![CDATA[/*><!--*/
+
+#nav {
+  float: right;
+  list-style: none;
+  z-index: 1;
+  background-image: url(images/nav_sep.gif);
+  background-repeat: no-repeat;
+  background-position: left;
+  margin-right: 10px;
+}
+
+#nav li {
+  float: left;
+  margin: 0px;
+}
+
+#nav li a {
+  display: block;
+  height: 67px;
+  margin: 0px;
+  line-height: 67px;
+  padding-left: 14px;
+  padding-right: 14px;
+  text-shadow: #000000 1px 1px 1px;
+  text-decoration: none;
+  text-transform: capitalize;
+  color: #ffffff;
+  font-size: 14px;
+  background-image: url(images/nav_sep.gif);
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
+#nav li a:hover {
+  color: #ffffff;
+}
+
+#nav li ul {
+  position: absolute;
+  width: 220px;
+  left: -999em;
+  list-style: none;
+  text-align: left;
+  z-index: 1;
+}
+
+#nav li ul li a {
+  width: 200px;
+  line-height: 40px;
+  height: 40px;
+  background-color: #b3210b;
+  padding: 0px;
+  padding-left: 14px;
+  background-position: left;
+}
+
+#nav li ul li a:hover {
+  background-color: #290e03;
+}
+
+#nav li:hover ul {
+	left: auto;
+}
+
+#nav li:hover ul, #nav li.sfhover ul {
+	left: auto;
+}
+
+/*]]>*/-->

@@ -1,0 +1,23 @@
+<fixture>
+
+    <category>
+        <category_id>1</category_id>
+        <category>Active</category>
+    </category>
+    <category>
+        <category_id>3</category_id>
+        <category>Inactive</category>
+    </category>
+
+    <fruit>
+        <fruit_id>11</fruit_id>
+        <name>Sugar</name>
+    </fruit>
+
+    <region>
+        <region_id>9</region_id>
+        <fruit_id>11</fruit_id>
+        <name>Japan</name>
+    </region>
+
+</fixture>

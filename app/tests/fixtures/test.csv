@@ -1,0 +1,4 @@
+test_id,test_varchar,"test_float","test_double",test_date
+1,George,0.16,11,2006-05-01
+2,"bob","0.57",22,"2002-02-03"
+3,sally,.025,33,2008-06-10

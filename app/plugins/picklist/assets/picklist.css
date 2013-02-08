@@ -1,0 +1,39 @@
+<!--/*--><![CDATA[/*><!--*/
+
+.picklist {
+	position: relative;
+	display: block;
+	width: 400px;
+	height: 100px;
+}
+
+.picklist_listbox {
+	position: absolute;
+	top: 0px;
+	width: 180px;
+	height: 100px;
+}
+
+.picklist_listbox_left {
+	left: 0px;
+}
+
+.picklist_listbox_right {
+	left: 240px;
+}
+
+.picklist_button {
+	position: absolute;
+	left: 190px;
+	width: 40px;
+}
+
+.picklist_button_add {
+	top: 30px;
+}
+
+.picklist_button_rem {
+	top: 60px;
+}
+
+/*]]>*/-->

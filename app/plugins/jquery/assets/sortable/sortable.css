@@ -1,0 +1,7 @@
+<!--/*--><![CDATA[/*><!--*/
+
+.sortable { list-style-type: none; margin: 0; padding: 0; }
+.sortable li { }
+.sortable li span { position: absolute; margin-left: -1.3em; }
+
+/*]]>*/-->

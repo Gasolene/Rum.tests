@@ -1,0 +1,39 @@
+<!--/*--><![CDATA[/*><!--*/
+
+.calendar {
+  border-top: 1px solid #000000;
+  border-left: 1px solid #000000;
+}
+
+.calendar tr td, .calendar tr th {
+  border-bottom: 1px solid #000000;
+  border-right: 1px solid #000000;
+  text-align:left;
+  vertical-align: top;
+}
+
+.calendar thead .month th {
+  text-align: center;
+}
+
+.calendar .weekdays {
+}
+
+.calendar .prev {
+}
+
+.calendar .next {
+}
+
+.calendar .day {
+}
+
+.calendar .today {
+  background-color: #E0E0E0;
+  color: #000000;
+}
+
+.calendar .event {
+}
+
+/*]]>*/-->

@@ -1,0 +1,25 @@
+<!--/*--><![CDATA[/*><!--*/
+
+  .colorpicker_colorarea {
+    display: inline;
+    top: 23px;
+    left: 0px;
+    display: none;
+    position: absolute;
+    width: auto;
+    background-color: #FFFFFF;
+    border: 1px solid #666666;
+  }
+
+  .colorpicker_colorarea table {
+    padding: 0px;
+    margin: 0px;
+  }
+
+  .colorpicker_colorarea table td {
+    padding: 0px;
+    margin: 0px;
+    height: 24px;
+  }
+
+/*]]>*/-->

@@ -1,0 +1,66 @@
+<!--/*--><![CDATA[/*><!--*/
+
+.scheduleview {
+}
+
+.scheduleview form {
+  margin: 0px;
+}
+
+.scheduleview thead tr th {
+  text-align: center;
+}
+
+.scheduleview tbody tr th {
+  padding: 2px;
+  vertical-align: top;
+  text-align: center;
+  cursor: default;
+}
+
+.scheduleview tbody tr td {
+  padding: 2px;
+  vertical-align: top;
+  text-align: center;
+}
+
+.scheduleview tfoot tr td {
+  text-align: right;
+}
+
+.scheduleview .scheduleview_cell {
+  cursor: pointer;
+  border: 1px solid;
+}
+
+.scheduleview.month .scheduleview_cell {
+  height: 120px;
+}
+
+.scheduleview .scheduleview_cell:hover {
+}
+
+.scheduleview .scheduleview_today {
+}
+
+.scheduleview .scheduleview_time {
+  text-align: right;
+  vertical-align: middle;
+  padding-right: 2px;
+  cursor: default;
+}
+
+.scheduleview .scheduleview_event {
+}
+
+.scheduleview .scheduleview_day {
+  text-align: left;
+  display: block;
+}
+
+.scheduleview input {
+  margin: 2px;
+}
+
+
+/*]]>*/-->

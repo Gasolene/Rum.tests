@@ -1,0 +1,20 @@
+<!--/*--><![CDATA[/*><!--*/
+
+  .lookup_list {
+    display : block;
+    position : absolute;
+    top: 23px;
+    left: 0px;
+    z-index: 1000;
+    width: 286px;
+  }
+
+  .lookup_img {
+	cursor : pointer;
+  }
+
+  .suggestbox, .lookup {
+  	width: 280px;
+  }
+
+/*]]>*/-->
