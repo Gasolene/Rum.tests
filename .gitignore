@@ -1,4 +1,13 @@
 #############
+## WinTools
+#############
+
+plink.exe
+putty.exe
+unzip.exe
+unzip32.dll
+
+#############
 ## Netbeans
 #############
 

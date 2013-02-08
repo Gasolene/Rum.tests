@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE application SYSTEM "../../../../system/base/dtd/application.dtd">
+
+<!-- 
+ application specification
+ @state (default=on): the state of the application
+   If @state=on, the application is in production working
+   If @state=off, the application is in maintenance/stop state
+   If @state=debug, the application is in development state
+-->
+<application                   state = "debug">
+
+  <pages               default-theme = "green" />
+
+  <authorization             allow = "User, Admin , Group1, Group2"
+                              deny = "">
+    <page                     path = "form"
+                             allow = "Admin, User"
+                              deny = "Suspended" />
+    <page                     path = "subfolder/index"
+                             allow = "Admin"
+                              deny = "Guest" />
+  </authorization>
+
+  <viewstate                 enabled = "true"
+                              method = "session"
+                             expires = "3600" />
+
+  <request                   default = "form"
+                       friendly-uris = "true" />
+  <cache                     enabled = "true" />
+
+  <authentication method="forms" deny="all" allow="tree,auth,cache,exception,logout,customer,loadtest" restrict="72.29.244,127.0.0.1,192.168" maxinvalidattempts="3" attemptwindow="60" requiressl="false">
+    <forms loginpage="Login" secret="abcd" />
+    <credentials>
+      <user                 username = "Homer"
+                            password = "123456"
+                              active = "true"
+                                salt = ""
+                     password-format = "none" />
+      <table                     dsn = "driver=text;format=TabDelimited;source=../app/data/Users.csv"
+                              source = "Users.csv"
+                      username-field = "Username"
+                      password-field = "Password"
+                        active-field = "Active"
+                  emailaddress-field = "Email"
+            failedattemptcount-field = "FailedCount"
+          attemptwindowexpires-field = "BlockedUntil"
+                          salt-field = "Salt"
+                                salt = "part1"
+                     password-format = "md5" />
+    </credentials>
+    <memberships>
+      <membership           username = "Homer"
+                                role = "Guest" />
+      <membership           username = "Homer"
+                                role = "Admin" />
+      <table                     dsn = "driver=text;format=TabDelimited;source=../app/data/Users.csv"
+                              source = "Users.csv"
+                      username-field = "Username"
+                          role-field = "Role" />
+    </memberships>
+  </authentication>
+
+  <data-source                   dsn = "adapter=mysqli;
+                                        uid=darnell;
+                                        pwd=R146D;
+                                        server=samwise;
+                                        database=darnell_test;" />
+
+  <!--
+   errors specification
+   @error: the http error to catch
+     Example: If @error=404, will redirect to @page on 404 error
+   @page: the page that will handle the error
+  -->
+  <errors>
+    <when                      error = "404"
+                                page = "Errors/PageNotFound" />
+	<when                      error = "400"
+                                page = "Errors/PageNotFound" />
+  </errors>
+
+</application>

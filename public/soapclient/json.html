@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+<script src="soapclient.js" type="text/javascript"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+
+	var JSONServerURL = "http://localhost/NuvistaInventoryManagement/public/json/";
+
+	/**
+     * getHTTPObject
+     * If getHTTPObject returns false, the browser isn't Ajax compatible. The if
+     * statement checks to see if it exists, then runs the code.
+     */
+    function getHTTPObject() {
+		var xhr = false;//set to false, so if it fails, do nothing
+		if(window.XMLHttpRequest) {//detect to see if browser allows this method
+			var xhr = new XMLHttpRequest();//set var the new request
+		} else if(window.ActiveXObject) {//detect to see if browser allows this method
+			try {
+				var xhr = new ActiveXObject("Msxml2.XMLHTTP");//try this method first
+			} catch(e) {//if it fails move onto the next
+				try {
+					var xhr = new ActiveXObject("Microsoft.XMLHTTP");//try this method next
+				} catch(e) {//if that also fails return false.
+					xhr = false;
+				}
+			}
+		}
+		return xhr;//return the value of xhr
+    }
+
+	/**
+     * getHTTPObject
+     * If getHTTPObject returns false, the browser isn't Ajax compatible. The if
+     * statement checks to see if it exists, then runs the code.
+     */
+	function sendJSONRequest(request, URL, callback)
+	{
+		request.onreadystatechange = callback;
+		request.open("GET", URL, true);
+		request.send(null);
+	}
+
+	function onHello()
+	{
+		if(helloRequest.readyState == 4)
+		{
+			alert(JSON.parse(helloRequest.responseText));
+		}
+	}
+ 
+	function hello()
+	{
+		helloRequest = getHTTPObject();
+		sendJSONRequest(helloRequest, JSONServerURL + "?method=hello", onHello);
+	}
+
+	function onLogin()
+	{
+		if(loginRequest.readyState == 4)
+		{
+			getCommunityImages(1, 1);
+		}
+	}
+
+	function login(username, password)
+	{
+		loginRequest = getHTTPObject();
+		sendJSONRequest(loginRequest, JSONServerURL + "?method=login&username="+username+"&password="+password, onLogin);
+	}
+
+	function onGetListings()
+	{
+		if(listingsRequest.readyState == 4)
+		{
+			var a = JSON.parse(listingsRequest.responseText);
+			alert(a);
+		}
+	}
+
+	function getListings(company_id)
+	{
+		listingsRequest = getHTTPObject();
+		sendJSONRequest(listingsRequest, JSONServerURL + "?method=getRegions&company_id=" + company_id, onGetListings);
+	}
+
+	function onGetImages()
+	{
+		if(imagesRequest.readyState == 4)
+		{
+			var a = JSON.parse(imagesRequest.responseText);
+			alert(a);
+		}
+	}
+
+	function getImages(company_id)
+	{
+		imagesRequest = getHTTPObject();
+		sendJSONRequest(imagesRequest, JSONServerURL + "?method=getImages&company_id=" + company_id, onGetImages);
+	}
+
+	function onGetCommunityImages()
+	{
+		if(communityImagesRequest.readyState == 4)
+		{
+			var a = JSON.parse(communityImagesRequest.responseText);
+			alert(a);
+		}
+	}
+
+	function getCommunityImages(company_id, community_id)
+	{
+		communityImagesRequest = getHTTPObject();
+		sendJSONRequest(communityImagesRequest, JSONServerURL + "?method=getCommunityImages&company_id=" + company_id + "&community_id=" + community_id, onGetImages);
+	}
+
+login("root", "admin77");
+
+
+//--><!]]>
+</script>
+</head>
+<body>
+</body>
+</html>

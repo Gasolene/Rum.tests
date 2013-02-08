@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+<script src="soapclient.js" type="text/javascript"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+
+var SoapServerURL = "http://localhost/NuvistaInventoryManagement/public/webservice/";
+
+function hello(callback)
+{
+	var pl = new SOAPClientParameters();
+	SOAPClient.invoke(SoapServerURL, "hello", pl, true, callback);
+}
+
+function login(username, password)
+{
+	pl = new SOAPClientParameters();
+	pl.add("username", username);
+	pl.add("password", password);
+
+	SOAPClient.invoke(SoapServerURL, "login", pl, true, onLogin);
+}
+
+function outputResponse(r)
+{
+	alert(r);
+}
+
+function onLogin()
+{
+	// I am now logged in...
+	// Now send a hello message to the server and output the response greeting
+	hello(outputResponse);
+}
+
+login("root", "admin77");
+
+//--><!]]>
+</script>
+</head>
+<body>
+</body>
+</html>

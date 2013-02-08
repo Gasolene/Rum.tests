@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+<script src="soapclient.js" type="text/javascript"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+var SoapServerURL = "http://localhost/NuvistaInventoryManagement/public/webservice/";
+var company_id = 1;
+var username = "root";
+var password = "123456";
+
+function login(username, password, callback)
+{
+	pl = new SOAPClientParameters();
+	pl.add("username", username);
+	pl.add("password", password);
+
+	SOAPClient.invoke(SoapServerURL, "login", pl, true);
+}
+
+function hello()
+{
+	var pl = new SOAPClientParameters();
+	SOAPClient.invoke(SoapServerURL, "hello", pl, true, function(e){alert(e)});
+}
+
+function updateRegions(company_id)
+{
+	var pl = new SOAPClientParameters();
+	pl.add("company_id", company_id);
+	SOAPClient.invoke(SoapServerURL, "getRegions", pl, true, onUpdateRegions);
+}
+
+function onUpdateRegions(r)
+{
+	var obj = JSON.parse(r);
+	for(i=0;i<obj.length;i++)
+	{
+		alert("Region: "+obj[i].region);return;
+	}
+}
+
+function updateCommunities(company_id, region_id)
+{
+	var pl = new SOAPClientParameters();
+	pl.add("company_id", company_id);
+	pl.add("region_id", region_id);
+	SOAPClient.invoke(SoapServerURL, "getCommunities", pl, true, onUpdateCommunities);
+}
+
+function onUpdateCommunities(r)
+{
+	var obj = JSON.parse(r);
+	for(i=0;i<obj.length;i++)
+	{
+		alert("Community: "+obj[i].community);return;
+	}
+}
+
+login(username, password);
+//hello();
+
+//--><!]]>
+</script>
+</head>
+<body>
+<input type="button" onclick="updateCommunities(1);" />
+</body>
+</html>

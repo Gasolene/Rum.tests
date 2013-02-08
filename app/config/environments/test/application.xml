@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE application SYSTEM "../../../../system/includes/dtd/application5.3.dtd">
+
+<!-- 
+ application specification
+ @state (default=on): the state of the application
+   If @state=on, the application is in production working
+   If @state=off, the application is in maintenance/stop state
+   If @state=debug, the application is in development state
+-->
+<application                   state = "debug">
+
+  <pages               default-theme = "green" />
+
+  <viewstate                 enabled = "true"
+                              method = "session"
+                             expires = "3600" />
+
+  <request                   default = "form"
+                       friendly-uris = "true" />
+  <cache                     enabled = "true" />
+
+  <data-source                   dsn = "adapter=mysqli;
+                                        uid=darnell;
+                                        pwd=R146D;
+                                        server=samwise;
+                                        database=darnell_test;" />
+</application>
