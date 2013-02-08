@@ -1,4 +1,4 @@
-<!--//--><![CDATA[//><!--
+
 
 	/**
 	 * Initialize namespace
@@ -10,4 +10,3 @@
 		document.getElementById( 'c_' + id ).style.display = 'none';
 	}
 
-//--><!]]>

@@ -1,4 +1,4 @@
-<!--//--><![CDATA[//><!--
+
 
 /**
 * Calendar Widget Version 1.0
@@ -311,4 +311,3 @@ function monthNext()
 	redrawCalendar( idtag );
 }
 
-//--><!]]>

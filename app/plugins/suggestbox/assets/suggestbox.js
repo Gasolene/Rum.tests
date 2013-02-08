@@ -1,4 +1,4 @@
-<!--//--><![CDATA
+
 
 	/* add trim() function to string */
 	String.prototype.trim = function() {
@@ -239,4 +239,3 @@
 		}
 	}
 
-//--><!]]>

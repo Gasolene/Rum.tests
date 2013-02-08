@@ -1,4 +1,4 @@
-<!--//--><![CDATA[//><!--
+
 
 	// -- 4umi additional functions
 
@@ -98,4 +98,3 @@
 	 return result;
 	}
 
-//--><!]]>
