@@ -1,7 +1,7 @@
 <?php
 	namespace Rum\Deploy;
 
-	class Staging1 extends \System\Deploy\DeploymentBase
+	class Test2 extends \System\Deploy\DeploymentBase
 	{
 		public $server="samwise";
 		public $user="root";

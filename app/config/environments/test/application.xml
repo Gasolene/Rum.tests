@@ -21,8 +21,9 @@
   <cache                     enabled = "true" />
 
   <data-source                   dsn = "adapter=mysqli;
-                                        uid=darnell;
-                                        pwd=R146D;
-                                        server=samwise;
-                                        database=darnell_test;" />
+                                        uid=root;
+                                        pwd=root;
+                                        port=8889;
+                                        server=localhost;
+                                        database=rum_test;" />
 </application>

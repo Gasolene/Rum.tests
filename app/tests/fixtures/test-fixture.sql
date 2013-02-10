@@ -1,11 +1,5 @@
 SET FOREIGN_KEY_CHECKS=0;
 
-TRUNCATE `group`;
-
-INSERT INTO `group` (`group_id`, `group_name`) VALUES 
-(2, 'Group A'),
-(4, 'Group B');
-
 DROP TABLE IF EXISTS `fruit`;
 CREATE TABLE `fruit` (
 `fruit_id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,

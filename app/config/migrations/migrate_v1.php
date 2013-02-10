@@ -10,7 +10,7 @@
 
 	class Migrate_v1 extends MigrationBase
 	{
-		public $version = 1;
+		public $version = 0.9;
 
 		public function up()
 		{

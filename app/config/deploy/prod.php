@@ -3,11 +3,17 @@
 
 	class Prod extends \System\Deploy\DeploymentBase
 	{
-		public $server="samwise";
+		public $server="shinbine.com";
+                public $port="2222";
 		public $user="root";
 		public $password="";
-		public $home_path="/var/www/html/dev.commerx.com/darnell/projects/staging1";
-		public $repository_path="C:\Documents and Settings\Darnell\My Documents\NetBeansProjects\AFPj";
+		public $home_path="/var/www/html/test";
+		public $repository_path="/Users/Darnell/Applications/test";
+
+		public function init()
+		{
+			$this->run("mkdir {$this->home_path}/releases");
+		}
 
 		public function deploy()
 		{
@@ -16,9 +22,6 @@
 
 			$this->run("unlink {$this->home_path}/current");
 			$this->run("ln -s {$this->release_path} {$this->home_path}/current");
-
-			// sym link to logs
-			$this->run("ln -s {$this->home_path}/shared/logs {$this->home_path}/current/logs");
 		}
 	}
 ?>

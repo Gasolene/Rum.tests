@@ -14,44 +14,26 @@
             
         }
 
-		function testXMLFixture() {
-            $ds = \System\AppServlet::getInstance()->dataAdapter->openDataSet('select * from `category`;');
-            $this->assertEqual($ds->count, 2);
-            $this->assertEqual($ds->rows[0]["category_id"], 1);
-            $this->assertEqual($ds->rows[1]["category_id"], 3);
+		function testSQLXMLFixture() {
+            $ds = \System\AppServlet::getInstance()->dataAdapter->openDataSet('select * from `fruit`;');
+            $this->assertEqual($ds->count, 3);
+            $this->assertEqual($ds->rows[0]["fruit_id"], 2);
+            $this->assertEqual($ds->rows[1]["fruit_id"], 3);
+            $this->assertEqual($ds->rows[2]["fruit_id"], 4);
 
-            $ds = \System\AppServlet::getInstance()->dataAdapter->openDataSet('select * from `customer`;');
-            $this->assertEqual($ds->count, 0);
+            $ds = \System\AppServlet::getInstance()->dataAdapter->openDataSet('select * from `region`;');
+            $this->assertEqual($ds->count, 3);
         }
 
-		function testXMLFixture2() {
-            $ds = \System\AppServlet::getInstance()->dataAdapter->openDataSet('select * from `category`;');
-            $this->assertEqual($ds->count, 2);
-            $this->assertEqual($ds->rows[0]["category_id"], 1);
-            $this->assertEqual($ds->rows[1]["category_id"], 3);
+		function testSQLXMLFixture2() {
+            $ds = \System\AppServlet::getInstance()->dataAdapter->openDataSet('select * from `fruit`;');
+            $this->assertEqual($ds->count, 3);
+            $this->assertEqual($ds->rows[0]["fruit_id"], 2);
+            $this->assertEqual($ds->rows[1]["fruit_id"], 3);
+            $this->assertEqual($ds->rows[2]["fruit_id"], 4);
 
-            $ds = \System\AppServlet::getInstance()->dataAdapter->openDataSet('select * from `customer`;');
-            $this->assertEqual($ds->count, 0);
-        }
-
-		function testSQLFixture() {
-            $ds = \System\AppServlet::getInstance()->dataAdapter->openDataSet('select * from `group`;');
-            $this->assertEqual($ds->count, 2);
-            $this->assertEqual($ds->rows[0]["group_id"], 2);
-            $this->assertEqual($ds->rows[1]["group_id"], 4);
-
-            $ds = \System\AppServlet::getInstance()->dataAdapter->openDataSet('select * from `customer`;');
-            $this->assertEqual($ds->count, 0);
-        }
-
-		function testSQLFixture2() {
-            $ds = \System\AppServlet::getInstance()->dataAdapter->openDataSet('select * from `group`;');
-            $this->assertEqual($ds->count, 2);
-            $this->assertEqual($ds->rows[0]["group_id"], 2);
-            $this->assertEqual($ds->rows[1]["group_id"], 4);
-
-            $ds = \System\AppServlet::getInstance()->dataAdapter->openDataSet('select * from `customer`;');
-            $this->assertEqual($ds->count, 0);
+            $ds = \System\AppServlet::getInstance()->dataAdapter->openDataSet('select * from `region`;');
+            $this->assertEqual($ds->count, 3);
         }
 
 		function testCSVFixture() {
