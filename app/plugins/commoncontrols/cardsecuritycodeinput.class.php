@@ -39,7 +39,7 @@
 			// Install assets
 			if(!file_exists(__HTDOCS_PATH__ . '/assets/commoncontrols/cardcvv2input'))
 			{
-				\System\Utils\FileSystem::copy(__PLUGINS_PATH__ . str_replace(__PLUGINS_PATH__, '', str_replace('\\', '/', __DIR__)) . '/assets/cardcvv2input', __HTDOCS_PATH__ . '/assets/commoncontrols/cardcvv2input');
+				\System\Utils\FileSystem::copy(__DIR__ . '/assets/cardcvv2input', __HTDOCS_PATH__ . '/assets/commoncontrols/cardcvv2input');
 			}
 
 			// include external resources

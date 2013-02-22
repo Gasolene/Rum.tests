@@ -295,7 +295,7 @@
 			// Install assets
 			if(!file_exists(__HTDOCS_PATH__ . '/assets/calendar'))
 			{
-				\System\Utils\FileSystem::copy(__PLUGINS_PATH__ . str_replace(__PLUGINS_PATH__, '', str_replace('\\', '/', __DIR__)) . '/assets', __HTDOCS_PATH__ . '/assets/calendar');
+				\System\Utils\FileSystem::copy(__DIR__ . '/assets', __HTDOCS_PATH__ . '/assets/calendar');
 			}
 
 			// include external resources

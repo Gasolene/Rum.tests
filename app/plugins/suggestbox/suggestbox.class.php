@@ -310,7 +310,7 @@
 			// Install assets
 			if(!file_exists(__HTDOCS_PATH__ . '/assets/suggestbox'))
 			{
-				\System\Utils\FileSystem::copy(__PLUGINS_PATH__ . str_replace(__PLUGINS_PATH__, '', str_replace('\\', '/', __DIR__)) . '/assets', __HTDOCS_PATH__ . '/assets/suggestbox');
+				\System\Utils\FileSystem::copy(__DIR__ . '/assets', __HTDOCS_PATH__ . '/assets/suggestbox');
 			}
 
 			$this->getParentByType( '\System\Web\WebControls\Page' )->addLink  ( \System\Base\ApplicationBase::getInstance()->config->assets . '/suggestbox/suggestbox.css' );

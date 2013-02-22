@@ -169,7 +169,7 @@
 			// Install assets
 			if(!file_exists(__HTDOCS_PATH__ . '/assets/imagecropper'))
 			{
-				\System\Utils\FileSystem::copy(__PLUGINS_PATH__ . str_replace(__PLUGINS_PATH__, '', str_replace('\\', '/', __DIR__)) . '/assets', __HTDOCS_PATH__ . '/assets/imagecropper');
+				\System\Utils\FileSystem::copy(__DIR__ . '/assets', __HTDOCS_PATH__ . '/assets/imagecropper');
 			}
 
 			$page = $this->getParentByType('\System\Web\WebControls\Page');

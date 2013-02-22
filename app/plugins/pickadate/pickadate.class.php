@@ -33,7 +33,7 @@
 			// Install assets
 			if(!file_exists(__HTDOCS_PATH__ . '/assets/pickadate'))
 			{
-				\System\Utils\FileSystem::copy(__PLUGINS_PATH__ . str_replace(__PLUGINS_PATH__, '', str_replace('\\', '/', __DIR__)) . '/assets', __HTDOCS_PATH__ . '/assets/datepicker');
+				\System\Utils\FileSystem::copy(__DIR__ . '/assets', __HTDOCS_PATH__ . '/assets/datepicker');
 			}
 
 			// include external resources
