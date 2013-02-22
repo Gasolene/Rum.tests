@@ -24,6 +24,6 @@
                                         uid=root;
                                         pwd=root;
                                         port=8889;
-                                        server=localhost;
+                                        server=127.0.0.1;
                                         database=rum_test;" />
 </application>
