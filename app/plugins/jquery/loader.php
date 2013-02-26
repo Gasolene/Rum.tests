@@ -27,8 +27,8 @@
 	function onCreatePage()
 	{
 		$page = \System\Base\ApplicationBase::getInstance()->requestHandler->page;
-		$page->addLink(__ASSETS_URI__.'/jquery/css/ui-lightness/jquery-ui-1.8.19.custom.css');
-		$page->addScript(__ASSETS_URI__.'/jquery/js/jquery-1.7.2.min.js');
-		$page->addScript(__ASSETS_URI__.'/jquery/js/jquery-ui-1.8.19.custom.min.js');
+		$page->addLink(\System\Base\ApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'commoncontrols', 'type'=>'text/css')).'&asset=css/ui-lightness/jquery-ui-1.8.19.custom.css');
+		$page->addScript(\System\Base\ApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'commoncontrols', 'type'=>'text/javascript')).'&asset=js/jquery-1.7.2.min.js');
+		$page->addScript(\System\Base\ApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'commoncontrols', 'type'=>'text/javascript')).'&asset=js/jquery-ui-1.8.19.custom.min.js');
 	}
 ?>

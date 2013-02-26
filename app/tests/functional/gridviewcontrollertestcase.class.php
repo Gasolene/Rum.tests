@@ -22,8 +22,8 @@
 			$this->assertResponse( '<td class="company_class">CompanyFooter</td>' );
 
 			$this->assertResponse( '<th class="company_class">' );
-			$this->assertResponse( '<tfoot>    <tr class="footer">      <td class="company_class">' );
-			$this->assertResponse( '<tbody>    <tr class="row" id="page_table2__0">      <td class="company_class">' );
+			$this->assertResponse( '<tfoot><tr class="footer"><td class="company_class">' );
+			$this->assertResponse( '<tbody><tr class="row" id="page_table2__0"><td class="company_class">' );
 
 			// test selected
 			$this->assertResponse( 'onclick="if(this.checked)this.checked=false;else this.checked=true;" id="page_table1__item_' );

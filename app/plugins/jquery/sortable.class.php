@@ -132,7 +132,7 @@
 			parent::onLoad();
 
 			$page = $this->getParentByType('\System\Web\WebControls\Page');
-			$page->addLink(__ASSETS_URI__.'/jquery/sortable/sortable.css');
+			$page->addLink(\System\Base\ApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'commoncontrols', 'type'=>'text/css')).'&asset=sortable/sortable.css');
 			$page->onload .= "$( \"#{$this->getHTMLControlIdString()}\" ).sortable();$( \"#{$this->getHTMLControlIdString()}\" ).disableSelection();$( \"#{$this->getHTMLControlIdString()}\" ).sortable({update:function(event,ui){PHPRum.sendHttpRequest('".$this->getQueryString()."',($('#{$this->getHTMLControlIdString()}').sortable('serialize')));}});";
 		}
 

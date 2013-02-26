@@ -279,7 +279,7 @@
 			$cropHolder = new \System\XML\DomObject('div');
 			$cropHolder->innerHtml = '
 <div id="'.$this->getHTMLControlIdString().'__facebook-cropper" class="facebook-cropper" style="width:'.$this->previewWidth.'px;height:'.$this->previewHeight.'px;display:none;">
-	<img id="'.$this->getHTMLControlIdString().'__loading" src="'.__ASSETS_URI__.'/imagecropper/spinner.gif" style="display:none;margin:0px auto;margin-top:'.($this->previewHeight/2-8).'px;" />
+	<img id="'.$this->getHTMLControlIdString().'__loading" src="'.\System\Base\ApplicationBase::getInstance()->config->host . \System\Base\ApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'commoncontrols', 'type'=>'image/gif')).'&asset=imagecropper/spinner.gif" style="display:none;margin:0px auto;margin-top:'.($this->previewHeight/2-8).'px;" />
 	<div id="'.$this->getHTMLControlIdString().'__facebook-cropper-container" class="facebook-cropper-container" style="width:'.$this->previewWidth.'px;height:'.$this->previewHeight.'px;">
 		<img id="'.$this->getHTMLControlIdString().'__preview" src="" />
 	</div>

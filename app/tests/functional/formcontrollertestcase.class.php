@@ -50,7 +50,7 @@
 			$this->get();
 
             // test for radio default
-			$this->assertResponse( 'value="f" class=" radiobutton" type="radio" checked="checked" />' );
+			$this->assertResponse( 'value="f" class="radiobutton" type="radio" checked="checked" />' );
 		}
 
 		function testCheckBoxList() {

@@ -22,3 +22,6 @@ AddType text/css .css
 #
 
 AddType text/xml .xml
+
+# Turn Rewrite Engine Off
+RewriteEngine Off

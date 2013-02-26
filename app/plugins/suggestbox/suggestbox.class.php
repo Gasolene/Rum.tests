@@ -307,7 +307,7 @@
 		{
 			parent::onLoad();
 
-			$this->getParentByType( '\System\Web\WebControls\Page' )->addLink  ( \System\Base\ApplicationBase::getInstance()->config->assets . '/suggestbox/suggestbox.css' );
+			$this->getParentByType( '\System\Web\WebControls\Page' )->addLink( \System\Web\WebApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'suggestbox', 'type'=>'text/css')) . '&asset=suggestbox.css' );
 			$this->getParentByType( '\System\Web\WebControls\Page' )->addScript( \System\Web\WebApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'suggestbox', 'type'=>'text/javascript')) . '&asset=suggestbox.js' );
 			$this->getParentByType( '\System\Web\WebControls\Page' )->addScript( \System\Web\WebApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'suggestbox', 'type'=>'text/javascript')) . '&asset=array.js' );
 

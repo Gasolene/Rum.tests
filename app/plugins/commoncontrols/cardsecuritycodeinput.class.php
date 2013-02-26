@@ -57,7 +57,7 @@
 
 			$a = new \System\XML\DomObject( 'a' );
 			$a->setAttribute( 'class', 'cardcvv2input_help' );
-			$a->setAttribute( 'href', "javascript:void window.open( '".__PROTOCOL__."://" . \System\Base\ApplicationBase::getInstance()->config->host . \System\Base\ApplicationBase::getInstance()->config->assets . '/commoncontrols/cardcvv2input/cvv2.php?base='.htmlentities(\System\Base\ApplicationBase::getInstance()->config->assets).'' . "', '', 'height=260,width=520,top='+((screen.height/2)-(130))+',left='+((screen.width/2)-(260))+',scrollbars=no' );" );
+			$a->setAttribute( 'href', "javascript:void window.open( '".__PROTOCOL__."://" . \System\Base\ApplicationBase::getInstance()->config->host . \System\Base\ApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'commoncontrols', 'type'=>'text/html')) . '&asset=cardcvv2input/cvv2.html' . "', '', 'height=260,width=520,top='+((screen.height/2)-(130))+',left='+((screen.width/2)-(260))+',scrollbars=no' );" );
 			$a->nodeValue = "(what's this)";
 
 			$span = new \System\XML\DomObject( 'span' );
