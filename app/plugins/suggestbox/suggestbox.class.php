@@ -282,7 +282,7 @@
 			 */
 
 			$img = new \System\XML\DomObject( 'img' );
-			$img->setAttribute( 'src',            \System\Base\ApplicationBase::getInstance()->config->assets . '/suggestbox/icon.gif' );
+			$img->setAttribute( 'src',            \System\Web\WebApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'suggestbox', 'type'=>'image/gif')) . '&asset=icon.gif' );
 			$img->setAttribute( 'alt',            'lookup' );
 			$img->setAttribute( 'class',          'lookup_img' );
 			$img->setAttribute( 'onclick',        'SuggestBox.handleKeyUp(event.keyCode,'.$this->maxNumToShow.','.($this->disableAutoComplete?'false':'true').',document.getElementById(\''.$this->getHTMLControlIdString().'\'),document.getElementById(\''.$this->getHTMLControlIdString().'__lookup\'),\''.$this->listName.'\',false,\''.str_replace('\'', '\\\'', $this->delimiter).'\');' );
@@ -307,15 +307,9 @@
 		{
 			parent::onLoad();
 
-			// Install assets
-			if(!file_exists(__HTDOCS_PATH__ . '/assets/suggestbox'))
-			{
-				\System\Utils\FileSystem::copy(__DIR__ . '/assets', __HTDOCS_PATH__ . '/assets/suggestbox');
-			}
-
 			$this->getParentByType( '\System\Web\WebControls\Page' )->addLink  ( \System\Base\ApplicationBase::getInstance()->config->assets . '/suggestbox/suggestbox.css' );
-			$this->getParentByType( '\System\Web\WebControls\Page' )->addScript( \System\Base\ApplicationBase::getInstance()->config->assets . '/suggestbox/suggestbox.js' );
-			$this->getParentByType( '\System\Web\WebControls\Page' )->addScript( \System\Base\ApplicationBase::getInstance()->config->assets . '/suggestbox/array.js' );
+			$this->getParentByType( '\System\Web\WebControls\Page' )->addScript( \System\Web\WebApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'suggestbox', 'type'=>'text/javascript')) . '&asset=suggestbox.js' );
+			$this->getParentByType( '\System\Web\WebControls\Page' )->addScript( \System\Web\WebApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'suggestbox', 'type'=>'text/javascript')) . '&asset=array.js' );
 
 			if( !defined( '__LISTNAME' . $this->listName ))
 			{

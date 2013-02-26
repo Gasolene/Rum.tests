@@ -18,8 +18,8 @@
 
 			$html = $this->responseAsXMLEntity();
 
-			$this->assertTrue( $html->body->div->getChildByAttribute('id', 'body')->div->form->getChildrenByName( 'input' )->count >= 10 );
-			$this->assertTrue( $html->body->div->getChildByAttribute('id', 'body')->div->form->getChildrenByName( 'input' )->count <= 11 );
+			$this->assertTrue( $html->body->div->getChildByAttribute('id', 'body')->div->form->getChildrenByName( 'input' )->count >= 9 );
+			$this->assertTrue( $html->body->div->getChildByAttribute('id', 'body')->div->form->getChildrenByName( 'input' )->count <= 10 );
 			$this->assertEqual( $html->body->div->getChildByAttribute('id', 'body')->div->form->getChildByAttribute( 'name', 'page' )->getAttribute( 'type' ), 'hidden' );
 			//$this->assertResponse( \Rum::config()->themes );
 			$this->assertResponse( '<legend><span>Sample Fieldset</span></legend>' );

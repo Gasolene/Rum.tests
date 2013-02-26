@@ -166,18 +166,12 @@
 		{
 			parent::onLoad();
 
-			// Install assets
-			if(!file_exists(__HTDOCS_PATH__ . '/assets/imagecropper'))
-			{
-				\System\Utils\FileSystem::copy(__DIR__ . '/assets', __HTDOCS_PATH__ . '/assets/imagecropper');
-			}
-
 			$page = $this->getParentByType('\System\Web\WebControls\Page');
-			$page->addLink( \System\Web\WebApplicationBase::getInstance()->config->assets . '/imagecropper/facebookcropper.css' );
-			$page->addScript( \System\Web\WebApplicationBase::getInstance()->config->assets . '/imagecropper/imagecropper-1.2-core-yc.js' );
-			$page->addScript( \System\Web\WebApplicationBase::getInstance()->config->assets . '/imagecropper/imagecropper-1.2-more-drag.js' );
-			$page->addScript( \System\Web\WebApplicationBase::getInstance()->config->assets . '/imagecropper/imagecropper.js' );
-			$page->addScript( \System\Web\WebApplicationBase::getInstance()->config->assets . '/imagecropper/facebookcropper.js' );
+			$page->addScript( \System\Web\WebApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'imagecropper', 'type'=>'text/css')) . '&asset=facebookcropper.css' );
+			$page->addLink( \System\Web\WebApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'imagecropper', 'type'=>'text/javascript')) . '&asset=imagecropper-1.2-core-yc.js' );
+			$page->addLink( \System\Web\WebApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'imagecropper', 'type'=>'text/javascript')) . '&asset=imagecropper-1.2-more-drag.js' );
+			$page->addLink( \System\Web\WebApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'imagecropper', 'type'=>'text/javascript')) . '&asset=imagecropper.js' );
+			$page->addLink( \System\Web\WebApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'imagecropper', 'type'=>'text/javascript')) . '&asset=facebookcropper.js' );
 
 			$this->addValidator(new \System\Validators\FileTypeValidator(array('image/jpeg', 'image/pjpeg', 'image/gif', 'image/png')));
 		}

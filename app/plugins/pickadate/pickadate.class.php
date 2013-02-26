@@ -30,17 +30,11 @@
 		protected function onLoad() {
 			parent::onLoad();
 
-			// Install assets
-			if(!file_exists(__HTDOCS_PATH__ . '/assets/pickadate'))
-			{
-				\System\Utils\FileSystem::copy(__DIR__ . '/assets', __HTDOCS_PATH__ . '/assets/datepicker');
-			}
-
 			// include external resources
 			$this->addValidator(new \System\Validators\DateTimeValidator());
-			$this->getParentByType( '\System\Web\WebControls\Page' )->addLink( \System\Base\ApplicationBase::getInstance()->config->assets . '/pickadate/pickadate.css' );
-			$this->getParentByType( '\System\Web\WebControls\Page' )->addLink( \System\Base\ApplicationBase::getInstance()->config->assets . '/pickadate/custom.css' );
-			$this->getParentByType( '\System\Web\WebControls\Page' )->addScript( \System\Base\ApplicationBase::getInstance()->config->assets . '/pickadate/pickadate.js' );
+			$this->getParentByType( '\System\Web\WebControls\Page' )->addLink( \System\Web\WebApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'pickadate', 'type'=>'text/css')) . '&asset=pickadate.css' );
+			$this->getParentByType( '\System\Web\WebControls\Page' )->addLink( \System\Web\WebApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'pickadate', 'type'=>'text/css')) . '&asset=custom.css' );
+			$this->getParentByType( '\System\Web\WebControls\Page' )->addScript( \System\Web\WebApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'pickadate', 'type'=>'text/javascript')) . '&asset=pickadate.js' );
 		}
 
 

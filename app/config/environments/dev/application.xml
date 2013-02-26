@@ -64,10 +64,9 @@
 
   <data-source                   dsn = "adapter=mysqli;
                                         uid=root;
-                                        pwd=root;
-                                        port=8889;
+                                        pwd=;
                                         server=127.0.0.1;
-                                        database=rum_test;" />
+                                        database=test;" />
 
   <!--
    errors specification

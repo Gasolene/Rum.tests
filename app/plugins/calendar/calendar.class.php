@@ -292,14 +292,8 @@
 		protected function onLoad() {
 			parent::onLoad();
 
-			// Install assets
-			if(!file_exists(__HTDOCS_PATH__ . '/assets/calendar'))
-			{
-				\System\Utils\FileSystem::copy(__DIR__ . '/assets', __HTDOCS_PATH__ . '/assets/calendar');
-			}
-
 			// include external resources
-			$this->getParentByType( '\System\Web\WebControls\Page' )->addLink( \System\Base\ApplicationBase::getInstance()->config->assets . '/calendar/calendar.css' );
+			$this->getParentByType( '\System\Web\WebControls\Page' )->addLink( \System\Web\WebApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'calendar', 'type'=>'text/css')) . '&asset=calendar.css' );
 		}
 
 

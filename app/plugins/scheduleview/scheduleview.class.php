@@ -202,14 +202,8 @@
 		protected function onLoad() {
 			parent::onLoad();
 
-			// Install assets
-			if(!file_exists(__HTDOCS_PATH__ . '/assets/scheduleview'))
-			{
-				\System\Utils\FileSystem::copy(__DIR__ . '/assets', __HTDOCS_PATH__ . '/assets/scheduleview');
-			}
-
 			// include external resources
-			$this->getParentByType( '\System\Web\WebControls\Page' )->addLink( \System\Base\ApplicationBase::getInstance()->config->assets . '/scheduleview/scheduleview.css' );
+			$this->getParentByType( '\System\Web\WebControls\Page' )->addLink( \System\Web\WebApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'scheduleview', 'type'=>'text/css')) . '&asset=scheduleview.css' );
 		}
 
 

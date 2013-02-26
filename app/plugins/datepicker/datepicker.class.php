@@ -43,16 +43,10 @@
 		protected function onLoad() {
 			parent::onLoad();
 
-			// Install assets
-			if(!file_exists(__HTDOCS_PATH__ . '/assets/datepicker'))
-			{
-				\System\Utils\FileSystem::copy(__DIR__ . '/assets', __HTDOCS_PATH__ . '/assets/datepicker');
-			}
-
 			// include external resources
 			$this->addValidator(new \System\Validators\DateTimeValidator());
-			$this->getParentByType( '\System\Web\WebControls\Page' )->addLink( \System\Base\ApplicationBase::getInstance()->config->assets . '/datepicker/datepicker.css' );
-			$this->getParentByType( '\System\Web\WebControls\Page' )->addScript( \System\Base\ApplicationBase::getInstance()->config->assets . '/datepicker/datepicker.js' );
+			$this->getParentByType( '\System\Web\WebControls\Page' )->addLink( \System\Web\WebApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'datepicker', 'type'=>'text/css')) . '&asset=datepicker.css' );
+			$this->getParentByType( '\System\Web\WebControls\Page' )->addScript( \System\Web\WebApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'datepicker', 'type'=>'text/javascript')) . '&asset=datepicker.js' );
 		}
 
 
@@ -79,7 +73,7 @@
 			$span->setAttribute( 'class', 'datepicker_cal' );
 
 			$img = new \System\XML\DomObject( 'img' );
-			$img->setAttribute( 'src',      \System\Base\ApplicationBase::getInstance()->config->assets . '/datepicker/icon.gif' );
+			$img->setAttribute( 'src',      \System\Web\WebApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'datepicker', 'type'=>'image/gif')) . '&asset=icon.gif' );
 			$img->setAttribute( 'alt',     'datepicker' );
 			$img->setAttribute( 'class',   'datepicker_img' );
 			$img->setAttribute( 'onclick', 'drawCalendar(\'' . $this->getHTMLControlIdString() . '\')' );
@@ -93,4 +87,4 @@
 			return $datepicker;
 		}
 	}
-	?>
+?>

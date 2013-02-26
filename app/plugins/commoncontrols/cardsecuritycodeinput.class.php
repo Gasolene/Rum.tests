@@ -36,14 +36,8 @@
 		protected function onLoad() {
 			parent::onLoad();
 
-			// Install assets
-			if(!file_exists(__HTDOCS_PATH__ . '/assets/commoncontrols/cardcvv2input'))
-			{
-				\System\Utils\FileSystem::copy(__DIR__ . '/assets/cardcvv2input', __HTDOCS_PATH__ . '/assets/commoncontrols/cardcvv2input');
-			}
-
 			// include external resources
-			$this->getParentByType( '\System\Web\WebControls\Page' )->addLink( \System\Base\ApplicationBase::getInstance()->config->assets . '/commoncontrols/cardcvv2input/cardcvv2input.css' );
+			$this->getParentByType( '\System\Web\WebControls\Page' )->addLink( \System\Web\WebApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'cardcvv2input', 'type'=>'text/css')) . '&asset=cardcvv2input/cardcvv2input.css' );
 
 			$this->addValidator(new CardSecurityCodeValidator());
 		}

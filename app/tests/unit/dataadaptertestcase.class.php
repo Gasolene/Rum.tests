@@ -28,6 +28,7 @@
 		}
 
 		function testMySql_DataAdapter() {
+			$this->expectError();
 			$da = DataAdapter::create(str_replace('mysqli', 'mysql', \Rum::config()->dsn));
 			$this->SqlDataAdapterTest( $da->openDataSet( 'select * from test' ));
 		}
@@ -43,6 +44,7 @@
 		}
 
 		function testDBCaching_MySQLDataAdapter() {
+			$this->expectError();
 			$this->DBCachingTest(DataAdapter::create(str_replace('mysqli', 'mysql', \Rum::config()->dsn).';cache_enabled=true;cache_expires=300;'));
 		}
 

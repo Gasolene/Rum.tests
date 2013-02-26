@@ -26,12 +26,6 @@
 	 */
 	function onCreatePage()
 	{
-		// Install assets
-		if(!file_exists(__HTDOCS_PATH__ . '/assets/jquery'))
-		{
-			\System\Utils\FileSystem::copy(__DIR__ . '/assets', __HTDOCS_PATH__ . '/assets/jquery');
-		}
-
 		$page = \System\Base\ApplicationBase::getInstance()->requestHandler->page;
 		$page->addLink(__ASSETS_URI__.'/jquery/css/ui-lightness/jquery-ui-1.8.19.custom.css');
 		$page->addScript(__ASSETS_URI__.'/jquery/js/jquery-1.7.2.min.js');

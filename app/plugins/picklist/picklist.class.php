@@ -213,18 +213,12 @@
 		{
 			parent::onLoad();
 
-			// Install assets
-			if(!file_exists(__HTDOCS_PATH__ . '/assets/picklist'))
-			{
-				\System\Utils\FileSystem::copy(__DIR__ . '/assets', __HTDOCS_PATH__ . '/assets/picklist');
-			}
-
 			$page = $this->getParentByType( '\System\Web\WebControls\Page' );
 
 			if( $page )
 			{
-				$page->addScript( \System\Base\ApplicationBase::getInstance()->config->assets . '/picklist/picklist.js' );
-				$page->addLink( \System\Base\ApplicationBase::getInstance()->config->assets . '/picklist/picklist.css' );
+				$page->addScript( \System\Web\WebApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'picklist', 'type'=>'text/javascript')) . '&asset=picklist.js' );
+				$page->addLink( \System\Web\WebApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'picklist', 'type'=>'text/css')) . '&asset=picklist.css' );
 			}
 		}
 

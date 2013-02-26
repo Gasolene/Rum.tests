@@ -75,12 +75,6 @@
 
 			\trigger_error("FCKEditor plugin is deprecated, use CKEditor plugin instead", E_USER_NOTICE);
 
-			// Install assets
-			if(!file_exists(__HTDOCS_PATH__ . self::PATHTOEDITORFILES))
-			{
-				\System\Utils\FileSystem::copy(__DIR__ . '/assets', __HTDOCS_PATH__ . self::PATHTOEDITORFILES);
-			}
-
             // include external resources
             $this->getParentByType( '\System\Web\WebControls\Page' )->addScript(WebApplicationBase::getInstance()->config->uri . self::PATHTOEDITORFILES . '/fckeditor.js' );
         }
