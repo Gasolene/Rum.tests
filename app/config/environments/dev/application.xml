@@ -28,6 +28,7 @@
 
   <request                   default = "form"
                        friendly-uris = "true" />
+  <session cookieless="false" />
   <cache                     enabled = "true" />
 
   <authentication method="forms" deny="all" allow="tree,auth,cache,exception,logout,customer,loadtest" restrict="72.29.244,127.0.0.1,192.168" maxinvalidattempts="3" attemptwindow="60" requiressl="false">
