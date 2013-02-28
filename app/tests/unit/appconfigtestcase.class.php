@@ -144,7 +144,7 @@
 			$this->assertTrue( $config->unittests === __UNIT_TESTS_PATH__ );
 			$this->assertTrue( $config->fixtures === __FIXTURES_PATH__ );
 			$this->assertTrue( $config->defaultController === 'Index' );
-			$this->assertTrue( $config->requestParameter === 'page' );
+			$this->assertTrue( $config->requestParameter === __PATH_REQUEST_PARAMETER__ );
 			$this->assertTrue( $config->rewriteURIS === true );
 			$this->assertTrue( $config->cookielessSession === false );
 			$this->assertTrue( $config->sessionTimeout === 0 );
@@ -223,7 +223,7 @@
 			$this->assertTrue( $config->unittests === __UNIT_TESTS_PATH__ );
 			$this->assertTrue( $config->fixtures === __FIXTURES_PATH__ );
 			$this->assertTrue( $config->defaultController === 'Index' );
-			$this->assertTrue( $config->requestParameter === 'page' );
+			$this->assertTrue( $config->requestParameter === __PATH_REQUEST_PARAMETER__ );
 			$this->assertTrue( $config->rewriteURIS === true );
 			$this->assertTrue( $config->cookielessSession === false );
 			$this->assertTrue( $config->sessionTimeout === 0 );
