@@ -60,7 +60,7 @@
 		public function getDomObject()
 		{
 			$text = parent::getDomObject();
-			$text->appendAttribute( 'onclick', 'drawCalendar(\'' . $this->getHTMLControlIdString() . '\');' );
+			$text->appendAttribute( 'onclick', 'drawCalendar(\'' . $this->getHTMLControlId() . '\');' );
 			$text->appendAttribute( 'class', ' datepicker' );
 			//$text->appendAttribute( 'onchange', 'alert(\'s\');' );
 
@@ -69,14 +69,14 @@
 			}
 
 			$span = new \System\XML\DomObject( 'span' );
-			$span->setAttribute( 'id', $this->getHTMLControlIdString() . '__cal' );
+			$span->setAttribute( 'id', $this->getHTMLControlId() . '__cal' );
 			$span->setAttribute( 'class', 'datepicker_cal' );
 
 			$img = new \System\XML\DomObject( 'img' );
 			$img->setAttribute( 'src',      \System\Web\WebApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'datepicker', 'type'=>'image/gif')) . '&asset=icon.gif' );
 			$img->setAttribute( 'alt',     'datepicker' );
 			$img->setAttribute( 'class',   'datepicker_img' );
-			$img->setAttribute( 'onclick', 'drawCalendar(\'' . $this->getHTMLControlIdString() . '\')' );
+			$img->setAttribute( 'onclick', 'drawCalendar(\'' . $this->getHTMLControlId() . '\')' );
 
 			$datepicker = new \System\XML\DomObject( 'span' );
 			$datepicker->setAttribute( 'style', 'position: relative;' );

@@ -59,7 +59,7 @@
 			
 			$script->innerHtml = "
 			<script type=\"text/javascript\">
-				$( '#".$this->getHTMLControlIdString()."' ).pickadate({
+				$( '#".$this->getHTMLControlId()."' ).pickadate({
 					date_min:		false,
 					date_max:		false,
 					date_selected:	".$arrayFormatValue.",

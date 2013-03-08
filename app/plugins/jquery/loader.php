@@ -7,16 +7,27 @@
     namespace JQuery;
 
 	// register event handler
-	\System\Base\ApplicationBase::getInstance()->events->registerEventHandler(new \System\Web\Events\WebApplicationHandleRequestEventHandler('\\JQuery\\onRequestHandler'));
+	\System\Base\ApplicationBase::getInstance()->events->registerEventHandler(new \System\Base\Events\ApplicationRunEventHandler('\\JQuery\\registerFieldAndRuleTypes'));
+	\System\Base\ApplicationBase::getInstance()->events->registerEventHandler(new \System\Web\Events\WebApplicationHandleRequestEventHandler('\\JQuery\\setCreatePageEventHandler'));
+
+	/**
+	 * register field types and rules
+	 * 
+	 * @return void
+	 */
+	function registerFieldAndRuleTypes()
+	{
+		\System\Web\FormModelBase::registerFieldType('date', '\\JQuery\\DatePicker');
+	}
 
 	/**
 	 * on request handler event
 	 * 
 	 * @return void
 	 */
-	function onRequestHandler()
+	function setCreatePageEventHandler()
 	{
-		\System\Base\ApplicationBase::getInstance()->requestHandler->events->registerEventHandler(new \System\Web\Events\PageControllerCreatePageEventHandler('\\JQuery\\onCreatePage'));
+		\System\Base\ApplicationBase::getInstance()->requestHandler->events->registerEventHandler(new \System\Web\Events\PageControllerCreatePageEventHandler('\\JQuery\\loadModules'));
 	}
 
 	/**
@@ -24,7 +35,7 @@
 	 * 
 	 * @return void
 	 */
-	function onCreatePage()
+	function loadModules()
 	{
 		$page = \System\Base\ApplicationBase::getInstance()->requestHandler->page;
 		$page->addLink(\System\Base\ApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'commoncontrols', 'type'=>'text/css')).'&asset=css/ui-lightness/jquery-ui-1.8.19.custom.css');

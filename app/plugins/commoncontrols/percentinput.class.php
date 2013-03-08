@@ -56,12 +56,12 @@
 		protected function onRequest( array &$httpRequest )
 		{
 			/* format postal/zip code based on request data */
-			if( isset( $httpRequest[$this->getHTMLControlIdString()] ))
+			if( isset( $httpRequest[$this->getHTMLControlId()] ))
 			{
 				// remove dashes and make uppercase
-				$httpRequest[$this->getHTMLControlIdString()] = (float) str_replace( '%', '', $httpRequest[$this->getHTMLControlIdString()] );
-				$httpRequest[$this->getHTMLControlIdString()] /= 100;
-				$httpRequest[$this->getHTMLControlIdString()] = $httpRequest[$this->getHTMLControlIdString()]<0?0:(float)$httpRequest[$this->getHTMLControlIdString()];
+				$httpRequest[$this->getHTMLControlId()] = (float) str_replace( '%', '', $httpRequest[$this->getHTMLControlId()] );
+				$httpRequest[$this->getHTMLControlId()] /= 100;
+				$httpRequest[$this->getHTMLControlId()] = $httpRequest[$this->getHTMLControlId()]<0?0:(float)$httpRequest[$this->getHTMLControlId()];
 			}
 
 			parent::onRequest($httpRequest);

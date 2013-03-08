@@ -216,47 +216,47 @@
 		protected function onRequest( array &$httpRequest ) {
 
 			// restore state if present
-			if( isset( $httpRequest[$this->getHTMLControlIdString().'__date'] )) {
-				$this->date = $httpRequest[$this->getHTMLControlIdString().'__date'];
-				unset( $httpRequest[$this->getHTMLControlIdString().'__date'] );
+			if( isset( $httpRequest[$this->getHTMLControlId().'__date'] )) {
+				$this->date = $httpRequest[$this->getHTMLControlId().'__date'];
+				unset( $httpRequest[$this->getHTMLControlId().'__date'] );
 			}
 
-			if( isset( $httpRequest[$this->getHTMLControlIdString().'__display_mode'] )) {
-				$this->displayMode = (int) $httpRequest[$this->getHTMLControlIdString().'__display_mode'];
-				unset( $httpRequest[$this->getHTMLControlIdString().'__display_mode'] );
+			if( isset( $httpRequest[$this->getHTMLControlId().'__display_mode'] )) {
+				$this->displayMode = (int) $httpRequest[$this->getHTMLControlId().'__display_mode'];
+				unset( $httpRequest[$this->getHTMLControlId().'__display_mode'] );
 			}
 
-			if( isset( $httpRequest[$this->getHTMLControlIdString().'__startTime'] )) {
-				$this->startTime = $httpRequest[$this->getHTMLControlIdString().'__startTime'];
-				unset( $httpRequest[$this->getHTMLControlIdString().'__startTime'] );
+			if( isset( $httpRequest[$this->getHTMLControlId().'__startTime'] )) {
+				$this->startTime = $httpRequest[$this->getHTMLControlId().'__startTime'];
+				unset( $httpRequest[$this->getHTMLControlId().'__startTime'] );
 			}
 
-			if( isset( $httpRequest[$this->getHTMLControlIdString().'__endTime'] )) {
-				$this->endTime = $httpRequest[$this->getHTMLControlIdString().'__endTime'];
-				unset( $httpRequest[$this->getHTMLControlIdString().'__endTime'] );
+			if( isset( $httpRequest[$this->getHTMLControlId().'__endTime'] )) {
+				$this->endTime = $httpRequest[$this->getHTMLControlId().'__endTime'];
+				unset( $httpRequest[$this->getHTMLControlId().'__endTime'] );
 			}
 
-			if( isset( $httpRequest[$this->getHTMLControlIdString().'__vday'] )) {
+			if( isset( $httpRequest[$this->getHTMLControlId().'__vday'] )) {
 				$this->displayMode = ScheduleViewMode::daily();
-				unset( $httpRequest[$this->getHTMLControlIdString().'__vday'] );
+				unset( $httpRequest[$this->getHTMLControlId().'__vday'] );
 			}
 
-			if( isset( $httpRequest[$this->getHTMLControlIdString().'__vweek'] )) {
+			if( isset( $httpRequest[$this->getHTMLControlId().'__vweek'] )) {
 				$this->displayMode = ScheduleViewMode::weekly();
-				unset( $httpRequest[$this->getHTMLControlIdString().'__vweek'] );
+				unset( $httpRequest[$this->getHTMLControlId().'__vweek'] );
 			}
 
-			if( isset( $httpRequest[$this->getHTMLControlIdString().'__vmonth'] )) {
+			if( isset( $httpRequest[$this->getHTMLControlId().'__vmonth'] )) {
 				$this->displayMode = ScheduleViewMode::monthly();
-				unset( $httpRequest[$this->getHTMLControlIdString().'__vmonth'] );
+				unset( $httpRequest[$this->getHTMLControlId().'__vmonth'] );
 			}
 
-			if( isset( $httpRequest[$this->getHTMLControlIdString().'__vagenda'] )) {
+			if( isset( $httpRequest[$this->getHTMLControlId().'__vagenda'] )) {
 				$this->displayMode = ScheduleViewMode::agenda();
-				unset( $httpRequest[$this->getHTMLControlIdString().'__vagenda'] );
+				unset( $httpRequest[$this->getHTMLControlId().'__vagenda'] );
 			}
 
-			if( isset( $httpRequest[$this->getHTMLControlIdString().'__prev'] )) {
+			if( isset( $httpRequest[$this->getHTMLControlId().'__prev'] )) {
 				if( $this->displayMode == ScheduleViewMode::daily() ) {
 					$this->date = date( 'Y-m-d', $this->_dateAdd( 'd', -1, strtotime( $this->date )));
 				}
@@ -269,10 +269,10 @@
 				elseif( $this->displayMode == ScheduleViewMode::agenda() ) {
 					$this->date = date( 'Y-m-d', $this->_dateAdd( 'd', -7, strtotime( $this->date )));
 				}
-				unset( $httpRequest[$this->getHTMLControlIdString().'__prev'] );
+				unset( $httpRequest[$this->getHTMLControlId().'__prev'] );
 			}
 
-			if( isset( $httpRequest[$this->getHTMLControlIdString().'__next'] )) {
+			if( isset( $httpRequest[$this->getHTMLControlId().'__next'] )) {
 				if( $this->displayMode == ScheduleViewMode::daily() ) {
 					$this->date = date( 'Y-m-d', $this->_dateAdd( 'd', 1, strtotime( $this->date )));
 				}
@@ -285,12 +285,12 @@
 				elseif( $this->displayMode == ScheduleViewMode::agenda() ) {
 					$this->date = date( 'Y-m-d', $this->_dateAdd( 'd', 7, strtotime( $this->date )));
 				}
-				unset( $httpRequest[$this->getHTMLControlIdString().'__next'] );
+				unset( $httpRequest[$this->getHTMLControlId().'__next'] );
 			}
 
-			if( isset( $httpRequest[$this->getHTMLControlIdString().'__tday'] )) {
+			if( isset( $httpRequest[$this->getHTMLControlId().'__tday'] )) {
 				$this->date = date( 'Y-m-d', time() );
-				unset( $httpRequest[$this->getHTMLControlIdString().'__tday'] );
+				unset( $httpRequest[$this->getHTMLControlId().'__tday'] );
 			}
 
 			if( $this->endTime <= $this->startTime ) {
@@ -517,7 +517,7 @@
 			$tfoot   = new \System\XML\DomObject( 'tfoot' );
 
 			// set some basic properties
-			$table->setAttribute( 'id',          $this->getHTMLControlIdString() );
+			$table->setAttribute( 'id',          $this->getHTMLControlId() );
 			$table->appendAttribute( 'class',    ' scheduleview scheduleview_day' );
 
 			$caption->nodeValue = $this->caption;
@@ -536,7 +536,7 @@
 
 			if( !$this->displayAll ) {
 				$vagenda = new \System\XML\DomObject( 'input' );
-				$vagenda->setAttribute( 'name', $this->getHTMLControlIdString() . '__vagenda' );
+				$vagenda->setAttribute( 'name', $this->getHTMLControlId() . '__vagenda' );
 				$vagenda->setAttribute( 'type', 'submit' );
 				$vagenda->setAttribute( 'value', \System\Base\ApplicationBase::getInstance()->translator->get('agenda', 'Agenda' ));
 				$vagenda->setAttribute( 'style', 'float:right;' );
@@ -547,7 +547,7 @@
 			}
 
 			$vmonth = new \System\XML\DomObject( 'input' );
-			$vmonth->setAttribute( 'name', $this->getHTMLControlIdString() . '__vmonth' );
+			$vmonth->setAttribute( 'name', $this->getHTMLControlId() . '__vmonth' );
 			$vmonth->setAttribute( 'type', 'submit' );
 			$vmonth->setAttribute( 'value', \System\Base\ApplicationBase::getInstance()->translator->get('month', 'Month' ));
 			$vmonth->setAttribute( 'style', 'float:right;' );
@@ -557,7 +557,7 @@
 			$div->addChild( $vmonth );
 
 			$vweek = new \System\XML\DomObject( 'input' );
-			$vweek->setAttribute( 'name', $this->getHTMLControlIdString() . '__vweek' );
+			$vweek->setAttribute( 'name', $this->getHTMLControlId() . '__vweek' );
 			$vweek->setAttribute( 'type', 'submit' );
 			$vweek->setAttribute( 'value', \System\Base\ApplicationBase::getInstance()->translator->get('week', 'Week' ));
 			$vweek->setAttribute( 'style', 'float:right;' );
@@ -567,7 +567,7 @@
 			$div->addChild( $vweek );
 
 			$vday = new \System\XML\DomObject( 'input' );
-			$vday->setAttribute( 'name', $this->getHTMLControlIdString() . '__vday' );
+			$vday->setAttribute( 'name', $this->getHTMLControlId() . '__vday' );
 			$vday->setAttribute( 'type', 'submit' );
 			$vday->setAttribute( 'value', \System\Base\ApplicationBase::getInstance()->translator->get('day', 'Day' ));
 			$vday->setAttribute( 'style', 'float:right;' );
@@ -579,21 +579,21 @@
 			if( !$this->displayAll ) {
 
 				$prev = new \System\XML\DomObject( 'input' );
-				$prev->setAttribute( 'name', $this->getHTMLControlIdString() . '__prev' );
+				$prev->setAttribute( 'name', $this->getHTMLControlId() . '__prev' );
 				$prev->setAttribute( 'type', 'submit' );
 				$prev->setAttribute( 'value', '<' );
 				$prev->setAttribute( 'style', 'float:left;' );
 				$div->addChild( $prev );
 
 				$next = new \System\XML\DomObject( 'input' );
-				$next->setAttribute( 'name', $this->getHTMLControlIdString() . '__next' );
+				$next->setAttribute( 'name', $this->getHTMLControlId() . '__next' );
 				$next->setAttribute( 'type', 'submit' );
 				$next->setAttribute( 'value', '>' );
 				$next->setAttribute( 'style', 'float:left;' );
 				$div->addChild( $next );
 
 				$tday = new \System\XML\DomObject( 'input' );
-				$tday->setAttribute( 'name', $this->getHTMLControlIdString() . '__tday' );
+				$tday->setAttribute( 'name', $this->getHTMLControlId() . '__tday' );
 				$tday->setAttribute( 'type', 'submit' );
 				$tday->setAttribute( 'value', \System\Base\ApplicationBase::getInstance()->translator->get('today', 'Today' ));
 				$tday->setAttribute( 'style', 'float:left;' );
@@ -714,7 +714,7 @@
 			$div = new \System\XML\DomObject( 'div' );
 
 			$startTime = new \System\XML\DomObject( 'select' );
-			$startTime->appendAttribute( 'name', $this->getHTMLControlIdString() . '__startTime' );
+			$startTime->appendAttribute( 'name', $this->getHTMLControlId() . '__startTime' );
 
 			for( $time = '00:00', $i=0; $i < 24; $i++, $time = date( 'H:i', $this->_dateAdd( 'H', 1, strtotime( $time )))) {
 				$option = new \System\XML\DomObject( 'option' );
@@ -728,7 +728,7 @@
 			}
 
 			$endTime = new \System\XML\DomObject( 'select' );
-			$endTime->appendAttribute( 'name', $this->getHTMLControlIdString() . '__endTime' );
+			$endTime->appendAttribute( 'name', $this->getHTMLControlId() . '__endTime' );
 
 			for( $time = '01:00', $i=1; $i <= 24; $i++, $time = date( 'H:i', $this->_dateAdd( 'H', 1, strtotime( $time )))) {
 				$option = new \System\XML\DomObject( 'option' );
@@ -851,7 +851,7 @@
 			$tfoot   = new \System\XML\DomObject( 'tfoot' );
 
 			// set some basic properties
-			$table->setAttribute( 'id',          $this->getHTMLControlIdString() );
+			$table->setAttribute( 'id',          $this->getHTMLControlId() );
 			$table->appendAttribute( 'class',    ' scheduleview scheduleview_week' );
 
 			$caption->nodeValue = $this->caption;
@@ -870,7 +870,7 @@
 
 			if( !$this->displayAll ) {
 				$vagenda = new \System\XML\DomObject( 'input' );
-				$vagenda->setAttribute( 'name', $this->getHTMLControlIdString() . '__vagenda' );
+				$vagenda->setAttribute( 'name', $this->getHTMLControlId() . '__vagenda' );
 				$vagenda->setAttribute( 'type', 'submit' );
 				$vagenda->setAttribute( 'value', 'Agenda' );
 				$vagenda->setAttribute( 'style', 'float:right;' );
@@ -881,7 +881,7 @@
 			}
 
 			$vmonth = new \System\XML\DomObject( 'input' );
-			$vmonth->setAttribute( 'name', $this->getHTMLControlIdString() . '__vmonth' );
+			$vmonth->setAttribute( 'name', $this->getHTMLControlId() . '__vmonth' );
 			$vmonth->setAttribute( 'type', 'submit' );
 			$vmonth->setAttribute( 'value', 'Month' );
 			$vmonth->setAttribute( 'style', 'float:right;' );
@@ -891,7 +891,7 @@
 			$div->addChild( $vmonth );
 
 			$vweek = new \System\XML\DomObject( 'input' );
-			$vweek->setAttribute( 'name', $this->getHTMLControlIdString() . '__vweek' );
+			$vweek->setAttribute( 'name', $this->getHTMLControlId() . '__vweek' );
 			$vweek->setAttribute( 'type', 'submit' );
 			$vweek->setAttribute( 'value', 'Week' );
 			$vweek->setAttribute( 'style', 'float:right;' );
@@ -901,7 +901,7 @@
 			$div->addChild( $vweek );
 
 			$vday = new \System\XML\DomObject( 'input' );
-			$vday->setAttribute( 'name', $this->getHTMLControlIdString() . '__vday' );
+			$vday->setAttribute( 'name', $this->getHTMLControlId() . '__vday' );
 			$vday->setAttribute( 'type', 'submit' );
 			$vday->setAttribute( 'value', 'Day' );
 			$vday->setAttribute( 'style', 'float:right;' );
@@ -913,21 +913,21 @@
 			if( !$this->displayAll ) {
 
 				$prev = new \System\XML\DomObject( 'input' );
-				$prev->setAttribute( 'name', $this->getHTMLControlIdString() . '__prev' );
+				$prev->setAttribute( 'name', $this->getHTMLControlId() . '__prev' );
 				$prev->setAttribute( 'type', 'submit' );
 				$prev->setAttribute( 'value', '<' );
 				$prev->setAttribute( 'style', 'float:left;' );
 				$div->addChild( $prev );
 
 				$next = new \System\XML\DomObject( 'input' );
-				$next->setAttribute( 'name', $this->getHTMLControlIdString() . '__next' );
+				$next->setAttribute( 'name', $this->getHTMLControlId() . '__next' );
 				$next->setAttribute( 'type', 'submit' );
 				$next->setAttribute( 'value', '>' );
 				$next->setAttribute( 'style', 'float:left;' );
 				$div->addChild( $next );
 
 				$tday = new \System\XML\DomObject( 'input' );
-				$tday->setAttribute( 'name', $this->getHTMLControlIdString() . '__tday' );
+				$tday->setAttribute( 'name', $this->getHTMLControlId() . '__tday' );
 				$tday->setAttribute( 'type', 'submit' );
 				$tday->setAttribute( 'value', 'Today' );
 				$tday->setAttribute( 'style', 'float:left;' );
@@ -1104,7 +1104,7 @@
 			$div = new \System\XML\DomObject( 'div' );
 
 			$startTime = new \System\XML\DomObject( 'select' );
-			$startTime->appendAttribute( 'name', $this->getHTMLControlIdString() . '__startTime' );
+			$startTime->appendAttribute( 'name', $this->getHTMLControlId() . '__startTime' );
 
 			for( $time = '00:00', $i=0; $i < 24; $i++, $time = date( 'H:i', $this->_dateAdd( 'H', 1, strtotime( $time )))) {
 				$option = new \System\XML\DomObject( 'option' );
@@ -1118,7 +1118,7 @@
 			}
 
 			$endTime = new \System\XML\DomObject( 'select' );
-			$endTime->appendAttribute( 'name', $this->getHTMLControlIdString() . '__endTime' );
+			$endTime->appendAttribute( 'name', $this->getHTMLControlId() . '__endTime' );
 
 			for( $time = '01:00', $i=1; $i <= 24; $i++, $time = date( 'H:i', $this->_dateAdd( 'H', 1, strtotime( $time )))) {
 				$option = new \System\XML\DomObject( 'option' );
@@ -1205,7 +1205,7 @@
 			$tfoot    = new \System\XML\DomObject( 'tfoot' );
 
 			/* attributes */
-			$table->setAttribute( 'id',          $this->getHTMLControlIdString() );
+			$table->setAttribute( 'id',          $this->getHTMLControlId() );
 			$table->appendAttribute( 'class',    ' scheduleview scheduleview_month' );
 
 			$caption->nodeValue = $this->caption;
@@ -1224,7 +1224,7 @@
 
 			if( !$this->displayAll ) {
 				$vagenda = new \System\XML\DomObject( 'input' );
-				$vagenda->setAttribute( 'name', $this->getHTMLControlIdString() . '__vagenda' );
+				$vagenda->setAttribute( 'name', $this->getHTMLControlId() . '__vagenda' );
 				$vagenda->setAttribute( 'type', 'submit' );
 				$vagenda->setAttribute( 'value', 'Agenda' );
 				$vagenda->setAttribute( 'style', 'float:right;' );
@@ -1235,7 +1235,7 @@
 			}
 
 			$vmonth = new \System\XML\DomObject( 'input' );
-			$vmonth->setAttribute( 'name', $this->getHTMLControlIdString() . '__vmonth' );
+			$vmonth->setAttribute( 'name', $this->getHTMLControlId() . '__vmonth' );
 			$vmonth->setAttribute( 'type', 'submit' );
 			$vmonth->setAttribute( 'value', 'Month' );
 			$vmonth->setAttribute( 'style', 'float:right;' );
@@ -1245,7 +1245,7 @@
 			$div->addChild( $vmonth );
 
 			$vweek = new \System\XML\DomObject( 'input' );
-			$vweek->setAttribute( 'name', $this->getHTMLControlIdString() . '__vweek' );
+			$vweek->setAttribute( 'name', $this->getHTMLControlId() . '__vweek' );
 			$vweek->setAttribute( 'type', 'submit' );
 			$vweek->setAttribute( 'value', 'Week' );
 			$vweek->setAttribute( 'style', 'float:right;' );
@@ -1255,7 +1255,7 @@
 			$div->addChild( $vweek );
 
 			$vday = new \System\XML\DomObject( 'input' );
-			$vday->setAttribute( 'name', $this->getHTMLControlIdString() . '__vday' );
+			$vday->setAttribute( 'name', $this->getHTMLControlId() . '__vday' );
 			$vday->setAttribute( 'type', 'submit' );
 			$vday->setAttribute( 'value', 'Day' );
 			$vday->setAttribute( 'style', 'float:right;' );
@@ -1267,21 +1267,21 @@
 			if( !$this->displayAll ) {
 
 				$prev = new \System\XML\DomObject( 'input' );
-				$prev->setAttribute( 'name', $this->getHTMLControlIdString() . '__prev' );
+				$prev->setAttribute( 'name', $this->getHTMLControlId() . '__prev' );
 				$prev->setAttribute( 'type', 'submit' );
 				$prev->setAttribute( 'value', '<' );
 				$prev->setAttribute( 'style', 'float:left;' );
 				$div->addChild( $prev );
 
 				$next = new \System\XML\DomObject( 'input' );
-				$next->setAttribute( 'name', $this->getHTMLControlIdString() . '__next' );
+				$next->setAttribute( 'name', $this->getHTMLControlId() . '__next' );
 				$next->setAttribute( 'type', 'submit' );
 				$next->setAttribute( 'value', '>' );
 				$next->setAttribute( 'style', 'float:left;' );
 				$div->addChild( $next );
 
 				$tday = new \System\XML\DomObject( 'input' );
-				$tday->setAttribute( 'name', $this->getHTMLControlIdString() . '__tday' );
+				$tday->setAttribute( 'name', $this->getHTMLControlId() . '__tday' );
 				$tday->setAttribute( 'type', 'submit' );
 				$tday->setAttribute( 'value', 'Today' );
 				$tday->setAttribute( 'style', 'float:left;' );
@@ -1447,7 +1447,7 @@
 			$tfoot    = new \System\XML\DomObject( 'tfoot' );
 
 			/* attributes */
-			$table->setAttribute( 'id',          $this->getHTMLControlIdString() );
+			$table->setAttribute( 'id',          $this->getHTMLControlId() );
 			$table->appendAttribute( 'class',    ' scheduleview scheduleview_agenda' );
 
 			$caption->nodeValue = $this->caption;
@@ -1465,7 +1465,7 @@
 			$div = new \System\XML\DomObject( 'div' );
 
 			$vagenda = new \System\XML\DomObject( 'input' );
-			$vagenda->setAttribute( 'name', $this->getHTMLControlIdString() . '__vagenda' );
+			$vagenda->setAttribute( 'name', $this->getHTMLControlId() . '__vagenda' );
 			$vagenda->setAttribute( 'type', 'submit' );
 			$vagenda->setAttribute( 'value', 'Agenda' );
 			$vagenda->setAttribute( 'style', 'float:right;' );
@@ -1475,7 +1475,7 @@
 			$div->addChild( $vagenda );
 
 			$vmonth = new \System\XML\DomObject( 'input' );
-			$vmonth->setAttribute( 'name', $this->getHTMLControlIdString() . '__vmonth' );
+			$vmonth->setAttribute( 'name', $this->getHTMLControlId() . '__vmonth' );
 			$vmonth->setAttribute( 'type', 'submit' );
 			$vmonth->setAttribute( 'value', 'Month' );
 			$vmonth->setAttribute( 'style', 'float:right;' );
@@ -1485,7 +1485,7 @@
 			$div->addChild( $vmonth );
 
 			$vweek = new \System\XML\DomObject( 'input' );
-			$vweek->setAttribute( 'name', $this->getHTMLControlIdString() . '__vweek' );
+			$vweek->setAttribute( 'name', $this->getHTMLControlId() . '__vweek' );
 			$vweek->setAttribute( 'type', 'submit' );
 			$vweek->setAttribute( 'value', 'Week' );
 			$vweek->setAttribute( 'style', 'float:right;' );
@@ -1495,7 +1495,7 @@
 			$div->addChild( $vweek );
 
 			$vday = new \System\XML\DomObject( 'input' );
-			$vday->setAttribute( 'name', $this->getHTMLControlIdString() . '__vday' );
+			$vday->setAttribute( 'name', $this->getHTMLControlId() . '__vday' );
 			$vday->setAttribute( 'type', 'submit' );
 			$vday->setAttribute( 'value', 'Day' );
 			$vday->setAttribute( 'style', 'float:right;' );
@@ -1505,21 +1505,21 @@
 			$div->addChild( $vday );
 
 			$prev = new \System\XML\DomObject( 'input' );
-			$prev->setAttribute( 'name', $this->getHTMLControlIdString() . '__prev' );
+			$prev->setAttribute( 'name', $this->getHTMLControlId() . '__prev' );
 			$prev->setAttribute( 'type', 'submit' );
 			$prev->setAttribute( 'value', '<' );
 			$prev->setAttribute( 'style', 'float:left;' );
 			$div->addChild( $prev );
 
 			$next = new \System\XML\DomObject( 'input' );
-			$next->setAttribute( 'name', $this->getHTMLControlIdString() . '__next' );
+			$next->setAttribute( 'name', $this->getHTMLControlId() . '__next' );
 			$next->setAttribute( 'type', 'submit' );
 			$next->setAttribute( 'value', '>' );
 			$next->setAttribute( 'style', 'float:left;' );
 			$div->addChild( $next );
 
 			$tday = new \System\XML\DomObject( 'input' );
-			$tday->setAttribute( 'name', $this->getHTMLControlIdString() . '__tday' );
+			$tday->setAttribute( 'name', $this->getHTMLControlId() . '__tday' );
 			$tday->setAttribute( 'type', 'submit' );
 			$tday->setAttribute( 'value', 'Today' );
 			$tday->setAttribute( 'style', 'float:left;' );

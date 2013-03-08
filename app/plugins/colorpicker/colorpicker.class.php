@@ -48,16 +48,16 @@
 		public function getDomObject()
 		{
 			$text = parent::getDomObject();
-			$text->appendAttribute( 'onclick', 'document.getElementById(\'' . 'c_' . $this->getHTMLControlIdString() . '\').style.display=\'block\'');
+			$text->appendAttribute( 'onclick', 'document.getElementById(\'' . 'c_' . $this->getHTMLControlId() . '\').style.display=\'block\'');
 			$text->appendAttribute( 'class', ' colorpicker' );
 
 			$colorpicker = new \System\XML\DomObject( 'div' );
-			$colorpicker->setAttribute( 'id', 'c_' . $this->getHTMLControlIdString() );
+			$colorpicker->setAttribute( 'id', 'c_' . $this->getHTMLControlId() );
 			$colorpicker->setAttribute( 'class', 'colorpicker_colorarea' );
 
 			$callback     = 'ColorPicker.getColor';
 			$enableCustom = false;
-			$elementId    = $this->getHTMLControlIdString();
+			$elementId    = $this->getHTMLControlId();
 			$defaultColor = $this->value?$this->value:'#FFFFFF';
 			$style        = 'display: block; margin: 3px; width: 12px; height: 12px; text-align: center; font-size: 1px; cursor: pointer;';
 

@@ -119,11 +119,11 @@
 
 			if( $this->multiline )
 			{
-				$lookup->textarea->setAttribute( 'onkeyup', 'SuggestBox.handleKeyUp(event.keyCode,'.$this->maxNumToShow.','.($this->disableAutoComplete?'false':'true').',document.getElementById(\''.$this->getHTMLControlIdString().'\'),document.getElementById(\''.$this->getHTMLControlIdString().'__lookup\'),\''.$this->listName.'\',false,\''.str_replace('\'', '\\\'', $this->delimiter).'\');' );
+				$lookup->textarea->setAttribute( 'onkeyup', 'SuggestBox.handleKeyUp(event.keyCode,'.$this->maxNumToShow.','.($this->disableAutoComplete?'false':'true').',document.getElementById(\''.$this->getHTMLControlId().'\'),document.getElementById(\''.$this->getHTMLControlId().'__lookup\'),\''.$this->listName.'\',false,\''.str_replace('\'', '\\\'', $this->delimiter).'\');' );
 			}
 			else
 			{
-				$lookup->input->setAttribute( 'onkeyup', 'SuggestBox.handleKeyUp(event.keyCode,'.$this->maxNumToShow.','.($this->disableAutoComplete?'false':'true').',document.getElementById(\''.$this->getHTMLControlIdString().'\'),document.getElementById(\''.$this->getHTMLControlIdString().'__lookup\'),\''.$this->listName.'\',false,\''.str_replace('\'', '\\\'', $this->delimiter).'\');' );
+				$lookup->input->setAttribute( 'onkeyup', 'SuggestBox.handleKeyUp(event.keyCode,'.$this->maxNumToShow.','.($this->disableAutoComplete?'false':'true').',document.getElementById(\''.$this->getHTMLControlId().'\'),document.getElementById(\''.$this->getHTMLControlId().'__lookup\'),\''.$this->listName.'\',false,\''.str_replace('\'', '\\\'', $this->delimiter).'\');' );
 			}
 
 			return $lookup;
@@ -138,12 +138,12 @@
 		 */
 		protected function onRequest( array &$httpRequest )
 		{
-			if( isset( $httpRequest[$this->getHTMLControlIdString()] ))
+			if( isset( $httpRequest[$this->getHTMLControlId()] ))
 			{
 				if( $this->delimiter )
 				{
-					$values = explode( $this->delimiter, $httpRequest[$this->getHTMLControlIdString()] );
-					$httpRequest[$this->getHTMLControlIdString()] = array();
+					$values = explode( $this->delimiter, $httpRequest[$this->getHTMLControlId()] );
+					$httpRequest[$this->getHTMLControlId()] = array();
 
 					foreach($values as $value)
 					{
@@ -151,21 +151,21 @@
 
 						if( $index > -1 )
 						{
-							$httpRequest[$this->getHTMLControlIdString()][] = $this->items->itemAt( $index );
+							$httpRequest[$this->getHTMLControlId()][] = $this->items->itemAt( $index );
 						}
 					}
 				}
 				else
 				{
-					$index = $this->items->indexOf( (string) $httpRequest[$this->getHTMLControlIdString()] );
+					$index = $this->items->indexOf( (string) $httpRequest[$this->getHTMLControlId()] );
 
 					if( $index > -1 )
 					{
-						$httpRequest[$this->getHTMLControlIdString()] = $this->items->itemAt( $index );
+						$httpRequest[$this->getHTMLControlId()] = $this->items->itemAt( $index );
 					}
 					else
 					{
-						$httpRequest[$this->getHTMLControlIdString()] = '';
+						$httpRequest[$this->getHTMLControlId()] = '';
 					}
 				}
 			}

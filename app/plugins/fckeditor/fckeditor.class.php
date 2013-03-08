@@ -108,7 +108,7 @@
 			WebApplicationBase::getInstance()->session['FCKEditor_UserFilesPath'] = serialize( WebApplicationBase::getInstance()->config->uri . self::PATHTOUSERFILES );
 			WebApplicationBase::getInstance()->session['FCKEditor_UserFilesAbsolutePath'] = serialize( WebApplicationBase::getInstance()->config->htdocs . self::PATHTOUSERFILES );
 
-			$FCKEditor = new \FCKeditor($this->getHTMLControlIdString());
+			$FCKEditor = new \FCKeditor($this->getHTMLControlId());
 			$FCKEditor->BasePath = WebApplicationBase::getInstance()->config->uri . self::PATHTOEDITORFILES . '/';
 			$FCKEditor->Width = $this->width;
 			$FCKEditor->Height = $this->height;
@@ -134,7 +134,7 @@
 			$fckeditor = new \System\XML\DomObject( 'script' );
 			$fckeditor->setAttribute( 'type', 'text/javascript' );
 			$fckeditor->innerHtml = "<!--
-var oFCKeditor_{$this->controlId}        = new FCKeditor( \"{$this->getHtmlControlIdString()}\" ) ;
+var oFCKeditor_{$this->controlId}        = new FCKeditor( \"{$this->getHTMLControlId()}\" ) ;
 oFCKeditor_{$this->controlId}.BasePath	 = \"" . WebApplicationBase::getInstance()->config->uri . self::PATHTOEDITORFILES . "/\" ;
 oFCKeditor_{$this->controlId}.Height	 = 300;
 oFCKeditor_{$this->controlId}.Value	     = \"{$value}\";

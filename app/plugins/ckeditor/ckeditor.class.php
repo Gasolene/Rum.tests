@@ -101,7 +101,7 @@
 			$this->configuration['filebrowserFlashBrowseUrl'] = "{$baseURI}/filemanager/browser/default/browser.html?Type=Flash&Connector={$baseURL}/filemanager/connectors/php/connector.php";
 
 			ob_start();
-			$CKEditor->editor($this->getHTMLControlIdString(), $this->value, $this->configuration, $this->events);
+			$CKEditor->editor($this->getHTMLControlId(), $this->value, $this->configuration, $this->events);
 			$span = new DomObject( 'span' );
 			$span->innerHtml = \ob_get_clean();
 			return $span;

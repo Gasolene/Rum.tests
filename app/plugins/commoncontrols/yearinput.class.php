@@ -69,9 +69,9 @@
 		 */
 		protected function onRequest( array &$httpRequest )
 		{
-			if( isset( $httpRequest[$this->getHTMLControlIdString()] ))
+			if( isset( $httpRequest[$this->getHTMLControlId()] ))
 			{
-				$httpRequest[$this->getHTMLControlIdString()] = (int) $httpRequest[$this->getHTMLControlIdString()];
+				$httpRequest[$this->getHTMLControlId()] = (int) $httpRequest[$this->getHTMLControlId()];
 			}
 
 			parent::onRequest($httpRequest);

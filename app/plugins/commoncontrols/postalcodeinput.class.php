@@ -58,20 +58,20 @@
 		protected function onRequest( array &$httpRequest ) {
 
 			/* format postal/zip code based on request data */
-			if( isset( $httpRequest[$this->getHTMLControlIdString()] )) {
+			if( isset( $httpRequest[$this->getHTMLControlId()] )) {
 
 				// remove dashes and make uppercase
-				$httpRequest[$this->getHTMLControlIdString()] = strtoupper( str_replace( array('-', ' '), '', $httpRequest[$this->getHTMLControlIdString()] ));
+				$httpRequest[$this->getHTMLControlId()] = strtoupper( str_replace( array('-', ' '), '', $httpRequest[$this->getHTMLControlId()] ));
 
 				// add space if 6 characters
-				if( strlen( $httpRequest[$this->getHTMLControlIdString()] ) == 6 ) {
-					$httpRequest[$this->getHTMLControlIdString()] = $httpRequest[$this->getHTMLControlIdString()][0]
-						. $httpRequest[$this->getHTMLControlIdString()][1]
-						. $httpRequest[$this->getHTMLControlIdString()][2]
+				if( strlen( $httpRequest[$this->getHTMLControlId()] ) == 6 ) {
+					$httpRequest[$this->getHTMLControlId()] = $httpRequest[$this->getHTMLControlId()][0]
+						. $httpRequest[$this->getHTMLControlId()][1]
+						. $httpRequest[$this->getHTMLControlId()][2]
 						. ' '
-						. $httpRequest[$this->getHTMLControlIdString()][3]
-						. $httpRequest[$this->getHTMLControlIdString()][4]
-						. $httpRequest[$this->getHTMLControlIdString()][5];
+						. $httpRequest[$this->getHTMLControlId()][3]
+						. $httpRequest[$this->getHTMLControlId()][4]
+						. $httpRequest[$this->getHTMLControlId()][5];
 				}
 			}
 

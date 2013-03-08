@@ -110,12 +110,12 @@
 		public function getDomObject()
 		{
 			$dom = new \System\XML\DomObject( 'ul' );
-			$dom->setAttribute( 'id', $this->getHTMLControlIdString() );
+			$dom->setAttribute( 'id', $this->getHTMLControlId() );
 			$dom->appendAttribute( 'class', ' sortable' );
 
 			for( $i = 0, $count = $this->items->count; $i < $count; $i++ )
 			{
-				$dom->innerHtml .= '<li id="'.$this->getHTMLControlIdString().'__'.$this->items->itemAt($i).'" class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'.($this->items->keyAt($i)).'</li>';
+				$dom->innerHtml .= '<li id="'.$this->getHTMLControlId().'__'.$this->items->itemAt($i).'" class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'.($this->items->keyAt($i)).'</li>';
 			}
 
 			return $dom;
@@ -132,8 +132,8 @@
 			parent::onLoad();
 
 			$page = $this->getParentByType('\System\Web\WebControls\Page');
-			$page->addLink(\System\Base\ApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'commoncontrols', 'type'=>'text/css')).'&asset=sortable/sortable.css');
-			$page->onload .= "$( \"#{$this->getHTMLControlIdString()}\" ).sortable();$( \"#{$this->getHTMLControlIdString()}\" ).disableSelection();$( \"#{$this->getHTMLControlIdString()}\" ).sortable({update:function(event,ui){PHPRum.sendHttpRequest('".$this->getQueryString()."',($('#{$this->getHTMLControlIdString()}').sortable('serialize')));}});";
+			//$page->addLink(\System\Base\ApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'commoncontrols', 'type'=>'text/css')).'&asset=sortable/sortable.css');
+			$page->onload .= "$( \"#{$this->getHTMLControlId()}\" ).sortable();$( \"#{$this->getHTMLControlId()}\" ).disableSelection();$( \"#{$this->getHTMLControlId()}\" ).sortable({update:function(event,ui){Rum.sendAsync(null, '".$this->getQueryString()."',($('#{$this->getHTMLControlId()}').sortable('serialize')));}});";
 		}
 
 
@@ -144,9 +144,9 @@
 		 */
 		protected function onRequest( array &$request )
 		{
-			if( isset( $request[$this->getHTMLControlIdString().'_'] ))
+			if( isset( $request[$this->getHTMLControlId().'_'] ))
 			{
-				$this->value = $request[$this->getHTMLControlIdString().'_'];
+				$this->value = $request[$this->getHTMLControlId().'_'];
 
 				$this->events->raise(new SortableSortEvent(), $this);
 
@@ -172,15 +172,15 @@
 		{
 			$page = $this->getParentByType('\System\Web\WebControls\Page');
 
-			$page->loadAjaxJScriptBuffer('list1 = document.getElementById(\''.$this->getHTMLControlIdString().'\');');
+			$page->loadAjaxJScriptBuffer('list1 = document.getElementById(\''.$this->getHTMLControlId().'\');');
 			$page->loadAjaxJScriptBuffer('list2 = document.createElement(\'div\');');
 			$page->loadAjaxJScriptBuffer('list2.innerHTML = \''.\addslashes(str_replace("\n", '', str_replace("\r", '', $this->fetch()))).'\';');
 			$page->loadAjaxJScriptBuffer('list1.parentNode.insertBefore(list2, list1);');
 			$page->loadAjaxJScriptBuffer('list1.parentNode.removeChild(list1);');
 
-			$page->loadAjaxJScriptBuffer("$( \"#{$this->getHTMLControlIdString()}\" ).sortable();");
-			$page->loadAjaxJScriptBuffer("$( \"#{$this->getHTMLControlIdString()}\" ).disableSelection();");
-			$page->loadAjaxJScriptBuffer("$( \"#{$this->getHTMLControlIdString()}\" ).sortable({update: function(event, ui) {PHPRum.sendHttpRequest('".$this->getQueryString()."', ($('#{$this->getHTMLControlIdString()}').sortable('serialize')));}})");
+			$page->loadAjaxJScriptBuffer("$( \"#{$this->getHTMLControlId()}\" ).sortable();");
+			$page->loadAjaxJScriptBuffer("$( \"#{$this->getHTMLControlId()}\" ).disableSelection();");
+			$page->loadAjaxJScriptBuffer("$( \"#{$this->getHTMLControlId()}\" ).sortable({update: function(event, ui) {PHPRum.sendHttpRequest('".$this->getQueryString()."', ($('#{$this->getHTMLControlId()}').sortable('serialize')));}})");
 		}
 	}
 ?>

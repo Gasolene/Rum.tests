@@ -51,35 +51,35 @@
 		protected function onRequest( array &$httpRequest ) {
 
 			/* format phone number based on request data */
-			if( isset( $httpRequest[$this->getHTMLControlIdString()] )) {
+			if( isset( $httpRequest[$this->getHTMLControlId()] )) {
 
-				$httpRequest[$this->getHTMLControlIdString()] = (string) $httpRequest[$this->getHTMLControlIdString()];
+				$httpRequest[$this->getHTMLControlId()] = (string) $httpRequest[$this->getHTMLControlId()];
 
 				// remove dollor signs
-				$httpRequest[$this->getHTMLControlIdString()] = str_replace( '$', '', $httpRequest[$this->getHTMLControlIdString()] );
+				$httpRequest[$this->getHTMLControlId()] = str_replace( '$', '', $httpRequest[$this->getHTMLControlId()] );
 
 				// if brackets then negative
 				$negative = false;
-				if( strpos( $httpRequest[$this->getHTMLControlIdString()], '(' ) !== false &&
-					strpos( $httpRequest[$this->getHTMLControlIdString()], ')' )) {
+				if( strpos( $httpRequest[$this->getHTMLControlId()], '(' ) !== false &&
+					strpos( $httpRequest[$this->getHTMLControlId()], ')' )) {
 					$negative = true;
 				}
 
 				// remove brackets
-				$httpRequest[$this->getHTMLControlIdString()] = str_replace( '(', '', str_replace( ')', '', $httpRequest[$this->getHTMLControlIdString()] ) );
+				$httpRequest[$this->getHTMLControlId()] = str_replace( '(', '', str_replace( ')', '', $httpRequest[$this->getHTMLControlId()] ) );
 
 				// remove spaces
-				$httpRequest[$this->getHTMLControlIdString()] = str_replace( ' ', '', $httpRequest[$this->getHTMLControlIdString()] );
+				$httpRequest[$this->getHTMLControlId()] = str_replace( ' ', '', $httpRequest[$this->getHTMLControlId()] );
 
-				if( is_numeric( $httpRequest[$this->getHTMLControlIdString()] )) {
+				if( is_numeric( $httpRequest[$this->getHTMLControlId()] )) {
 
 					// strip trailing zeros
-					$httpRequest[$this->getHTMLControlIdString()] = number_format( $httpRequest[$this->getHTMLControlIdString()], 2, '.', '' );
+					$httpRequest[$this->getHTMLControlId()] = number_format( $httpRequest[$this->getHTMLControlId()], 2, '.', '' );
 
 					// cast
-					$httpRequest[$this->getHTMLControlIdString()] = (real) $httpRequest[$this->getHTMLControlIdString()];
+					$httpRequest[$this->getHTMLControlId()] = (real) $httpRequest[$this->getHTMLControlId()];
 					if( $negative ) {
-						$httpRequest[$this->getHTMLControlIdString()] = -$httpRequest[$this->getHTMLControlIdString()];
+						$httpRequest[$this->getHTMLControlId()] = -$httpRequest[$this->getHTMLControlId()];
 					}
 				}
 			}

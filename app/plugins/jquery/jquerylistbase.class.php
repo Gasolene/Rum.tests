@@ -19,7 +19,7 @@
 	 * @subpackage		Web
 	 * @author			Darnell Shinbine
 	 */
-	abstract class JQueryListBase extends JQueryBase
+	abstract class JQueryListBase extends \System\Web\WebControls\WebControlBase
 	{
 		/**
 		 * collection of items

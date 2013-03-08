@@ -52,13 +52,13 @@
 		protected function onRequest( array &$httpRequest )
 		{
 			/* format exp date based on request data */
-			if( isset( $httpRequest[ $this->getHTMLControlIdString() . '__month' ] ) &&
-				isset( $httpRequest[ $this->getHTMLControlIdString() . '__year' ] ))
+			if( isset( $httpRequest[ $this->getHTMLControlId() . '__month' ] ) &&
+				isset( $httpRequest[ $this->getHTMLControlId() . '__year' ] ))
 			{
-				$httpRequest[$this->getHTMLControlIdString()] = date( 'm/d/y', strtotime( $httpRequest[ $this->getHTMLControlIdString() . '__year' ] . '-' . $httpRequest[ $this->getHTMLControlIdString() . '__month' ] . '-01' ));
+				$httpRequest[$this->getHTMLControlId()] = date( 'm/d/y', strtotime( $httpRequest[ $this->getHTMLControlId() . '__year' ] . '-' . $httpRequest[ $this->getHTMLControlId() . '__month' ] . '-01' ));
 
-				unset( $httpRequest[ $this->getHTMLControlIdString() . '__month' ] );
-				unset( $httpRequest[ $this->getHTMLControlIdString() . '__year' ] );
+				unset( $httpRequest[ $this->getHTMLControlId() . '__month' ] );
+				unset( $httpRequest[ $this->getHTMLControlId() . '__year' ] );
 			}
 
 			parent::onRequest($httpRequest);
@@ -75,7 +75,7 @@
 		{
 			parent::onLoad();
 
-			$this->defaultHTMLControlId = $this->getHTMLControlIdString().'__month';
+			$this->defaultHTMLControlId = $this->getHTMLControlId().'__month';
 		}
 
 
@@ -98,11 +98,11 @@
 			$select_month->setAttribute( 'class', 'ccexpirydateinput_month');
 			$select_year->setAttribute( 'class', 'ccexpirydateinput_year');
 
-			$select_month->setAttribute( 'name', $this->getHTMLControlIdString() . '__month' );
-			$select_year->setAttribute( 'name', $this->getHTMLControlIdString() . '__year' );
+			$select_month->setAttribute( 'name', $this->getHTMLControlId() . '__month' );
+			$select_year->setAttribute( 'name', $this->getHTMLControlId() . '__year' );
 
-			$select_month->setAttribute( 'id', $this->getHTMLControlIdString() . '__month' );
-			$select_year->setAttribute( 'id', $this->getHTMLControlIdString() . '__year' );
+			$select_month->setAttribute( 'id', $this->getHTMLControlId() . '__month' );
+			$select_year->setAttribute( 'id', $this->getHTMLControlId() . '__year' );
 
 			$select_month->setAttribute( 'tabIndex', $this->tabIndex++ );
 			$select_year->setAttribute( 'tabIndex', $this->tabIndex );
@@ -116,8 +116,8 @@
 
 			if( $this->ajaxPostBack )
 			{
-				$select_month->appendAttribute( 'onchange', $this->ajaxHTTPRequest . ' = PHPRum.sendHttpRequest( \'' . $this->ajaxCallback . '\', \'' . $this->getHTMLControlIdString().'=\'+this.value+\'&'.$this->getRequestData().'\', \'POST\', ' . ( $this->ajaxEventHandler?'\'' . addslashes( (string) $this->ajaxEventHandler ) . '\'':'function() { PHPRum.evalHttpResponse(\''.\addslashes($this->ajaxHTTPRequest).'\') }' ) . ' );' );
-				$select_year->appendAttribute( 'onchange', $this->ajaxHTTPRequest . ' = PHPRum.sendHttpRequest( \'' . $this->ajaxCallback . '\', \'' . $this->getHTMLControlIdString().'=\'+this.value+\'&'.$this->getRequestData().'\', \'POST\', ' . ( $this->ajaxEventHandler?'\'' . addslashes( (string) $this->ajaxEventHandler ) . '\'':'function() { PHPRum.evalHttpResponse(\''.\addslashes($this->ajaxHTTPRequest).'\') }' ) . ' );' );
+				$select_month->appendAttribute( 'onchange', 'Rum.evalAsync(\'' . $this->ajaxCallback . '\',\'' . $this->getHTMLControlId().'=\'+this.value+\'&'.$this->getRequestData().'\',\'POST\');' );
+				$select_year->appendAttribute( 'onchange', 'Rum.evalAsync(\'' . $this->ajaxCallback . '\',\'' . $this->getHTMLControlId().'=\'+this.value+\'&'.$this->getRequestData().'\',\'POST\');' );
 			}
 
 			// set invalid class

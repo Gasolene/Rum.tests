@@ -62,7 +62,7 @@
 			$this->items = new \System\Web\WebControls\ListItemCollection(ProvinceSelector::$provinces);
 
 			if( $this->countrySelector ) {
-				$htmlControlIdString = $this->countrySelector->getHTMLControlIdString();
+				$htmlControlIdString = $this->countrySelector->getHTMLControlId();
 				$this->attributes->add( 'onchange', 'document.getElementById(\'' . $htmlControlIdString . '\').value = \'CA\';' );
 			}
 		}

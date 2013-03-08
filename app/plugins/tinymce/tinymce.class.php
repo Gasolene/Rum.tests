@@ -107,7 +107,7 @@
 		template_replace_values : {}
 	});
 </script>
-<textarea class=\"tinymce\" id=\"{$this->getHTMLControlIdString()}\" name=\"{$this->getHTMLControlIdString()}\" rows=\"15\" cols=\"80\" style=\"width:100%;\">
+<textarea class=\"tinymce\" id=\"{$this->getHTMLControlId()}\" name=\"{$this->getHTMLControlId()}\" rows=\"15\" cols=\"80\" style=\"width:100%;\">
 ".\htmlentities($this->value)."
 </textarea>";
 			return $span;

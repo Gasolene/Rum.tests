@@ -80,7 +80,7 @@
 			parent::sendHeaders();
 
 			if( !$this->name ) {
-				$this->name = $this->getHTMLControlIdString() . '.csv';
+				$this->name = $this->getHTMLControlId() . '.csv';
 			}
 
 			\System\Web\HTTPResponse::addHeader( "Content-disposition: attachment; filename={$this->name};creation-date=".(date('Y-m-d')).";modification-date=".(date('Y-m-d')).";" );

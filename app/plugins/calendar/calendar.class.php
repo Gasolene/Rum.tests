@@ -271,14 +271,14 @@
 		 */
 		protected function onRequest( array &$httpRequest ) {
 
-			if( isset( $httpRequest[$this->getHTMLControlIdString().'__month'] )) {
-				$this->month = $httpRequest[$this->getHTMLControlIdString().'__month'];
-				unset( $httpRequest[$this->getHTMLControlIdString().'__month'] );
+			if( isset( $httpRequest[$this->getHTMLControlId().'__month'] )) {
+				$this->month = $httpRequest[$this->getHTMLControlId().'__month'];
+				unset( $httpRequest[$this->getHTMLControlId().'__month'] );
 			}
 
-			if( isset( $httpRequest[$this->getHTMLControlIdString().'__year'] )) {
-				$this->year = $httpRequest[$this->getHTMLControlIdString().'__year'];
-				unset( $httpRequest[$this->getHTMLControlIdString().'__year'] );
+			if( isset( $httpRequest[$this->getHTMLControlId().'__year'] )) {
+				$this->year = $httpRequest[$this->getHTMLControlId().'__year'];
+				unset( $httpRequest[$this->getHTMLControlId().'__year'] );
 			}
 		}
 
@@ -373,7 +373,7 @@
 			$tfoot    = new \System\XML\DomObject( 'tfoot' );
 
 			/* attributes */
-			$calendar->setAttribute( 'id',          $this->getHTMLControlIdString() );
+			$calendar->setAttribute( 'id',          $this->getHTMLControlId() );
 			$calendar->appendAttribute( 'class',    ' calendar' );
 
 			/* month */
@@ -572,7 +572,7 @@
 				}
 			}
 
-			return $this->getQueryString( '?' . $this->getHTMLControlIdString().'__month=' . $mo . '&' . $this->getHTMLControlIdString().'__year=' . $year );
+			return $this->getQueryString( '?' . $this->getHTMLControlId().'__month=' . $mo . '&' . $this->getHTMLControlId().'__year=' . $year );
 		}
 
 
@@ -597,7 +597,7 @@
 				$year++;
 			}
 
-			return $this->getQueryString( '?' . $this->getHTMLControlIdString().'__month=' . $mo . '&' . $this->getHTMLControlIdString().'__year=' . $year );
+			return $this->getQueryString( '?' . $this->getHTMLControlId().'__month=' . $mo . '&' . $this->getHTMLControlId().'__year=' . $year );
 		}
 
 

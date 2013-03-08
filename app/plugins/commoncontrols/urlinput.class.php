@@ -42,13 +42,13 @@
 		protected function onRequest( array &$httpRequest ) {
 
 			/* format phone number based on request data */
-			if( isset( $httpRequest[$this->getHTMLControlIdString()] )) {
+			if( isset( $httpRequest[$this->getHTMLControlId()] )) {
 
-				if( strpos( $httpRequest[$this->getHTMLControlIdString()], 'http' ) === false && strlen($httpRequest[$this->getHTMLControlIdString()]) > 0) {
-					$httpRequest[$this->getHTMLControlIdString()] = 'http://' . $httpRequest[$this->getHTMLControlIdString()];
+				if( strpos( $httpRequest[$this->getHTMLControlId()], 'http' ) === false && strlen($httpRequest[$this->getHTMLControlId()]) > 0) {
+					$httpRequest[$this->getHTMLControlId()] = 'http://' . $httpRequest[$this->getHTMLControlId()];
 				}
 
-				$httpRequest[$this->getHTMLControlIdString()] = trim( $httpRequest[$this->getHTMLControlIdString()] );
+				$httpRequest[$this->getHTMLControlId()] = trim( $httpRequest[$this->getHTMLControlId()] );
 			}
 
 			parent::onRequest($httpRequest);

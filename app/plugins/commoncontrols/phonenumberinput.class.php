@@ -49,79 +49,79 @@
 		protected function onRequest( array &$httpRequest )
 		{
 			/* format phone number based on request data */
-			if( isset( $httpRequest[$this->getHTMLControlIdString()] ))
+			if( isset( $httpRequest[$this->getHTMLControlId()] ))
 			{
-				if( strlen( $httpRequest[$this->getHTMLControlIdString()] ) > 0 )
+				if( strlen( $httpRequest[$this->getHTMLControlId()] ) > 0 )
 				{
 					// remove dashes spaces and brackets
-					$httpRequest[$this->getHTMLControlIdString()] = str_replace( '-', '', str_replace( ' ', '', str_replace( '(', '', str_replace( ')', '', $httpRequest[$this->getHTMLControlIdString()] ))));
+					$httpRequest[$this->getHTMLControlId()] = str_replace( '-', '', str_replace( ' ', '', str_replace( '(', '', str_replace( ')', '', $httpRequest[$this->getHTMLControlId()] ))));
 
 					// replace ext with x
-					$httpRequest[$this->getHTMLControlIdString()] = str_ireplace( 'ext', 'x', $httpRequest[$this->getHTMLControlIdString()] );
+					$httpRequest[$this->getHTMLControlId()] = str_ireplace( 'ext', 'x', $httpRequest[$this->getHTMLControlId()] );
 
 					// get extension pos
-					$ext_pos = stripos( $httpRequest[$this->getHTMLControlIdString()], 'x' );
+					$ext_pos = stripos( $httpRequest[$this->getHTMLControlId()], 'x' );
 
 					// store extension
 					$ext = "";
 					if( $ext_pos )
 					{
-						$ext = substr( $httpRequest[$this->getHTMLControlIdString()], $ext_pos + 1 );
-						$httpRequest[$this->getHTMLControlIdString()] = substr( $httpRequest[$this->getHTMLControlIdString()], 0, $ext_pos );
+						$ext = substr( $httpRequest[$this->getHTMLControlId()], $ext_pos + 1 );
+						$httpRequest[$this->getHTMLControlId()] = substr( $httpRequest[$this->getHTMLControlId()], 0, $ext_pos );
 					}
 
 					// 7 character phone no.
-					if( strlen( $httpRequest[$this->getHTMLControlIdString()] ) == 7 )
+					if( strlen( $httpRequest[$this->getHTMLControlId()] ) == 7 )
 					{
-						$httpRequest[$this->getHTMLControlIdString()] = '(???) '
-							. $httpRequest[$this->getHTMLControlIdString()][0]
-							. $httpRequest[$this->getHTMLControlIdString()][1]
-							. $httpRequest[$this->getHTMLControlIdString()][2]
+						$httpRequest[$this->getHTMLControlId()] = '(???) '
+							. $httpRequest[$this->getHTMLControlId()][0]
+							. $httpRequest[$this->getHTMLControlId()][1]
+							. $httpRequest[$this->getHTMLControlId()][2]
 							. '-'
-							. $httpRequest[$this->getHTMLControlIdString()][3]
-							. $httpRequest[$this->getHTMLControlIdString()][4]
-							. $httpRequest[$this->getHTMLControlIdString()][5]
-							. $httpRequest[$this->getHTMLControlIdString()][6];
+							. $httpRequest[$this->getHTMLControlId()][3]
+							. $httpRequest[$this->getHTMLControlId()][4]
+							. $httpRequest[$this->getHTMLControlId()][5]
+							. $httpRequest[$this->getHTMLControlId()][6];
 					}
 					// 10 character phone no.
-					elseif( strlen( $httpRequest[$this->getHTMLControlIdString()] ) == 10 )
+					elseif( strlen( $httpRequest[$this->getHTMLControlId()] ) == 10 )
 					{
-						$httpRequest[$this->getHTMLControlIdString()] = '('
-							. $httpRequest[$this->getHTMLControlIdString()][0]
-							. $httpRequest[$this->getHTMLControlIdString()][1]
-							. $httpRequest[$this->getHTMLControlIdString()][2]
+						$httpRequest[$this->getHTMLControlId()] = '('
+							. $httpRequest[$this->getHTMLControlId()][0]
+							. $httpRequest[$this->getHTMLControlId()][1]
+							. $httpRequest[$this->getHTMLControlId()][2]
 							. ') '
-							. $httpRequest[$this->getHTMLControlIdString()][3]
-							. $httpRequest[$this->getHTMLControlIdString()][4]
-							. $httpRequest[$this->getHTMLControlIdString()][5]
+							. $httpRequest[$this->getHTMLControlId()][3]
+							. $httpRequest[$this->getHTMLControlId()][4]
+							. $httpRequest[$this->getHTMLControlId()][5]
 							. '-'
-							. $httpRequest[$this->getHTMLControlIdString()][6]
-							. $httpRequest[$this->getHTMLControlIdString()][7]
-							. $httpRequest[$this->getHTMLControlIdString()][8]
-							. $httpRequest[$this->getHTMLControlIdString()][9];
+							. $httpRequest[$this->getHTMLControlId()][6]
+							. $httpRequest[$this->getHTMLControlId()][7]
+							. $httpRequest[$this->getHTMLControlId()][8]
+							. $httpRequest[$this->getHTMLControlId()][9];
 					}
 					// 11 character phone no.
-					elseif( strlen( $httpRequest[$this->getHTMLControlIdString()] ) == 11 )
+					elseif( strlen( $httpRequest[$this->getHTMLControlId()] ) == 11 )
 					{
-						$httpRequest[$this->getHTMLControlIdString()] = '('
-							. $httpRequest[$this->getHTMLControlIdString()][1]
-							. $httpRequest[$this->getHTMLControlIdString()][2]
-							. $httpRequest[$this->getHTMLControlIdString()][3]
+						$httpRequest[$this->getHTMLControlId()] = '('
+							. $httpRequest[$this->getHTMLControlId()][1]
+							. $httpRequest[$this->getHTMLControlId()][2]
+							. $httpRequest[$this->getHTMLControlId()][3]
 							. ') '
-							. $httpRequest[$this->getHTMLControlIdString()][4]
-							. $httpRequest[$this->getHTMLControlIdString()][5]
-							. $httpRequest[$this->getHTMLControlIdString()][6]
+							. $httpRequest[$this->getHTMLControlId()][4]
+							. $httpRequest[$this->getHTMLControlId()][5]
+							. $httpRequest[$this->getHTMLControlId()][6]
 							. '-'
-							. $httpRequest[$this->getHTMLControlIdString()][7]
-							. $httpRequest[$this->getHTMLControlIdString()][8]
-							. $httpRequest[$this->getHTMLControlIdString()][9]
-							. $httpRequest[$this->getHTMLControlIdString()][10];
+							. $httpRequest[$this->getHTMLControlId()][7]
+							. $httpRequest[$this->getHTMLControlId()][8]
+							. $httpRequest[$this->getHTMLControlId()][9]
+							. $httpRequest[$this->getHTMLControlId()][10];
 					}
 
 					// add extension
 					if( $ext_pos )
 					{
-						$httpRequest[$this->getHTMLControlIdString()] .= ' ext '
+						$httpRequest[$this->getHTMLControlId()] .= ' ext '
 							. (isset($ext[0])?(int)$ext[0]:'')
 							. (isset($ext[1])?(int)$ext[1]:'')
 							. (isset($ext[2])?(int)$ext[2]:'')

@@ -194,11 +194,11 @@
 					$tmp_uri = $this->tmpURI . '/'.\session_id().'_'.$this->controlId.'_orig';
 					$save_path = $this->getSavePath();
 
-					if(isset($request[$this->getHTMLControlIdString()."__uploaded"]) && $request[$this->getHTMLControlIdString()."__uploaded"] == 1)
+					if(isset($request[$this->getHTMLControlId()."__uploaded"]) && $request[$this->getHTMLControlId()."__uploaded"] == 1)
 					{
 						$info = $this->getFileInfo();
-						$this->xoffset = (-$request[$this->getHTMLControlIdString()."__xoffset"]);
-						$this->yoffset = (-$request[$this->getHTMLControlIdString()."__yoffset"]);
+						$this->xoffset = (-$request[$this->getHTMLControlId()."__xoffset"]);
+						$this->yoffset = (-$request[$this->getHTMLControlId()."__yoffset"]);
 						if($this->xoffset<0)$this->xoffset=0;
 						if($this->yoffset<0)$this->yoffset=0;
 
@@ -212,14 +212,14 @@
 						$this->submitted = true;
 						$this->value = $save_path;
 
-						unset($request[$this->getHTMLControlIdString()."__xoffset"]);
-						unset($request[$this->getHTMLControlIdString()."__yoffset"]);
-						unset($request[$this->getHTMLControlIdString()."__uploaded"]);
-						unset($request[$this->getHTMLControlIdString()."__post"]);
+						unset($request[$this->getHTMLControlId()."__xoffset"]);
+						unset($request[$this->getHTMLControlId()."__yoffset"]);
+						unset($request[$this->getHTMLControlId()."__uploaded"]);
+						unset($request[$this->getHTMLControlId()."__post"]);
 					}
 					else
 					{
-						if( isset( $_FILES[$this->getHTMLControlIdString()] ) && isset($request[$this->getHTMLControlIdString()."__post"]) && $request[$this->getHTMLControlIdString()."__post"] == 1)
+						if( isset( $_FILES[$this->getHTMLControlId()] ) && isset($request[$this->getHTMLControlId()."__post"]) && $request[$this->getHTMLControlId()."__post"] == 1)
 						{
 							$info = $this->getFileInfo();
 							$img = new \GD\GDImage(\file_get_contents($info["tmp_name"]));
@@ -228,15 +228,15 @@
 							// store image
 							\copy($info["tmp_name"], $tmp_path);
 
-							\System\Web\HttpResponse::write("document.getElementById('{$this->getHTMLControlIdString()}__loading').style.display='none';");
-							\System\Web\HttpResponse::write("document.getElementById('{$this->getHTMLControlIdString()}__facebook-cropper-container').style.display='block';");
-							\System\Web\HttpResponse::write("document.getElementById('{$this->getHTMLControlIdString()}__preview').src='{$tmp_uri}?t=".time()."';");
-							\System\Web\HttpResponse::write("document.getElementById('{$this->getHTMLControlIdString()}__post').value='0';");
-							\System\Web\HttpResponse::write("document.getElementById('{$this->getHTMLControlIdString()}__uploaded').value='1';");
+							\System\Web\HttpResponse::write("document.getElementById('{$this->getHTMLControlId()}__loading').style.display='none';");
+							\System\Web\HttpResponse::write("document.getElementById('{$this->getHTMLControlId()}__facebook-cropper-container').style.display='block';");
+							\System\Web\HttpResponse::write("document.getElementById('{$this->getHTMLControlId()}__preview').src='{$tmp_uri}?t=".time()."';");
+							\System\Web\HttpResponse::write("document.getElementById('{$this->getHTMLControlId()}__post').value='0';");
+							\System\Web\HttpResponse::write("document.getElementById('{$this->getHTMLControlId()}__uploaded').value='1';");
 
 							// auto size
-							\System\Web\HttpResponse::write("document.getElementById('{$this->getHTMLControlIdString()}__preview').style.width='".$img->getWidth()."px';");
-							\System\Web\HttpResponse::write("document.getElementById('{$this->getHTMLControlIdString()}__preview').style.height='".$img->getHeight()."px';");
+							\System\Web\HttpResponse::write("document.getElementById('{$this->getHTMLControlId()}__preview').style.width='".$img->getWidth()."px';");
+							\System\Web\HttpResponse::write("document.getElementById('{$this->getHTMLControlId()}__preview').style.height='".$img->getHeight()."px';");
 
 							\System\Web\HttpResponse::end();
 						}
@@ -278,34 +278,34 @@
 			$span = new \System\XML\DomObject('span');
 			$cropHolder = new \System\XML\DomObject('div');
 			$cropHolder->innerHtml = '
-<div id="'.$this->getHTMLControlIdString().'__facebook-cropper" class="facebook-cropper" style="width:'.$this->previewWidth.'px;height:'.$this->previewHeight.'px;display:none;">
-	<img id="'.$this->getHTMLControlIdString().'__loading" src="'.\System\Base\ApplicationBase::getInstance()->config->host . \System\Base\ApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'commoncontrols', 'type'=>'image/gif')).'&asset=imagecropper/spinner.gif" style="display:none;margin:0px auto;margin-top:'.($this->previewHeight/2-8).'px;" />
-	<div id="'.$this->getHTMLControlIdString().'__facebook-cropper-container" class="facebook-cropper-container" style="width:'.$this->previewWidth.'px;height:'.$this->previewHeight.'px;">
-		<img id="'.$this->getHTMLControlIdString().'__preview" src="" />
+<div id="'.$this->getHTMLControlId().'__facebook-cropper" class="facebook-cropper" style="width:'.$this->previewWidth.'px;height:'.$this->previewHeight.'px;display:none;">
+	<img id="'.$this->getHTMLControlId().'__loading" src="'.\System\Base\ApplicationBase::getInstance()->config->host . \System\Base\ApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'commoncontrols', 'type'=>'image/gif')).'&asset=imagecropper/spinner.gif" style="display:none;margin:0px auto;margin-top:'.($this->previewHeight/2-8).'px;" />
+	<div id="'.$this->getHTMLControlId().'__facebook-cropper-container" class="facebook-cropper-container" style="width:'.$this->previewWidth.'px;height:'.$this->previewHeight.'px;">
+		<img id="'.$this->getHTMLControlId().'__preview" src="" />
 	</div>
 </div>
-<input name="'.$this->getHTMLControlIdString().'__yoffset" id="'.$this->getHTMLControlIdString().'__yoffset" type="hidden" value="1" />
-<input name="'.$this->getHTMLControlIdString().'__xoffset" id="'.$this->getHTMLControlIdString().'__xoffset" type="hidden" value="1" />
-<input name="'.$this->getHTMLControlIdString().'__uploaded" id="'.$this->getHTMLControlIdString().'__uploaded" type="hidden" value="0" />
-<input name="'.$this->getHTMLControlIdString().'__post" id="'.$this->getHTMLControlIdString().'__post" type="hidden" value="0" />
+<input name="'.$this->getHTMLControlId().'__yoffset" id="'.$this->getHTMLControlId().'__yoffset" type="hidden" value="1" />
+<input name="'.$this->getHTMLControlId().'__xoffset" id="'.$this->getHTMLControlId().'__xoffset" type="hidden" value="1" />
+<input name="'.$this->getHTMLControlId().'__uploaded" id="'.$this->getHTMLControlId().'__uploaded" type="hidden" value="0" />
+<input name="'.$this->getHTMLControlId().'__post" id="'.$this->getHTMLControlId().'__post" type="hidden" value="0" />
 
 <script type="text/javascript">
 //<![CDATA[
 window.addEvent(\'load\', function(){ // important do not use domReady since we want the image to be loaded
 	document.ondragstart = function () { return false; }; //IE drag hack
-	imagecropper.FacebookCropper.cropImage(\''.$this->getHTMLControlIdString().'__preview\', \''.$this->getHTMLControlIdString().'__facebook-cropper-container\', \''.$this->getHTMLControlIdString().'__facebook-cropper\', \''.$this->getHTMLControlIdString().'__yoffset\', \''.$this->getHTMLControlIdString().'__xoffset\', '.$this->height/$this->width.', \''.$this->width.'px\', \''.$this->height.'px\');
+	imagecropper.FacebookCropper.cropImage(\''.$this->getHTMLControlId().'__preview\', \''.$this->getHTMLControlId().'__facebook-cropper-container\', \''.$this->getHTMLControlId().'__facebook-cropper\', \''.$this->getHTMLControlId().'__yoffset\', \''.$this->getHTMLControlId().'__xoffset\', '.$this->height/$this->width.', \''.$this->width.'px\', \''.$this->height.'px\');
 	});
 //]]>
 </script>';
 
 			$input = parent::getDomObject();
 			$input->appendAttribute( 'onchange', "
-				document.getElementById('{$this->getHTMLControlIdString()}__facebook-cropper').style.display='block';
-				document.getElementById('{$this->getHTMLControlIdString()}__loading').style.display='block';
-				document.getElementById('{$this->getHTMLControlIdString()}__facebook-cropper-container').style.display='none';
-				document.getElementById('{$this->getHTMLControlIdString()}__uploaded').value='0';
-				document.getElementById('{$this->getHTMLControlIdString()}__post').value='1';
-				imagecropper.FacebookCropper.uploadImage(document.getElementById('{$this->getParentByType('\System\Web\WebControls\Form')->getHTMLControlIdString()}'), imagecropper.FacebookCropper.handleResponse);");
+				document.getElementById('{$this->getHTMLControlId()}__facebook-cropper').style.display='block';
+				document.getElementById('{$this->getHTMLControlId()}__loading').style.display='block';
+				document.getElementById('{$this->getHTMLControlId()}__facebook-cropper-container').style.display='none';
+				document.getElementById('{$this->getHTMLControlId()}__uploaded').value='0';
+				document.getElementById('{$this->getHTMLControlId()}__post').value='1';
+				imagecropper.FacebookCropper.uploadImage(document.getElementById('{$this->getParentByType('\System\Web\WebControls\Form')->getHTMLControlId()}'), imagecropper.FacebookCropper.handleResponse);");
 
 			$span->addChild($cropHolder);
 			$span->addChild($input);

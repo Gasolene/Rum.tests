@@ -38,10 +38,10 @@
 		protected function onRequest( array &$httpRequest )
 		{
 			/* format postal/zip code based on request data */
-			if( isset( $httpRequest[$this->getHTMLControlIdString()] ))
+			if( isset( $httpRequest[$this->getHTMLControlId()] ))
 			{
 				// remove dashes and make uppercase
-				$httpRequest[$this->getHTMLControlIdString()] = strtoupper( str_replace( '-', '', $httpRequest[$this->getHTMLControlIdString()] ));
+				$httpRequest[$this->getHTMLControlId()] = strtoupper( str_replace( '-', '', $httpRequest[$this->getHTMLControlId()] ));
 			}
 
 			parent::onRequest($httpRequest);

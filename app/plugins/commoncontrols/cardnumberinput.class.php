@@ -71,11 +71,11 @@
 		protected function onRequest( array &$httpRequest )
 		{
 			/* format postal/zip code based on request data */
-			if( isset( $httpRequest[$this->getHTMLControlIdString()] ))
+			if( isset( $httpRequest[$this->getHTMLControlId()] ))
 			{
 				// remove dashes and spaces
-				$httpRequest[$this->getHTMLControlIdString()] = trim( str_replace( '-', '', str_replace( ' ', '', $httpRequest[$this->getHTMLControlIdString()] )));
-				//$httpRequest[$this->getHTMLControlIdString()] = preg_replace('/\D/', '', $httpRequest[$this->getHTMLControlIdString()]);
+				$httpRequest[$this->getHTMLControlId()] = trim( str_replace( '-', '', str_replace( ' ', '', $httpRequest[$this->getHTMLControlId()] )));
+				//$httpRequest[$this->getHTMLControlId()] = preg_replace('/\D/', '', $httpRequest[$this->getHTMLControlId()]);
 			}
 
 			parent::onRequest($httpRequest);

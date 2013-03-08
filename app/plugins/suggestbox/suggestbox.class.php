@@ -132,8 +132,6 @@
 
 			$this->items            = new SuggestItemCollection();
 			$this->listName         = $controlId;
-			$this->ajaxEventHandler = 'SuggestBox.onResponse';
-			$this->ajaxHTTPRequest  = 'SuggestBox.HTTPRequest';
 		}
 
 
@@ -255,21 +253,21 @@
 				$input->setAttribute( 'value', $this->getTextValue() );
 			}
 
-			$input->setAttribute( 'id',           $this->getHTMLControlIdString() );
-			$input->setAttribute( 'name',         $this->getHTMLControlIdString() );
+			$input->setAttribute( 'id',           $this->getHTMLControlId() );
+			$input->setAttribute( 'name',         $this->getHTMLControlId() );
 			$input->setAttribute( 'tabIndex',     $this->tabIndex );
 			$input->appendAttribute( 'class',     ' textbox suggestbox' );
 
-			$input->appendAttribute( 'onkeydown',    'if(document.getElementById(\''.$this->getHTMLControlIdString().'__lookup\').style.display==\'block\')if(event.keyCode==13){return false;}' );
-			$input->appendAttribute( 'onkeyup',      'SuggestBox.handleKeyUp(event.keyCode,'.$this->maxNumToShow.','.($this->disableAutoComplete?'false':'true').',document.getElementById(\''.$this->getHTMLControlIdString().'\'),document.getElementById(\''.$this->getHTMLControlIdString().'__lookup\'),\''.$this->listName.'\',false,\''.str_replace('\'', '\\\'', $this->delimiter).'\');' );
+			$input->appendAttribute( 'onkeydown',    'if(document.getElementById(\''.$this->getHTMLControlId().'__lookup\').style.display==\'block\')if(event.keyCode==13){return false;}' );
+			$input->appendAttribute( 'onkeyup',      'SuggestBox.handleKeyUp(event.keyCode,'.$this->maxNumToShow.','.($this->disableAutoComplete?'false':'true').',document.getElementById(\''.$this->getHTMLControlId().'\'),document.getElementById(\''.$this->getHTMLControlId().'__lookup\'),\''.$this->listName.'\',false,\''.str_replace('\'', '\\\'', $this->delimiter).'\');' );
 
 			$select = new \System\XML\DomObject( 'select' );
-			$select->setAttribute( 'id',          $this->getHTMLControlIdString() . '__lookup' );
+			$select->setAttribute( 'id',          $this->getHTMLControlId() . '__lookup' );
 			$select->setAttribute( 'size',        $this->listSize );
 			$select->setAttribute( 'style',       'display:none;' );
 			$select->setAttribute( 'class',       'listbox lookup_list' );
-			$select->setAttribute( 'onkeyup',     'SuggestBox.selectHandleKeyUp(event.keyCode,document.getElementById(\''.$this->getHTMLControlIdString().'\'),document.getElementById(\''.$this->getHTMLControlIdString().'__lookup\'),\''.str_replace('\'', '\\\'', $this->delimiter).'\');' );
-			$select->setAttribute( 'onclick',     'SuggestBox.update(document.getElementById(\''.$this->getHTMLControlIdString().'\'),document.getElementById(\''.$this->getHTMLControlIdString().'__lookup\'),\''.str_replace('\'', '\\\'', $this->delimiter).'\');' );
+			$select->setAttribute( 'onkeyup',     'SuggestBox.selectHandleKeyUp(event.keyCode,document.getElementById(\''.$this->getHTMLControlId().'\'),document.getElementById(\''.$this->getHTMLControlId().'__lookup\'),\''.str_replace('\'', '\\\'', $this->delimiter).'\');' );
+			$select->setAttribute( 'onclick',     'SuggestBox.update(document.getElementById(\''.$this->getHTMLControlId().'\'),document.getElementById(\''.$this->getHTMLControlId().'__lookup\'),\''.str_replace('\'', '\\\'', $this->delimiter).'\');' );
 
 			// handle for XHTML
 			/**
@@ -285,7 +283,7 @@
 			$img->setAttribute( 'src',            \System\Web\WebApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'suggestbox', 'type'=>'image/gif')) . '&asset=icon.gif' );
 			$img->setAttribute( 'alt',            'lookup' );
 			$img->setAttribute( 'class',          'lookup_img' );
-			$img->setAttribute( 'onclick',        'SuggestBox.handleKeyUp(event.keyCode,'.$this->maxNumToShow.','.($this->disableAutoComplete?'false':'true').',document.getElementById(\''.$this->getHTMLControlIdString().'\'),document.getElementById(\''.$this->getHTMLControlIdString().'__lookup\'),\''.$this->listName.'\',false,\''.str_replace('\'', '\\\'', $this->delimiter).'\');' );
+			$img->setAttribute( 'onclick',        'SuggestBox.handleKeyUp(event.keyCode,'.$this->maxNumToShow.','.($this->disableAutoComplete?'false':'true').',document.getElementById(\''.$this->getHTMLControlId().'\'),document.getElementById(\''.$this->getHTMLControlId().'__lookup\'),\''.$this->listName.'\',false,\''.str_replace('\'', '\\\'', $this->delimiter).'\');' );
 
 			$lookup = new \System\XML\DomObject( 'span' );
 			$lookup->setAttribute( 'style',       'position: relative;' );
@@ -315,7 +313,7 @@
 			{
 				define( '__LISTNAME' . $this->listName, true );
 
-				$this->getParentByType( '\System\Web\WebControls\Page' )->onload .= $this->ajaxHTTPRequest . '[\''.$this->listName.'\'] = PHPRum.sendHttpRequest( \'' . $this->ajaxCallback . '\', \'' . $this->getRequestData() . '&' . $this->getHTMLControlIdString() . '__async=true\', \'POST\', function() { ' . $this->ajaxEventHandler . '( \'' . $this->listName . '\', \'' . $this->textField . '\', \'' . $this->getHTMLControlIdString() . '\' ); } );SuggestBox.textValues[\''.$this->listName.'\']=document.getElementById(\''.$this->getHTMLControlIdString().'\').value;document.getElementById(\''.$this->getHTMLControlIdString().'\').value=\'Loading...\';document.getElementById(\''.$this->getHTMLControlIdString().'\').disabled=true;';
+				//$this->getParentByType( '\System\Web\WebControls\Page' )->onload .= 'SuggestBox.HTTPRequest = Rum.createXMLHttpRequest(); Rum.sendAsync( \'SuggestBox.HTTPRequest\', \'' . $this->ajaxCallback . '\', \'' . $this->getRequestData() . '&' . $this->getHTMLControlId() . '__async=true\', \'POST\', function() { SuggestBox.onResponse( \'' . $this->listName . '\', \'' . $this->textField . '\', \'' . $this->getHTMLControlId() . '\' ); } );SuggestBox.textValues[\''.$this->listName.'\']=document.getElementById(\''.$this->getHTMLControlId().'\').value;document.getElementById(\''.$this->getHTMLControlId().'\').value=\'Loading...\';document.getElementById(\''.$this->getHTMLControlId().'\').disabled=true;';
 			}
 		}
 
@@ -328,7 +326,7 @@
 		 */
 		protected function onRequest( array &$httpRequest )
 		{
-			if( isset( $httpRequest[$this->getHTMLControlIdString() . '__async'] ))
+			if( isset( $httpRequest[$this->getHTMLControlId() . '__async'] ))
 			{
 				// send DataSet as xml message
 				\System\Web\HTTPResponse::addHeader('content-type', 'text/xml');

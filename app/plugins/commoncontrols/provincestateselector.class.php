@@ -112,9 +112,9 @@
 			$this->items = new \System\Web\WebControls\ListItemCollection(ProvinceStateSelector::$provincesstates);
 
 			if( $this->countrySelector ) {
-				$htmlControlIdString = $this->countrySelector->getHTMLControlIdString();
+				$htmlControlIdString = $this->countrySelector->getHTMLControlId();
 				$this->attributes->add( 'onchange', 'if(this.value==\'AB\'||this.value==\'BC\'||this.value==\'MB\'||this.value==\'NB\'||this.value==\'NL\'||this.value==\'NT\'||this.value==\'NS\'||this.value==\'NU\'||this.value==\'ON\'||this.value==\'PE\'||this.value==\'QC\'||this.value==\'SK\'||this.value==\'YT\'){document.getElementById(\'' . $htmlControlIdString . '\').value = \'CA\';}else if(this.value!=\'--\' && this.value!=\'\'){document.getElementById(\'' . $htmlControlIdString . '\').value = \'US\';}' );
-				$this->countrySelector->attributes->add( 'onchange', 'if(this.value!=\'CA\' && this.value!=\'US\'){document.getElementById(\'' . $this->getHTMLControlIdString() . '\').value = \'--\';}' );
+				$this->countrySelector->attributes->add( 'onchange', 'if(this.value!=\'CA\' && this.value!=\'US\'){document.getElementById(\'' . $this->getHTMLControlId() . '\').value = \'--\';}' );
 			}
 		}
 

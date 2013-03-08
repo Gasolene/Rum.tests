@@ -89,22 +89,22 @@
 		public function getDomObject()
 		{
 			$select = new \System\XML\DomObject( 'select' );
-			$select->setAttribute( 'id', $this->getHTMLControlIdString() . '__unselected');
-			$select->setAttribute( 'name', $this->getHTMLControlIdString() . '__unselected[]' );
+			$select->setAttribute( 'id', $this->getHTMLControlId() . '__unselected');
+			$select->setAttribute( 'name', $this->getHTMLControlId() . '__unselected[]' );
 			$select->setAttribute( 'class', 'picklist_listbox picklist_listbox_left' );
 			$select->setAttribute( 'size', $this->listSize );
 			$select->setAttribute( 'multiple', 'multiple' );
 
 			$select2 = new \System\XML\DomObject( 'select' );
-			$select2->setAttribute( 'id', $this->getHTMLControlIdString() . '__dummy');
-			$select2->setAttribute( 'name', $this->getHTMLControlIdString() . '__dummy[]');
+			$select2->setAttribute( 'id', $this->getHTMLControlId() . '__dummy');
+			$select2->setAttribute( 'name', $this->getHTMLControlId() . '__dummy[]');
 			$select2->setAttribute( 'class', 'picklist_listbox picklist_listbox_right' );
 			$select2->setAttribute( 'size', $this->listSize );
 			$select2->setAttribute( 'multiple', 'multiple' );
 
 			$select3 = new \System\XML\DomObject( 'select' );
-			$select3->setAttribute( 'id', $this->getHTMLControlIdString() . '__selected');
-			$select3->setAttribute( 'name', $this->getHTMLControlIdString() . '[]');
+			$select3->setAttribute( 'id', $this->getHTMLControlId() . '__selected');
+			$select3->setAttribute( 'name', $this->getHTMLControlId() . '[]');
 			$select3->setAttribute( 'multiple', 'multiple' );
 			$select3->setAttribute( 'style', 'display:none;' );
 
@@ -175,18 +175,18 @@
 			$add->setAttribute( 'value', '>>' );
 			$add->setAttribute( 'type', 'button' );
 			$add->setAttribute( 'class', 'picklist_button picklist_button_add' );
-			$add->setAttribute( 'id', $this->getHTMLControlIdString() . '__add' );
-			$add->setAttribute( 'onclick', 'PickList.move(\''.$this->getHTMLControlIdString().'__unselected\', \''.$this->getHTMLControlIdString().'__dummy\');PickList.updateSelected(\''.$this->getHTMLControlIdString().'__dummy\', \''.$this->getHTMLControlIdString().'__selected\');' );
+			$add->setAttribute( 'id', $this->getHTMLControlId() . '__add' );
+			$add->setAttribute( 'onclick', 'PickList.move(\''.$this->getHTMLControlId().'__unselected\', \''.$this->getHTMLControlId().'__dummy\');PickList.updateSelected(\''.$this->getHTMLControlId().'__dummy\', \''.$this->getHTMLControlId().'__selected\');' );
 
 			$remove = new \System\XML\DomObject( 'input' );
 			$remove->setAttribute( 'value', '<<' );
 			$remove->setAttribute( 'type', 'button' );
 			$remove->setAttribute( 'class', 'picklist_button picklist_button_rem' );
-			$remove->setAttribute( 'id', $this->getHTMLControlIdString() . '__rem' );
-			$remove->setAttribute( 'onclick', 'PickList.move(\''.$this->getHTMLControlIdString().'__dummy\', \''.$this->getHTMLControlIdString().'__unselected\');PickList.updateSelected(\''.$this->getHTMLControlIdString().'__dummy\', \''.$this->getHTMLControlIdString().'__selected\');' );
+			$remove->setAttribute( 'id', $this->getHTMLControlId() . '__rem' );
+			$remove->setAttribute( 'onclick', 'PickList.move(\''.$this->getHTMLControlId().'__dummy\', \''.$this->getHTMLControlId().'__unselected\');PickList.updateSelected(\''.$this->getHTMLControlId().'__dummy\', \''.$this->getHTMLControlId().'__selected\');' );
 
 			$span = $this->createDomObject( 'span' );
-			$span->setAttribute( 'id', $this->getHTMLControlIdString() . '__node' );
+			$span->setAttribute( 'id', $this->getHTMLControlId() . '__node' );
 			$span->appendAttribute( 'class', 'picklist' );
 			$span->addChild( $select );
 			$span->addChild( $add );
@@ -237,33 +237,33 @@
 				{
 					$this->submitted = true;
 				}
-				elseif( isset( $request[$this->getHTMLControlIdString() . '__post'] ))
+				elseif( isset( $request[$this->getHTMLControlId() . '__post'] ))
 				{
 					$this->submitted = true;
 
-					if( isset( $request[$this->getHTMLControlIdString()] ))
+					if( isset( $request[$this->getHTMLControlId()] ))
 					{
-						if( $this->value != $request[$this->getHTMLControlIdString()] )
+						if( $this->value != $request[$this->getHTMLControlId()] )
 						{
 							$this->changed = true;
 						}
 
-						if(is_array($request[$this->getHTMLControlIdString()]))
+						if(is_array($request[$this->getHTMLControlId()]))
 						{
-							$this->value = $request[$this->getHTMLControlIdString()];
+							$this->value = $request[$this->getHTMLControlId()];
 						}
 						else
 						{
 							$this->value = array();
 						}
-						unset( $request[$this->getHTMLControlIdString()] );
+						unset( $request[$this->getHTMLControlId()] );
 					}
 					else
 					{
 						$this->value = array();
 					}
 
-					unset( $request[$this->getHTMLControlIdString() . '__post'] );
+					unset( $request[$this->getHTMLControlId() . '__post'] );
 				}
 
 				if( !$this->value )
