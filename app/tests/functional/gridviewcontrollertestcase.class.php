@@ -18,7 +18,7 @@
 			$this->assertResponse( '<tr class="row" id="page_table1__0" onclick' );
 
 			$this->assertResponse( '<td class="company_class"><a href="mailto:moore@adobe.com">Adobe</a></td>' );
-			$this->assertResponse( 'onclick="PHPRum.sendPostBack(\'/test/public\', \''.\Rum::config()->requestParameter.'=gridview&amp;Company=Microsoft\', \'POST\');"' );
+			$this->assertResponse( 'onclick="Rum.sendSync(\'/test/public\', \''.\Rum::config()->requestParameter.'=gridview&amp;Company=Microsoft\', \'POST\');"' );
 			$this->assertResponse( '<td class="company_class">CompanyFooter</td>' );
 
 			$this->assertResponse( '<th class="company_class">' );
@@ -47,7 +47,7 @@
 		function testFilters() {
 			$this->get(array('id'=>'7'));
 
-			$this->assertResponse( 'PHPRum.sendPostBack(\'/test/public\', \'id=7&amp;'.\Rum::config()->requestParameter.'=gridview&amp;page_table1__filter_name=Company&amp;page_table1__filter_value=\'+this.value' );
+			$this->assertResponse( 'Rum.sendSync(\'/test/public\', \'id=7&amp;'.\Rum::config()->requestParameter.'=gridview&amp;page_table1__filter_name=Company&amp;page_table1__filter_value=\'+this.value' );
 			$this->assertResponse( 'showing 1 to 10 of 18' );
 			$this->assertEqual($this->controller->table1->dataSource->count, 18);
 

@@ -27,6 +27,7 @@
 			$this->page->form->fieldset1->legend = 'Sample Fieldset';
 
 			$this->form->add( \MyApp\UI::TextBox( 'Name', '' ));
+			$this->form->autoFocus = true;
 			$this->fieldset1->add( new \CommonControls\AddressInput( 'Address' ));
 			$this->fieldset1->add( new \SuggestBox\SuggestBox( 'City', 'Calgary' ));
 			$this->fieldset1->add( new \CommonControls\ProvinceStateSelector( 'Province', 'AB' ));
@@ -44,7 +45,7 @@
 			$this->fieldset2->add( \MyApp\UI::DateTimeSelector( 'DateTime' ));
 			$this->fieldset2->add( \MyApp\UI::DateSelector( 'Date' ));
 			$this->fieldset2->add( \MyApp\UI::TimeSelector( 'Time' ));
-			$this->fieldset2->add( new WebControls\TextBox( 'Comment' ));
+			$this->fieldset2->add( new \System\Web\WebControls\TextArea( 'Comment' ));
 			$this->fieldset2->add( new \CommonControls\PercentInput( 'percent' ));
 			$this->fieldset2->add( new \CommonControls\MoneyInput( 'price' ));
 			$this->fieldset2->add( new \CommonControls\URLInput( 'URL' ));
@@ -76,8 +77,6 @@
 			$this->Name->tooltip = 'Enter your name here tooltip';
 
 			$this->Sex->f->label = 'Female';
-
-			$this->Comment->multiline = true;
 
 			$this->form->add( new WebControls\Button( 'save', 'Save' ));
 

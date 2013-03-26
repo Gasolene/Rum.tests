@@ -78,6 +78,7 @@
 	class RadioGroup extends \System\Web\WebControls\RadioGroup {}
 	class ReportView extends \System\Web\WebControls\ReportView {}
 	class TextBox extends \System\Web\WebControls\TextBox {}
+	class TextArea extends \System\Web\WebControls\TextArea {}
 	class TimeSelector extends \System\Web\WebControls\TimeSelector {}
 	class TreeNode extends \System\Web\WebControls\TreeNode {}
 	class TreeView extends \System\Web\WebControls\TreeView {}
@@ -109,8 +110,7 @@
 				}
 				elseif( $field->blob )
 				{
-					$this->add( new TextBox( $field->name ));
-					$this->getControl( $field->name )->multiline = true;
+					$this->add( new TextArea( $field->name ));
 				}
 				else
 				{

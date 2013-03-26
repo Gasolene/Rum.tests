@@ -77,7 +77,6 @@
 		 */
 		public function getDomObject()
 		{
-			$this->multiline = false;
 			$value = (float) number_format(( $this->value *= 100 ), 2 ) . '%';
 
 			$dom = parent::getDomObject();

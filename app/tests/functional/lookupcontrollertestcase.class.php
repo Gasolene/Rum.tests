@@ -12,13 +12,7 @@
 		function testOnLoad() {
 			$this->get();
 
-			//$this->assertResponse( ".storeData('MyList',Array('Edmonton','Calgary','Vancouver','Toronto','Los   Angelos','New	York','Cleveland','Seattle','Regina','Grande	Prarie','Montreal','Ottawa','Halifax','Hamilton','Saskatoon','Oakland','Winnipeg','Thunder Bay','St.  Johns','Ft.  St.  John','A	&	F'));" );
-			//$this->assertResponse( ".storeData('City_lookup',Array('Edmonton','Calgary','Vancouver','Toronto','Los   Angelos','New	York','Cleveland','Seattle','Regina','Grande	Prarie','Montreal','Ottawa','Halifax','Hamilton','Saskatoon','Oakland','Winnipeg','Thunder Bay','St.  Johns','Ft.  St.  John','A	&	F'));" );
-
-			$this->assertResponse( "SuggestBox.HTTPRequest['MyList'] = PHPRum.sendHttpRequest( '{$_SERVER['PHP_SELF']}'," );
 			$this->assertResponse( "City_Suggest__async=true', 'POST', function() { SuggestBox.onResponse( 'MyList', 'Name of city', 'page_form_City_Suggest' ); } );SuggestBox.textValues['MyList']=document.getElementById('page_form_City_Suggest').value;document.getElementById('page_form_City_Suggest').value='Loading...';document.getElementById('page_form_City_Suggest').disabled=true;" );
-
-			$this->assertResponse( "SuggestBox.HTTPRequest['City_lookup'] = PHPRum.sendHttpRequest( '{$_SERVER['PHP_SELF']}'," );
 			$this->assertResponse( "City_lookup__async=true', 'POST', function() { SuggestBox.onResponse( 'City_lookup', 'Name of city', 'page_form_City_lookup' ); } );SuggestBox.textValues['City_lookup']=document.getElementById('page_form_City_lookup').value;document.getElementById('page_form_City_lookup').value='Loading...';document.getElementById('page_form_City_lookup').disabled=true;" );
 
 			$this->assertResponse( "onkeydown=\"if(document.getElementById('page_form_City_Suggest__lookup').style.display=='block')if(event.keyCode==13){return false;}\"" );

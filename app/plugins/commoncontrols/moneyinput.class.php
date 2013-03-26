@@ -97,7 +97,6 @@
 		 */
 		public function getDomObject()
 		{
-			$this->multiline = false;
 			$dom = parent::getDomObject();
 			$dom->appendAttribute( 'class', ' priceinput' );
 

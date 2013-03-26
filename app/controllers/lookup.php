@@ -17,11 +17,11 @@
 			$this->City_Suggest->listName = 'MyList';
 
 			$this->City_multi_suggest->delimiter = ',';
-			$this->City_multi_suggest->multiline = true;
-			$this->City_multi_suggest->rows = 2;
+			//$this->City_multi_suggest->multiline = true;
+			//$this->City_multi_suggest->rows = 2;
 			$this->City_multi_lookup->delimiter = ',';
-			$this->City_multi_lookup->multiline = true;
-			$this->City_multi_lookup->rows = 2;
+			//$this->City_multi_lookup->multiline = true;
+			//$this->City_multi_lookup->rows = 2;
 		}
 
 		function onPageLoad( &$page, $args ) {

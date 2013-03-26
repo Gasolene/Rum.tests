@@ -28,28 +28,28 @@
 		function testNodes() {
 			$this->get();
 
-			$this->assertResponse( "<a class=\"collapsed\" title=\"collapsed\" onclick=\"PHPRum.treeviewToggleNode('page_tree','root_1'" );
-			$this->assertResponse( "<a class=\"collapsed\" title=\"collapsed\" onclick=\"PHPRum.treeviewToggleNode('page_tree','root_2'" );
-			$this->assertResponse( "<a class=\"collapsed\" title=\"collapsed\" onclick=\"PHPRum.treeviewToggleNode('page_tree','root_2_1'" );
-			$this->assertResponse( "<a class=\"collapsed\" title=\"collapsed\" onclick=\"PHPRum.treeviewToggleNode('page_tree','root_2_2'" );
-			$this->assertResponse( "<a class=\"fcollapsed\" title=\"collapsed\" onclick=\"PHPRum.treeviewToggleNode('page_tree','root_2_3'" );
+			$this->assertResponse( "<a class=\"collapsed\" title=\"collapsed\" onclick=\"Rum.treeviewToggleNode('page_tree','root_1'" );
+			$this->assertResponse( "<a class=\"collapsed\" title=\"collapsed\" onclick=\"Rum.treeviewToggleNode('page_tree','root_2'" );
+			$this->assertResponse( "<a class=\"collapsed\" title=\"collapsed\" onclick=\"Rum.treeviewToggleNode('page_tree','root_2_1'" );
+			$this->assertResponse( "<a class=\"collapsed\" title=\"collapsed\" onclick=\"Rum.treeviewToggleNode('page_tree','root_2_2'" );
+			$this->assertResponse( "<a class=\"fcollapsed\" title=\"collapsed\" onclick=\"Rum.treeviewToggleNode('page_tree','root_2_3'" );
 
 			$this->get( array( 'page_tree__root_2_expand' => '1', 'page' => 'tree' ));
 
-			$this->assertResponse( "<a class=\"collapsed\" title=\"collapsed\" onclick=\"PHPRum.treeviewToggleNode('page_tree','root_1'" );
-			$this->assertResponse( "<a class=\"expanded\" title=\"expanded\" onclick=\"PHPRum.treeviewToggleNode('page_tree','root_2'" );
-			$this->assertResponse( "<a class=\"collapsed\" title=\"collapsed\" onclick=\"PHPRum.treeviewToggleNode('page_tree','root_2_1'" );
-			$this->assertResponse( "<a class=\"collapsed\" title=\"collapsed\" onclick=\"PHPRum.treeviewToggleNode('page_tree','root_2_2'" );
-			$this->assertResponse( "<a class=\"fcollapsed\" title=\"collapsed\" onclick=\"PHPRum.treeviewToggleNode('page_tree','root_2_3'" );
+			$this->assertResponse( "<a class=\"collapsed\" title=\"collapsed\" onclick=\"Rum.treeviewToggleNode('page_tree','root_1'" );
+			$this->assertResponse( "<a class=\"expanded\" title=\"expanded\" onclick=\"Rum.treeviewToggleNode('page_tree','root_2'" );
+			$this->assertResponse( "<a class=\"collapsed\" title=\"collapsed\" onclick=\"Rum.treeviewToggleNode('page_tree','root_2_1'" );
+			$this->assertResponse( "<a class=\"collapsed\" title=\"collapsed\" onclick=\"Rum.treeviewToggleNode('page_tree','root_2_2'" );
+			$this->assertResponse( "<a class=\"fcollapsed\" title=\"collapsed\" onclick=\"Rum.treeviewToggleNode('page_tree','root_2_3'" );
 
 			$this->post( array( 'page_tree__root_2_2_expand' => '1', 'page_tree__submitted' => '1', 'page' => 'tree' ));
 			$this->get();
 
-			$this->assertResponse( "<a class=\"collapsed\" title=\"collapsed\" onclick=\"PHPRum.treeviewToggleNode('page_tree','root_1'" );
-			$this->assertResponse( "<a class=\"expanded\" title=\"expanded\" onclick=\"PHPRum.treeviewToggleNode('page_tree','root_2'" );
-			$this->assertResponse( "<a class=\"collapsed\" title=\"collapsed\" onclick=\"PHPRum.treeviewToggleNode('page_tree','root_2_1'" );
-			$this->assertResponse( "<a class=\"expanded\" title=\"expanded\" onclick=\"PHPRum.treeviewToggleNode('page_tree','root_2_2'" );
-			$this->assertResponse( "<a class=\"fcollapsed\" title=\"collapsed\" onclick=\"PHPRum.treeviewToggleNode('page_tree','root_2_3'" );
+			$this->assertResponse( "<a class=\"collapsed\" title=\"collapsed\" onclick=\"Rum.treeviewToggleNode('page_tree','root_1'" );
+			$this->assertResponse( "<a class=\"expanded\" title=\"expanded\" onclick=\"Rum.treeviewToggleNode('page_tree','root_2'" );
+			$this->assertResponse( "<a class=\"collapsed\" title=\"collapsed\" onclick=\"Rum.treeviewToggleNode('page_tree','root_2_1'" );
+			$this->assertResponse( "<a class=\"expanded\" title=\"expanded\" onclick=\"Rum.treeviewToggleNode('page_tree','root_2_2'" );
+			$this->assertResponse( "<a class=\"fcollapsed\" title=\"collapsed\" onclick=\"Rum.treeviewToggleNode('page_tree','root_2_3'" );
 		}
 	}
 ?>

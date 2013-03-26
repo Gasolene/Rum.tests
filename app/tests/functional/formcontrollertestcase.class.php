@@ -18,8 +18,8 @@
 
 			$html = $this->responseAsXMLEntity();
 
-			$this->assertTrue( $html->body->div->getChildByAttribute('id', 'body')->div->form->getChildrenByName( 'input' )->count >= 9 );
-			$this->assertTrue( $html->body->div->getChildByAttribute('id', 'body')->div->form->getChildrenByName( 'input' )->count <= 10 );
+			$this->assertTrue( $html->body->div->getChildByAttribute('id', 'body')->div->form->getChildrenByName( 'input' )->count >= 1 );
+			$this->assertTrue( $html->body->div->getChildByAttribute('id', 'body')->div->form->getChildrenByName( 'input' )->count <= 2 );
 			$this->assertEqual( $html->body->div->getChildByAttribute('id', 'body')->div->form->getChildByAttribute( 'name', \Rum::config()->requestParameter )->getAttribute( 'type' ), 'hidden' );
 			//$this->assertResponse( \Rum::config()->themes );
 			$this->assertResponse( '<legend><span>Sample Fieldset</span></legend>' );
@@ -38,19 +38,19 @@
 			$this->get();
 
 			// default focus to first control
-			$this->assertResponse( 'document.getElementById(\'page_form_fieldset1_Address\').focus();' );
+			$this->assertResponse( 'Rum.id(\'page_form_fieldset1_Address\').focus();' );
 
 			$this->post( array( 'page_form__gotcha'=>'', 'page_form__submit' => '1', 'page_form_Name'=>'foo', 'page_form_fieldset1_Address'=>'12345', 'page_form_fieldset1_City' => 'Boston', 'page_form_fieldset1_Province__post' => '1', 'page_form_fieldset1_Province' => 'CA', 'page_form_fieldset2_title' => 'Mr', 'page_form_fieldset1_E-Mail_Address' => 'a@b.c', 'page_form_fieldset2_Birthday' => '2005-09-32' ));
 
 			// default focus to first invalid control
-			$this->assertResponse( 'document.getElementById(\'page_form_fieldset1_E-Mail_Address\').focus();' );
+			$this->assertResponse( 'Rum.id(\'page_form_fieldset1_E-Mail_Address\').focus();' );
 		}
 
 		function testDefaults() {
 			$this->get();
 
             // test for radio default
-			$this->assertResponse( 'value="f" class="radiobutton" type="radio" checked="checked" />' );
+			$this->assertResponse( 'value="f" type="radio" checked="checked" />' );
 		}
 
 		function testCheckBoxList() {

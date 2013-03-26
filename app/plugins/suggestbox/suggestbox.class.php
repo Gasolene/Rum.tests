@@ -14,8 +14,6 @@
 	 *
 	 * @property bool $multiline multiline
 	 * @property int $size size of textbox
-	 * @property int $rows no of rows
-	 * @property int $cols no of cols
 	 * @property bool $disableAutoComplete disable auto complete
 	 * @property int $maxNumToShow max no to show
 	 * @property int $listSize list size
@@ -169,19 +167,7 @@
 		 */
 		public function __set($field,$value)
 		{
-			if($field=='multiline')
-			{
-				$this->{$field} = (bool)$value;
-			}
-			elseif($field=='size')
-			{
-				$this->{$field} = (int)$value;
-			}
-			elseif($field=='rows')
-			{
-				$this->{$field} = (int)$value;
-			}
-			elseif($field=='cols')
+			if($field=='size')
 			{
 				$this->{$field} = (int)$value;
 			}
@@ -236,6 +222,7 @@
 			$input = null;
 
 			// create widget
+			/*
 			if( $this->multiline )
 			{
 				$input = $this->createDomObject('textarea');
@@ -246,12 +233,14 @@
 			}
 			else
 			{
+			 * 
+			 */
 				$input = $this->getInputDomObject();
 				$input->setAttribute( 'type', 'text' );
 				$input->setAttribute( 'size', $this->size );
 				$input->setAttribute( 'autocomplete', 'off' );
 				$input->setAttribute( 'value', $this->getTextValue() );
-			}
+			//}
 
 			$input->setAttribute( 'id',           $this->getHTMLControlId() );
 			$input->setAttribute( 'name',         $this->getHTMLControlId() );
@@ -313,7 +302,7 @@
 			{
 				define( '__LISTNAME' . $this->listName, true );
 
-				//$this->getParentByType( '\System\Web\WebControls\Page' )->onload .= 'SuggestBox.HTTPRequest = Rum.createXMLHttpRequest(); Rum.sendAsync( \'SuggestBox.HTTPRequest\', \'' . $this->ajaxCallback . '\', \'' . $this->getRequestData() . '&' . $this->getHTMLControlId() . '__async=true\', \'POST\', function() { SuggestBox.onResponse( \'' . $this->listName . '\', \'' . $this->textField . '\', \'' . $this->getHTMLControlId() . '\' ); } );SuggestBox.textValues[\''.$this->listName.'\']=document.getElementById(\''.$this->getHTMLControlId().'\').value;document.getElementById(\''.$this->getHTMLControlId().'\').value=\'Loading...\';document.getElementById(\''.$this->getHTMLControlId().'\').disabled=true;';
+				$this->getParentByType( '\System\Web\WebControls\Page' )->onload .= 'SuggestBox.HTTPRequest[\''.$this->listName.'\'] = Rum.createXMLHttpRequest(); Rum.sendAsync( SuggestBox.HTTPRequest[\''.$this->listName.'\'], \'' . $this->ajaxCallback . '\', \'' . $this->getRequestData() . '&' . $this->getHTMLControlId() . '__async=true\', \'POST\', function() { SuggestBox.onResponse( \'' . $this->listName . '\', \'' . $this->textField . '\', \'' . $this->getHTMLControlId() . '\' ); } );SuggestBox.textValues[\''.$this->listName.'\']=document.getElementById(\''.$this->getHTMLControlId().'\').value;document.getElementById(\''.$this->getHTMLControlId().'\').value=\'Loading...\';document.getElementById(\''.$this->getHTMLControlId().'\').disabled=true;';
 			}
 		}
 

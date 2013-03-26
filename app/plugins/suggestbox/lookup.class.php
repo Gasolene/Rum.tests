@@ -116,15 +116,7 @@
 		public function getDomObject()
 		{
 			$lookup = parent::getDomObject();
-
-			if( $this->multiline )
-			{
-				$lookup->textarea->setAttribute( 'onkeyup', 'SuggestBox.handleKeyUp(event.keyCode,'.$this->maxNumToShow.','.($this->disableAutoComplete?'false':'true').',document.getElementById(\''.$this->getHTMLControlId().'\'),document.getElementById(\''.$this->getHTMLControlId().'__lookup\'),\''.$this->listName.'\',false,\''.str_replace('\'', '\\\'', $this->delimiter).'\');' );
-			}
-			else
-			{
-				$lookup->input->setAttribute( 'onkeyup', 'SuggestBox.handleKeyUp(event.keyCode,'.$this->maxNumToShow.','.($this->disableAutoComplete?'false':'true').',document.getElementById(\''.$this->getHTMLControlId().'\'),document.getElementById(\''.$this->getHTMLControlId().'__lookup\'),\''.$this->listName.'\',false,\''.str_replace('\'', '\\\'', $this->delimiter).'\');' );
-			}
+			$lookup->input->setAttribute( 'onkeyup', 'SuggestBox.handleKeyUp(event.keyCode,'.$this->maxNumToShow.','.($this->disableAutoComplete?'false':'true').',document.getElementById(\''.$this->getHTMLControlId().'\'),document.getElementById(\''.$this->getHTMLControlId().'__lookup\'),\''.$this->listName.'\',false,\''.str_replace('\'', '\\\'', $this->delimiter).'\');' );
 
 			return $lookup;
 		}
