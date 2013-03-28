@@ -1,5 +1,5 @@
 ﻿/*
-Copyright (c) 2003-2011, CKSource - Frederico Knabben. All rights reserved.
+Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.html or http://ckeditor.com/license
 */
 
@@ -14,7 +14,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 */
 
 /**
- * Constains the dictionary of language entries.
+ * Contains the dictionary of language entries.
  * @namespace
  */
 CKEDITOR.lang['sl'] =
@@ -31,7 +31,8 @@ CKEDITOR.lang['sl'] =
 	 * Screenreader titles. Please note that screenreaders are not always capable
 	 * of reading non-English words. So be careful while translating it.
 	 */
-	editorTitle : 'Rich text editor, %1, press ALT 0 for help.', // MISSING
+	editorTitle : 'Rich text editor, %1', // MISSING
+	editorHelp : 'Press ALT 0 for help', // MISSING
 
 	// ARIA descriptions.
 	toolbars	: 'Editor toolbars', // MISSING
@@ -119,10 +120,13 @@ CKEDITOR.lang['sl'] =
 		alignTop		: 'Na vrh',
 		alignMiddle		: 'V sredino',
 		alignBottom		: 'Na dno',
+		invalidValue	: 'Invalid value.', // MISSING
 		invalidHeight	: 'Višina mora biti število.',
 		invalidWidth	: 'Širina mora biti število.',
 		invalidCssLength	: 'Value specified for the "%1" field must be a positive number with or without a valid CSS measurement unit (px, %, in, cm, mm, em, ex, pt, or pc).', // MISSING
 		invalidHtmlLength	: 'Value specified for the "%1" field must be a positive number with or without a valid HTML measurement unit (px or %).', // MISSING
+		invalidInlineStyle	: 'Value specified for the inline style must consist of one or more tuples with the format of "name : value", separated by semi-colons.', // MISSING
+		cssLengthTooltip	: 'Enter a number for a value in pixels or a number with a valid CSS unit (px, %, in, cm, mm, em, ex, pt, or pc).', // MISSING
 
 		// Put the voice-only part of the label in the span.
 		unavailable		: '%1<span class="cke_accessibility">, nedosegljiv</span>'
@@ -240,6 +244,7 @@ CKEDITOR.lang['sl'] =
 		findWhat			: 'Najdi:',
 		replaceWith			: 'Zamenjaj z:',
 		notFoundMsg			: 'Navedeno besedilo ni bilo najdeno.',
+		findOptions			: 'Find Options', // MISSING
 		matchCase			: 'Razlikuj velike in male črke',
 		matchWord			: 'Samo cele besede',
 		matchCyclic			: 'Primerjaj znake v cirilici',
@@ -693,7 +698,7 @@ CKEDITOR.lang['sl'] =
 		ignoreAll		: 'Prezri vse',
 		addWord			: 'Dodaj besedo',
 		emptyDic		: 'Ime slovarja ne more biti prazno.',
-
+		noSuggestions	: 'Ni predlogov',
 		optionsTab		: 'Možnosti',
 		allCaps			: 'Ignore All-Caps Words', // MISSING
 		ignoreDomainNames : 'Ignore Domain Names', // MISSING

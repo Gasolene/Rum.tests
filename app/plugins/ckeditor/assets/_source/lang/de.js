@@ -1,5 +1,5 @@
 ﻿/*
-Copyright (c) 2003-2011, CKSource - Frederico Knabben. All rights reserved.
+Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.html or http://ckeditor.com/license
 */
 
@@ -14,7 +14,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 */
 
 /**
- * Constains the dictionary of language entries.
+ * Contains the dictionary of language entries.
  * @namespace
  */
 CKEDITOR.lang['de'] =
@@ -31,7 +31,8 @@ CKEDITOR.lang['de'] =
 	 * Screenreader titles. Please note that screenreaders are not always capable
 	 * of reading non-English words. So be careful while translating it.
 	 */
-	editorTitle : 'WYSIWYG-Editor, %1, drücken Sie ALT 0 für Hilfe.',
+	editorTitle : 'WYSIWYG-Editor, %1',
+	editorHelp : 'Drücken Sie ALT 0 für Hilfe',
 
 	// ARIA descriptions.
 	toolbars	: 'Editor Symbolleisten',
@@ -119,10 +120,13 @@ CKEDITOR.lang['de'] =
 		alignTop		: 'Oben',
 		alignMiddle		: 'Mitte',
 		alignBottom		: 'Unten',
+		invalidValue	: 'Invalid value.', // MISSING
 		invalidHeight	: 'Höhe muss eine Zahl sein.',
 		invalidWidth	: 'Breite muss eine Zahl sein.',
-		invalidCssLength	: 'Value specified for the "%1" field must be a positive number with or without a valid CSS measurement unit (px, %, in, cm, mm, em, ex, pt, or pc).', // MISSING
-		invalidHtmlLength	: 'Value specified for the "%1" field must be a positive number with or without a valid HTML measurement unit (px or %).', // MISSING
+		invalidCssLength	: 'Wert spezifiziert für "%1" Feld muss ein positiver numerischer Wert sein mit oder ohne korrekte CSS Messeinheit (px, %, in, cm, mm, em, ex, pt oder pc).',
+		invalidHtmlLength	: 'Wert spezifiziert für "%1" Feld muss ein positiver numerischer Wert sein mit oder ohne korrekte HTML Messeinheit (px oder %).',
+		invalidInlineStyle	: 'Wert spezifiziert für inline Stilart muss enthalten ein oder mehr Tupels mit dem Format "Name : Wert" getrennt mit Semikolons.',
+		cssLengthTooltip	: 'Gebe eine Zahl ein für ein Wert in pixels oder eine Zahl mit einer korrekten CSS Messeinheit (px, %, in, cm, mm, em, ex, pt oder pc).',
 
 		// Put the voice-only part of the label in the span.
 		unavailable		: '%1<span class="cke_accessibility">, nicht verfügbar</span>'
@@ -188,7 +192,7 @@ CKEDITOR.lang['de'] =
 		selectAnchor		: 'Anker auswählen',
 		anchorName		: 'nach Anker Name',
 		anchorId			: 'nach Element Id',
-		emailAddress		: 'E-Mail Addresse',
+		emailAddress		: 'E-Mail Adresse',
 		emailSubject		: 'Betreffzeile',
 		emailBody		: 'Nachrichtentext',
 		noAnchors		: '(keine Anker im Dokument vorhanden)',
@@ -240,6 +244,7 @@ CKEDITOR.lang['de'] =
 		findWhat			: 'Suche nach:',
 		replaceWith			: 'Ersetze mit:',
 		notFoundMsg			: 'Der gesuchte Text wurde nicht gefunden.',
+		findOptions			: 'Suchoptionen',
 		matchCase			: 'Groß-Kleinschreibung beachten',
 		matchWord			: 'Nur ganze Worte suchen',
 		matchCyclic			: 'Zyklische Suche',
@@ -693,7 +698,7 @@ CKEDITOR.lang['de'] =
 		ignoreAll		: 'Alle ignorieren',
 		addWord			: 'Wort hinzufügen',
 		emptyDic		: 'Wörterbuchname sollte leer sein.',
-
+		noSuggestions	: 'keine Vorschläge',
 		optionsTab		: 'Optionen',
 		allCaps			: 'Groß geschriebenen Wörter ignorieren',
 		ignoreDomainNames : 'Domain-Namen ignorieren',
@@ -717,8 +722,8 @@ CKEDITOR.lang['de'] =
 	{
 		title		: 'Über CKEditor',
 		dlgTitle	: 'Über CKEditor',
-		help	: 'Check $1 for help.', // MISSING
-		userGuide : 'CKEditor User\'s Guide', // MISSING
+		help	: 'Prüfe $1 für Hilfe.',
+		userGuide : 'CKEditor Benutzerhandbuch',
 		moreInfo	: 'Für Informationen über unsere Lizenzbestimmungen besuchen sie bitte unsere Webseite:',
 		copy		: 'Copyright &copy; $1. Alle Rechte vorbehalten.'
 	},
@@ -807,6 +812,6 @@ CKEDITOR.lang['de'] =
 		metaDescription : 'Dokument-Beschreibung',
 		metaAuthor : 'Autor',
 		metaCopyright : 'Copyright',
-		previewHtml : '<p>This is some <strong>sample text</strong>. You are using <a href="javascript:void(0)">CKEditor</a>.</p>' // MISSING
+		previewHtml : '<p>Das ist ein <strong>Beispieltext</strong>. Du schreibst in <a href="javascript:void(0)">CKEditor</a>.</p>'
 	}
 };

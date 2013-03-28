@@ -68,7 +68,16 @@
 				}
 				catch(\Exception $e)
 				{
-					throw new \System\Utils\DirectoryNotWritableException("Could not install assets into " . __HTDOCS_PATH__ . self::PATHTOEDITORFILES);
+					mkdir(__HTDOCS_PATH__ . '/assets');
+
+					try
+					{
+						\System\Utils\FileSystem::copy(__DIR__ . '/assets', __HTDOCS_PATH__ . self::PATHTOEDITORFILES);
+					}
+					catch(\Exception $e)
+					{
+						throw new \System\Utils\DirectoryNotWritableException("Could not install assets into " . __HTDOCS_PATH__ . self::PATHTOEDITORFILES);
+					}
 				}
 			}
 
