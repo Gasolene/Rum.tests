@@ -4,7 +4,10 @@
 	 * @author			Darnell Shinbine
 	 * @copyright		Copyright (c) 2011
 	 */
-    namespace JQuery;
+	namespace JQuery;
+
+	// include config
+	include __PLUGINS_PATH__ . '/jquery/config.inc.php';
 
 	// register event handler
 	\System\Base\ApplicationBase::getInstance()->events->registerEventHandler(new \System\Base\Events\ApplicationRunEventHandler('\\JQuery\\registerFieldAndRuleTypes'));
@@ -17,7 +20,7 @@
 	 */
 	function registerFieldAndRuleTypes()
 	{
-		\System\Web\FormModelBase::registerFieldType('date', '\\JQuery\\DatePicker');
+		//\System\Web\FormModelBase::registerFieldType('date', '\\JQuery\\Widgets\\DatePicker');
 	}
 
 	/**
@@ -38,8 +41,9 @@
 	function loadModules()
 	{
 		$page = \System\Base\ApplicationBase::getInstance()->requestHandler->page;
-		$page->addLink(\System\Base\ApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'commoncontrols', 'type'=>'text/css')).'&asset=css/ui-lightness/jquery-ui-1.8.19.custom.css');
-		$page->addScript(\System\Base\ApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'commoncontrols', 'type'=>'text/javascript')).'&asset=js/jquery-1.7.2.min.js');
-		$page->addScript(\System\Base\ApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'commoncontrols', 'type'=>'text/javascript')).'&asset=js/jquery-ui-1.8.19.custom.min.js');
+		$page->addLink(\System\Base\ApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'jquery', 'type'=>'text/css')).'&asset=css/'.\JQuery\theme.'/jquery-ui-1.8.19.custom.css');
+		$page->addScript(\System\Base\ApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'jquery', 'type'=>'text/javascript')).'&asset=js/jquery-1.7.2.min.js');
+		$page->addScript(\System\Base\ApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'jquery', 'type'=>'text/javascript')).'&asset=js/jquery-ui-1.8.19.custom.min.js');
+		$page->addScript(\System\Base\ApplicationBase::getInstance()->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'jquery', 'type'=>'text/javascript')).'&asset=js/jquery.cookie.js');
 	}
 ?>
