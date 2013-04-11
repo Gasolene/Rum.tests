@@ -82,6 +82,9 @@
 
 			//$this->Name->ajaxPostBack = true;
 			//$this->form->ajaxPostBack = true;
+			$this->Date->ajaxValidation = true;
+			$this->Time->ajaxValidation = true;
+			$this->DateTime->ajaxValidation = true;
 		}
 
 		function onPageLoad( &$page, $args ) {
@@ -110,7 +113,7 @@
 		}
 
 		function onFormPost( &$form, $args ) {
-
+return;
 			$err = '';
 			if( $this->form->validate($err) ) {
 				$this->form->save();
