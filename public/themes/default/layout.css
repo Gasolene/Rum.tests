@@ -61,6 +61,19 @@ ul.messages {
   display: block;
 }
 
+ul.messages li .dismiss {
+  float: right;
+  display: block;
+  margin-top: 4px;
+  background-image: url("icons/Knob Cancel.png");
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+  width: 32px;
+  height: 32px;
+  text-indent: -3000px;
+  cursor: pointer;
+}
+
 ul.messages li {
   margin: 0px;
   padding-left: 40px;

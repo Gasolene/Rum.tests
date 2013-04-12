@@ -11,7 +11,7 @@
 	/**
 	 * Represents a JQuery Sortable Control
 	 *
-	 * @property string $path Specifies the start page URI
+	 * @property string $pageURI Specifies the start page URI
 	 * @property bool $debug When set to true, outputs useful information to the console display if the console object exists.
 	 * @property bool $autoTrigger When set to true, triggers the loading of the next set of content automatically when the user scrolls to the bottom of the containing element. When set to false, the required next link will trigger the loading of the next set of content when clicked.
 	 * @property string $loadingHtml The HTML to show at the bottom of the content while loading the next set.
@@ -222,15 +222,7 @@
 			$page->loadAjaxJScriptBuffer('jscroll2.innerHTML = \''.\addslashes(str_replace("\n", '', str_replace("\r", '', $this->fetch()))).'\';');
 			$page->loadAjaxJScriptBuffer('jscroll1.parentNode.insertBefore(jscroll2, jscroll1);');
 			$page->loadAjaxJScriptBuffer('jscroll1.parentNode.removeChild(jscroll1);');
-
-			$page->loadAjaxJScriptBuffer("$('#{$this->getHTMLControlId()}').jscroll({
-    debug: ".($this->debug?'true':'false').",
-    autoTrigger: ".($this->autoTrigger?'true':'false').",
-    loadingHtml: '".stripslashes($this->loadingHtml)."',
-    padding: ".$this->padding.",
-    nextSelector: '".stripslashes($this->nextSelector)."',
-    contentSelector: '".stripslashes($this->contentSelector)."'
-});");
+			$page->loadAjaxJScriptBuffer("$('#{$this->getHTMLControlId()}').jscroll({debug: ".($this->debug?'true':'false').",autoTrigger: ".($this->autoTrigger?'true':'false').",loadingHtml: '".stripslashes($this->loadingHtml)."',padding: ".$this->padding.",nextSelector: '".stripslashes($this->nextSelector)."',contentSelector: '".stripslashes($this->contentSelector)."'});");
 		}
 	}
 ?>

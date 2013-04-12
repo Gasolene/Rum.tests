@@ -156,7 +156,7 @@
   height: 32px;
 }
 
-.gridview tfoot .button.new {
+.gridview tfoot .button.add {
   display: block;
   background: none;
   border: none;

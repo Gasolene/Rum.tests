@@ -10,7 +10,7 @@
 	<div id="header">
 		<a id="logo"><img src="<?=  Rum::config()->uri?>/resources/images/logo.png"/></a>
 		<ul id="nav">
-			<li><a href="/">Home</a></li>
+			<li><a href="<?=\Rum::uri('form')?>">Home</a></li>
 		</ul>
 		<a href="/logout/" class="login">Logout</a>
 	</div>

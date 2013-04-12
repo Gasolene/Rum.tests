@@ -302,7 +302,7 @@
 			{
 				define( '__LISTNAME' . $this->listName, true );
 
-				$this->getParentByType( '\System\Web\WebControls\Page' )->onload .= 'SuggestBox.HTTPRequest[\''.$this->listName.'\'] = Rum.createXMLHttpRequest(); Rum.sendAsync( SuggestBox.HTTPRequest[\''.$this->listName.'\'], \'' . $this->ajaxCallback . '\', \'' . $this->getRequestData() . '&' . $this->getHTMLControlId() . '__async=true\', \'POST\', function() { SuggestBox.onResponse( \'' . $this->listName . '\', \'' . $this->textField . '\', \'' . $this->getHTMLControlId() . '\' ); } );SuggestBox.textValues[\''.$this->listName.'\']=document.getElementById(\''.$this->getHTMLControlId().'\').value;document.getElementById(\''.$this->getHTMLControlId().'\').value=\'Loading...\';document.getElementById(\''.$this->getHTMLControlId().'\').disabled=true;';
+				$this->getParentByType( '\System\Web\WebControls\Page' )->onload .= 'SuggestBox.HTTPRequest[\''.$this->listName.'\'] = Rum.createXMLHttpRequest(); Rum.sendAsyncWithCallback( SuggestBox.HTTPRequest[\''.$this->listName.'\'], \'' . $this->ajaxCallback . '\', \'' . $this->getRequestData() . '&' . $this->getHTMLControlId() . '__async=true\', \'POST\', function() { SuggestBox.onResponse( \'' . $this->listName . '\', \'' . $this->textField . '\', \'' . $this->getHTMLControlId() . '\' ); } );SuggestBox.textValues[\''.$this->listName.'\']=document.getElementById(\''.$this->getHTMLControlId().'\').value;document.getElementById(\''.$this->getHTMLControlId().'\').value=\'Loading...\';document.getElementById(\''.$this->getHTMLControlId().'\').disabled=true;';
 			}
 		}
 

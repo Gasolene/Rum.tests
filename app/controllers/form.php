@@ -113,7 +113,7 @@
 		}
 
 		function onFormPost( &$form, $args ) {
-return;
+
 			$err = '';
 			if( $this->form->validate($err) ) {
 				$this->form->save();
