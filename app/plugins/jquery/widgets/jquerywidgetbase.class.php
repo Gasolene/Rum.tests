@@ -40,6 +40,8 @@
 		 */
 		public function __construct( $controlId, $default = null, array $options = array() )
 		{
+			parent::__construct($controlId, $default);
+
 			$this->options = $options;
 		}
 
@@ -63,12 +65,7 @@
 		 */
 		protected function getOptions()
 		{
-			$options = "";
-			foreach($this->options as $key=>$val)
-			{
-				$options[] = "{$key}: {$val},";
-			}
-			return $options;
+			return json_encode($this->options);
 		}
 	}
 ?>

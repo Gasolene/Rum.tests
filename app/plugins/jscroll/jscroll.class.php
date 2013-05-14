@@ -196,15 +196,7 @@
 		{
 			parent::onLoad();
 
-			$page = $this->getParentByType('\System\Web\WebControls\Page');
-			$page->onload .= "$('#{$this->getHTMLControlId()}').jscroll({
-    debug: ".($this->debug?'true':'false').",
-    autoTrigger: ".($this->autoTrigger?'true':'false').",
-    loadingHtml: '".stripslashes($this->loadingHtml)."',
-    padding: ".$this->padding.",
-    nextSelector: '".stripslashes($this->nextSelector)."',
-    contentSelector: '".stripslashes($this->contentSelector)."'
-});";
+			$this->getParentByType('\System\Web\WebControls\Page')->onload .= $this->getJQueryInit();
 		}
 
 
@@ -219,10 +211,29 @@
 
 			$page->loadAjaxJScriptBuffer('jscroll1 = document.getElementById(\''.$this->getHTMLControlId().'\');');
 			$page->loadAjaxJScriptBuffer('jscroll2 = document.createElement(\'div\');');
-			$page->loadAjaxJScriptBuffer('jscroll2.innerHTML = \''.\addslashes(str_replace("\n", '', str_replace("\r", '', $this->fetch()))).'\';');
+			$page->loadAjaxJScriptBuffer('jscroll2.className = \' jscroll\';');
+			$page->loadAjaxJScriptBuffer('jscroll2.setAttribute(\'id\', \''.$this->getHTMLControlId().'\');');
+			$page->loadAjaxJScriptBuffer('jscroll2.innerHTML = \'<a href=\"'.$this->pageURI.'\">more...</a>\';');
 			$page->loadAjaxJScriptBuffer('jscroll1.parentNode.insertBefore(jscroll2, jscroll1);');
 			$page->loadAjaxJScriptBuffer('jscroll1.parentNode.removeChild(jscroll1);');
-			$page->loadAjaxJScriptBuffer("$('#{$this->getHTMLControlId()}').jscroll({debug: ".($this->debug?'true':'false').",autoTrigger: ".($this->autoTrigger?'true':'false').",loadingHtml: '".stripslashes($this->loadingHtml)."',padding: ".$this->padding.",nextSelector: '".stripslashes($this->nextSelector)."',contentSelector: '".stripslashes($this->contentSelector)."'});");
+			$page->loadAjaxJScriptBuffer($this->getJQueryInit());
+		}
+
+
+		/**
+		 * get jquery init
+		 * @return string
+		 */
+		private function getJQueryInit()
+		{
+		    return "$('#{$this->getHTMLControlId()}').jscroll({".
+    "debug: ".($this->debug?'true':'false').",".
+    "autoTrigger: ".($this->autoTrigger?'true':'false').",".
+    "loadingHtml: '".stripslashes($this->loadingHtml)."',".
+    "padding: ".$this->padding.",".
+    "nextSelector: '".stripslashes($this->nextSelector)."',".
+    "contentSelector: '".stripslashes($this->contentSelector)."'".
+"}).scroll();";
 		}
 	}
 ?>

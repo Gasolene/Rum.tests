@@ -27,7 +27,11 @@
 		{
 			parent::onLoad();
 
-			$this->getParentByType('\System\Web\WebControls\Page')->onload .= "$( \"#{$this->getHTMLControlId()}\" ).datepicker();";
+			$this->getParentByType( '\System\Web\WebControls\Page' )
+					->addLink( \System\Web\WebApplicationBase::getInstance()
+					->getPageURI(__MODULE_REQUEST_PARAMETER__, array('id'=>'jquery', 'type'=>'application/javascript')) . 
+					'&asset=spinner/jquery-mousewheel-master/jquery.mousewheel.js' );
+			$this->getParentByType('\System\Web\WebControls\Page')->onload .= "$( \"#{$this->getHTMLControlId()}\" ).spinner();";
 		}
 
 
