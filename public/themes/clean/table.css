@@ -129,6 +129,65 @@
 .gridview .summary {
 }
 
+.gridview th {
+}
+
+.gridview td {
+	/* white-space: nowrap; */
+}
+
+.gridview .move_up {
+	display: block;
+	text-indent: -3000px;
+	background-image: url(images/up.png);
+	background-position:left;
+	background-repeat:no-repeat;
+	padding-left: 15px;
+}
+
+.gridview .move_down {
+	display: block;
+	text-indent: -3000px;
+	background-image: url(images/down.png);
+	background-position:left;
+	background-repeat:no-repeat;
+	padding-left: 15px;
+}
+
+.gridview .sort_desc {
+	background-image: url(images/down.png);
+	background-position:left;
+	background-repeat:no-repeat;
+	padding-left: 15px;
+}
+
+.gridview .sort_asc {
+	background-image: url(images/up.png);
+	background-position:left;
+	background-repeat:no-repeat;
+	padding-left: 15px;
+}
+
+.gridview .listcolumn {
+	width: 20px;
+}
+
+.gridview .movecolumn {
+	width: 20px;
+}
+
+.gridview .filter input {
+	width:100%;
+}
+
+.gridview a.disabled {
+	display: none;
+}
+
+.gridview .pages {
+	float: right;
+}
+
 /* Controls */
 
 .gridview .checkbox {
