@@ -322,6 +322,11 @@
 			$XMLParser = new \System\XML\XMLParser();
 			$rss = $XMLParser->parse( $xml );
 
+			$this->title = $rss->channel->getChildByName('title')->value;
+			$this->description = $rss->channel->getChildByName('description')->value;
+			$this->link = $rss->channel->getChildByName('link')->value;
+			if($rss->channel->findChildByName('language')) $this->language = $rss->channel->getChildByName('language')->value;
+			if($rss->channel->findChildByName('lastBuildDate')) $this->lastBuildDate = $rss->channel->getChildByName('lastbuilddate')->value;
 			$this->_items = array();
 
 			foreach($rss->channel->getChildrenByName('item') as $item)
