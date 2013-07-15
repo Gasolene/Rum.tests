@@ -1,5 +1,18 @@
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'classrooms')
+		DROP TABLE [classrooms];
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'School')
+		DROP TABLE [School];
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'student')
+		DROP TABLE [student];
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'student_classrooms')
+		DROP TABLE [student_classrooms];
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'page')
+		DROP TABLE [page];
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'team')
+		DROP TABLE [team];
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'player')
+		DROP TABLE [player];
 
-			$this->db->execute( '
 				CREATE TABLE classrooms (
 					classroom_id int IDENTITY(1,1) NOT NULL,
 					School_id int NULL,
@@ -8,9 +21,8 @@
 					(
 						classroom_id
 					)
-				) ON [PRIMARY]' );
+				) ON [PRIMARY];
 
-			$this->db->execute( '
 				CREATE TABLE School (
 					School_id int IDENTITY(1,1) NOT NULL,
 					School_name varchar(80) NULL,
@@ -18,9 +30,8 @@
 					(
 						School_id
 					)
-				) ON [PRIMARY]' );
+				) ON [PRIMARY];
 
-			$this->db->execute( '
 				CREATE TABLE student (
 					student_id int IDENTITY(1,1) NOT NULL,
 					student_name varchar(80) NULL,
@@ -29,11 +40,8 @@
 					(
 						student_id
 					)
-				) ON [PRIMARY]' );
+				) ON [PRIMARY];
 
-//$this->db->execute( 'drop table student_classrooms' );
-
-			$this->db->execute( '
 				CREATE TABLE student_classrooms (
 					student_id int NOT NULL,
 					classroom_id int NOT NULL,
@@ -42,9 +50,8 @@
 						student_id,
 						classroom_id
 					)
-				)' );
+				);
 
-			$this->db->execute( '
 				CREATE TABLE [page] (
 					page_id int IDENTITY(1,1) NOT NULL,
 					parent_id int NULL,
@@ -52,9 +59,8 @@
 					(
 						page_id
 					)
-				) ON [PRIMARY]' );
+				) ON [PRIMARY];
 
-			$this->db->execute( '
 				CREATE TABLE [team] (
 					team_id int IDENTITY(1,1) NOT NULL,
 					player_id int NULL,
@@ -62,9 +68,8 @@
 					(
 						team_id
 					)
-				) ON [PRIMARY]' );
+				) ON [PRIMARY];
 
-			$this->db->execute( '
 				CREATE TABLE [player] (
 					player_id int IDENTITY(1,1) NOT NULL,
 					team_id int NULL,
@@ -72,4 +77,4 @@
 					(
 						player_id
 					)
-				) ON [PRIMARY]' );
+				) ON [PRIMARY];

@@ -9,7 +9,9 @@
    If @state=debug, the application is in development state
 -->
 <application                   state = "debug">
-
+	<app-settings>
+		<add key="mssql_conn_str" value="adapter=mssql;uid=test;pwd=123456;server=DTOWN\SQLExpress;database=test;" />
+	</app-settings>
   <pages               default-theme = "green" />
 
   <viewstate                 enabled = "true"

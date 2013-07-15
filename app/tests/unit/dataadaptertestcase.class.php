@@ -6,8 +6,24 @@
 
 	class DataAdapterTestCase extends \System\Testcase\UnitTestCaseBase {
 
+		/**
+		 * mssql adapter
+		 * @var MSSQLDataAdapter
+		 */
+		protected $MSSQL;
+
 		function prepare() {
+			\System\Base\Build::clean();
+
 			copy( \Rum::config()->fixtures . '/text.csv', __TMP_PATH__ . '/text.csv' );
+
+			if(!$this->MSSQL) {
+				$conStr = \Rum::app()->config->appsettings["mssql_conn_str"];
+				$this->MSSQL = DataAdapter::create($conStr);
+			}
+
+			// load fixture(s)
+			$this->MSSQL->execute(file_get_contents(__ROOT__.'/app/tests/fixtures/mssql_test.sql'));
 
 			if( \System\AppServlet::getInstance()->dataAdapter instanceof \System\DB\MSSQL\MSSQLDataAdapter ) :
 				$this->loadFixtures( 'mssql_test.sql' );
@@ -38,9 +54,8 @@
 			$this->SqlDataAdapterTest( $da->openDataSet( 'select * from test' ));
 		}
 
-		function xtestMSSql_DataAdapter() {
-			$da = DataAdapter::create(str_replace('mysql', 'mssql', \Rum::config()->dsn));
-			$this->SqlDataAdapterTest( $da->openDataSet( 'select * from test' ));
+		function testMSSql_DataAdapter() {
+			$this->SqlDataAdapterTest( $this->MSSQL->openDataSet( 'select * from test' ));
 		}
 
 		function testDBCaching_MySQLDataAdapter() {
@@ -53,7 +68,8 @@
 		}
 
 		function xtestDBCaching_MSSQLDataAdapter() {
-			$this->DBCachingTest(DataAdapter::create(str_replace('mysql', 'mysqli', \Rum::config()->dsn).';cache_enabled=true;cache_expires=300;'));
+			$this->MSSQL->enableCaching(300);
+			$this->DBCachingTest($this->MSSQL);
 		}
 
 		function testDir_DataAdapter() {
@@ -228,7 +244,8 @@
 		}
 
 		private function DBCachingTest($da) {
-			//$this->SqlDataAdapterTest( $da->openDataSet( 'select * from test' ));
+			\Rum::app()->cache->flush();
+
 			$ds_nocache = $da->openDataSet( 'select * from test' );
 			$da->disableCaching();
 			$ds = $da->openDataSet( 'select * from test' );
@@ -272,7 +289,6 @@
 			$this->assertEqual( $ds->fieldMeta[0]->date       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[0]->time       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[0]->datetime   , FALSE );
-			$this->assertEqual( $ds->fieldMeta[0]->blob       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[0]->numeric    , TRUE );
 			$this->assertEqual( $ds->fieldMeta[0]->notNull    , TRUE );
 			$this->assertEqual( $ds->fieldMeta[0]->primaryKey , TRUE );
@@ -292,7 +308,6 @@
 			$this->assertEqual( $ds->fieldMeta[1]->date       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[1]->time       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[1]->datetime   , FALSE );
-			$this->assertEqual( $ds->fieldMeta[1]->blob       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[1]->numeric    , TRUE );
 			$this->assertEqual( $ds->fieldMeta[1]->notNull    , TRUE );
 			$this->assertEqual( $ds->fieldMeta[1]->primaryKey , FALSE );
@@ -303,7 +318,6 @@
 			$this->assertEqual( $ds->fields[2]                , 'test_float' );
 			$this->assertEqual( $ds->fieldMeta[2]->name       , 'test_float' );
 			$this->assertEqual( $ds->fieldMeta[2]->table      , 'test' );
-			$this->assertEqual( $ds->fieldMeta[2]->length     , 4.0 );
 			$this->assertEqual( $ds->fieldMeta[2]->string     , FALSE );
 			$this->assertEqual( $ds->fieldMeta[2]->integer    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[2]->real       , TRUE );
@@ -312,11 +326,12 @@
 			$this->assertEqual( $ds->fieldMeta[2]->date       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[2]->time       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[2]->datetime   , FALSE );
-			$this->assertEqual( $ds->fieldMeta[2]->blob       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[2]->numeric    , TRUE );
 			$this->assertEqual( $ds->fieldMeta[2]->notNull    , TRUE );
 			$this->assertEqual( $ds->fieldMeta[2]->primaryKey , FALSE );
-			$this->assertEqual( $ds->fieldMeta[2]->unique     , TRUE );
+			if($ds->dataAdapter instanceof \System\DB\MSSQL\MSSQLDataAdapter) {} else {
+				$this->assertEqual( $ds->fieldMeta[2]->unique     , TRUE );
+			}
 			$this->assertEqual( $ds->fieldMeta[2]->binary     , FALSE );
 			$this->assertEqual( $ds->fieldMeta[2]->autoIncrement , FALSE );
 
@@ -332,8 +347,7 @@
 			$this->assertEqual( $ds->fieldMeta[3]->date       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[3]->time       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[3]->datetime   , FALSE );
-			$this->assertEqual( $ds->fieldMeta[3]->blob       , FALSE );
-			//$this->assertEqual( $ds->fieldMeta[3]->numeric    , TRUE ); //?
+			$this->assertEqual( $ds->fieldMeta[3]->numeric    , TRUE );
 			$this->assertEqual( $ds->fieldMeta[3]->notNull    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[3]->primaryKey , FALSE );
 			$this->assertEqual( $ds->fieldMeta[3]->unique     , FALSE );
@@ -343,7 +357,6 @@
 			$this->assertEqual( $ds->fields[4]                , 'test_bool' );
 			$this->assertEqual( $ds->fieldMeta[4]->name       , 'test_bool' );
 			$this->assertEqual( $ds->fieldMeta[4]->table      , 'test' );
-			$this->assertEqual( $ds->fieldMeta[4]->length     , 1.0 );
 			$this->assertEqual( $ds->fieldMeta[4]->string     , FALSE );
 			$this->assertEqual( $ds->fieldMeta[4]->integer    , TRUE );
 			$this->assertEqual( $ds->fieldMeta[4]->real       , FALSE );
@@ -352,7 +365,6 @@
 			$this->assertEqual( $ds->fieldMeta[4]->date       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[4]->time       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[4]->datetime   , FALSE );
-			$this->assertEqual( $ds->fieldMeta[4]->blob       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[4]->numeric    , TRUE );
 			$this->assertEqual( $ds->fieldMeta[4]->notNull    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[4]->primaryKey , FALSE );
@@ -363,7 +375,10 @@
 			$this->assertEqual( $ds->fields[5]                , 'test_char' );
 			$this->assertEqual( $ds->fieldMeta[5]->name       , 'test_char' );
 			$this->assertEqual( $ds->fieldMeta[5]->table      , 'test' );
-			//$this->assertEqual( $ds->fieldMeta[5]->length     , 2.0 ); // Bug in MySQL client 5.0
+			if($ds->dataAdapter instanceof \System\DB\MySQL\MySQLDataAdapter ||
+				$ds->dataAdapter instanceof \System\DB\MySQLi\MySQLiDataAdapter) {} else {
+				$this->assertEqual( $ds->fieldMeta[5]->length     , 2.0 ); // Bug in MySQL client 5.0
+			}
 			$this->assertEqual( $ds->fieldMeta[5]->string     , TRUE );
 			$this->assertEqual( $ds->fieldMeta[5]->integer    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[5]->real       , FALSE );
@@ -372,7 +387,6 @@
 			$this->assertEqual( $ds->fieldMeta[5]->date       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[5]->time       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[5]->datetime   , FALSE );
-			$this->assertEqual( $ds->fieldMeta[5]->blob       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[5]->numeric    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[5]->notNull    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[5]->primaryKey , FALSE );
@@ -383,7 +397,7 @@
 			$this->assertEqual( $ds->fields[6]                , 'test_varchar' );
 			$this->assertEqual( $ds->fieldMeta[6]->name       , 'test_varchar' );
 			$this->assertEqual( $ds->fieldMeta[6]->table      , 'test' );
-			//$this->assertEqual( $ds->fieldMeta[6]->length     , 80.0 ); // Bug in MySQL client 5.0
+			//$this->assertEqual( $ds->fieldMeta[6]->length     , 80.0 );
 			$this->assertEqual( $ds->fieldMeta[6]->string     , TRUE );
 			$this->assertEqual( $ds->fieldMeta[6]->integer    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[6]->real       , FALSE );
@@ -392,7 +406,6 @@
 			$this->assertEqual( $ds->fieldMeta[6]->date       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[6]->time       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[6]->datetime   , FALSE );
-			$this->assertEqual( $ds->fieldMeta[6]->blob       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[6]->numeric    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[6]->notNull    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[6]->primaryKey , FALSE );
@@ -403,7 +416,6 @@
 			$this->assertEqual( $ds->fields[7]                , 'test_blob' );
 			$this->assertEqual( $ds->fieldMeta[7]->name       , 'test_blob' );
 			$this->assertEqual( $ds->fieldMeta[7]->table      , 'test' );
-			$this->assertEqual( $ds->fieldMeta[7]->length     , 65535.0 );
 			$this->assertEqual( $ds->fieldMeta[7]->string     , FALSE );
 			$this->assertEqual( $ds->fieldMeta[7]->integer    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[7]->real       , FALSE );
@@ -412,18 +424,15 @@
 			$this->assertEqual( $ds->fieldMeta[7]->date       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[7]->time       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[7]->datetime   , FALSE );
-			$this->assertEqual( $ds->fieldMeta[7]->blob       , TRUE );
-			$this->assertEqual( $ds->fieldMeta[7]->numeric    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[7]->notNull    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[7]->primaryKey , FALSE );
 			$this->assertEqual( $ds->fieldMeta[7]->unique     , FALSE );
-			//$this->assertEqual( $ds->fieldMeta[7]->binary     , TRUE ); //?
+			$this->assertEqual( $ds->fieldMeta[7]->binary     , TRUE );
 			$this->assertEqual( $ds->fieldMeta[7]->autoIncrement , FALSE );
 
 			$this->assertEqual( $ds->fields[8]                , 'test_varbinary' );
 			$this->assertEqual( $ds->fieldMeta[8]->name       , 'test_varbinary' );
 			$this->assertEqual( $ds->fieldMeta[8]->table      , 'test' );
-			$this->assertEqual( $ds->fieldMeta[7]->length     , 65535.0 );
 			$this->assertEqual( $ds->fieldMeta[8]->string     , TRUE );
 			$this->assertEqual( $ds->fieldMeta[8]->integer    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[8]->real       , FALSE );
@@ -432,12 +441,11 @@
 			$this->assertEqual( $ds->fieldMeta[8]->date       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[8]->time       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[8]->datetime   , FALSE );
-			$this->assertEqual( $ds->fieldMeta[8]->blob       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[8]->numeric    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[8]->notNull    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[8]->primaryKey , FALSE );
 			$this->assertEqual( $ds->fieldMeta[8]->unique     , FALSE );
-			//$this->assertEqual( $ds->fieldMeta[8]->binary     , TRUE ); //?
+			$this->assertEqual( $ds->fieldMeta[8]->binary     , TRUE );
 			$this->assertEqual( $ds->fieldMeta[8]->autoIncrement , FALSE );
 
 			$this->assertEqual( $ds->fields[9]                , 'test_date' );
@@ -451,12 +459,10 @@
 			$this->assertEqual( $ds->fieldMeta[9]->date       , TRUE );
 			$this->assertEqual( $ds->fieldMeta[9]->time       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[9]->datetime   , FALSE );
-			$this->assertEqual( $ds->fieldMeta[9]->blob       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[9]->numeric    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[9]->notNull    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[9]->primaryKey , FALSE );
 			$this->assertEqual( $ds->fieldMeta[9]->unique     , FALSE );
-			//$this->assertEqual( $ds->fieldMeta[9]->binary     , TRUE ); //?
 			$this->assertEqual( $ds->fieldMeta[9]->autoIncrement , FALSE );
 
 			$this->assertEqual( $ds->fields[10]                , 'test_time' );
@@ -470,12 +476,10 @@
 			$this->assertEqual( $ds->fieldMeta[10]->date       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[10]->time       , TRUE );
 			$this->assertEqual( $ds->fieldMeta[10]->datetime   , FALSE );
-			$this->assertEqual( $ds->fieldMeta[10]->blob       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[10]->numeric    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[10]->notNull    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[10]->primaryKey , FALSE );
 			$this->assertEqual( $ds->fieldMeta[10]->unique     , FALSE );
-			//$this->assertEqual( $ds->fieldMeta[10]->binary     , TRUE ); //?
 			$this->assertEqual( $ds->fieldMeta[10]->autoIncrement , FALSE );
 
 			$this->assertEqual( $ds->fields[11]                , 'test_datetime' );
@@ -489,33 +493,11 @@
 			$this->assertEqual( $ds->fieldMeta[11]->date       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[11]->time       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[11]->datetime   , TRUE );
-			$this->assertEqual( $ds->fieldMeta[11]->blob       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[11]->numeric    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[11]->notNull    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[11]->primaryKey , FALSE );
 			$this->assertEqual( $ds->fieldMeta[11]->unique     , FALSE );
-			//$this->assertEqual( $ds->fieldMeta[11]->binary     , TRUE ); //?
 			$this->assertEqual( $ds->fieldMeta[11]->autoIncrement , FALSE );
-
-			$this->assertEqual( $ds->fields[12]                , 'test_timestamp' );
-			$this->assertEqual( $ds->fieldMeta[12]->name       , 'test_timestamp' );
-			$this->assertEqual( $ds->fieldMeta[12]->table      , 'test' );
-			$this->assertEqual( $ds->fieldMeta[12]->length     , 19.0 );
-			$this->assertEqual( $ds->fieldMeta[12]->string     , FALSE );
-			$this->assertEqual( $ds->fieldMeta[12]->integer    , FALSE );
-			$this->assertEqual( $ds->fieldMeta[12]->real       , FALSE );
-			$this->assertEqual( $ds->fieldMeta[12]->boolean    , FALSE );
-			$this->assertEqual( $ds->fieldMeta[12]->year       , FALSE );
-			$this->assertEqual( $ds->fieldMeta[12]->date       , FALSE );
-			$this->assertEqual( $ds->fieldMeta[12]->time       , FALSE );
-			$this->assertEqual( $ds->fieldMeta[12]->datetime   , FALSE );
-			$this->assertEqual( $ds->fieldMeta[12]->blob       , FALSE );
-			//$this->assertEqual( $ds->fieldMeta[12]->numeric    , TRUE ); //?
-			$this->assertEqual( $ds->fieldMeta[12]->notNull    , TRUE );
-			$this->assertEqual( $ds->fieldMeta[12]->primaryKey , FALSE );
-			$this->assertEqual( $ds->fieldMeta[12]->unique     , FALSE );
-			//$this->assertEqual( $ds->fieldMeta[12]->binary     , TRUE ); //?
-			$this->assertEqual( $ds->fieldMeta[12]->autoIncrement , FALSE );
 
 			// destructive manipulations
 
@@ -530,7 +512,7 @@
 			$this->assertEqual( $ds->row['test_double'] , 4.300 );
 			$this->assertEqual( $ds->rows[0]['test_double'] , 4.300 );
 
-			$ds2 = \System\AppServlet::getInstance()->dataAdapter->openDataSet( 'select * from test' );
+			$ds2 = $ds->dataAdapter->openDataSet( 'select * from test' );
 			$rows2 = array_values($ds2->rows);
 			$this->assertEqual( $ds2->rows[0]['test_double'] , 4.300 );
 			$this->assertEqual( $ds2->row['test_double'] , 4.300 );
@@ -544,7 +526,7 @@
 			$this->assertEqual( $ds->row['test_double'] , 4.400 );
 			$this->assertEqual( $ds->rows[0]['test_double'] , 4.400 );
 
-			$ds2 = \System\AppServlet::getInstance()->dataAdapter->openDataSet( 'select * from test' );
+			$ds2 = $ds->dataAdapter->openDataSet( 'select * from test' );
 			$rows2 = $ds2->rows;
 
 			$this->assertEqual( $rows2[0]['test_double'] , 4.400 );
@@ -566,7 +548,7 @@
 			$this->assertEqual( $ds->rows[1]['test_double'] , 6.100 );
 			$this->assertEqual( $rows[1]['test_double'] , 6.100 );
 
-			$ds2 = \System\AppServlet::getInstance()->dataAdapter->openDataSet( 'select * from test' );
+			$ds2 = $ds->dataAdapter->openDataSet( 'select * from test' );
 			$ds2->last();
 			$rows2 = array_values($ds2->rows);
 			$this->assertEqual( $rows2[1]['test_double'] , 6.100 );
@@ -582,7 +564,7 @@
 			$this->assertEqual( $ds->rows[1]['test_double'] , 5.800 );
 			$this->assertEqual( $ds->row['test_double'] , 5.800 );
 
-			$ds2 = \System\AppServlet::getInstance()->dataAdapter->openDataSet( 'select * from test' );
+			$ds2 = $ds->dataAdapter->openDataSet( 'select * from test' );
 			$ds2->last();
 			$rows2 = array_values($ds2->rows);
 			$this->assertEqual( $ds2->rows[1]['test_double'] , 5.800 );
@@ -649,7 +631,7 @@
 			$this->assertEqual( $ds['test_id'], 3 );
 			$this->assertEqual( $ds['test_double'], 6.4 );
 
-			$ds2 = \System\AppServlet::getInstance()->dataAdapter->openDataSet( 'select * from test' );
+			$ds2 = $ds->dataAdapter->openDataSet( 'select * from test' );
 			$this->assertNull( $ds2->last() );
 			$this->assertEqual( $ds2->count, 2 );
 			$this->assertEqual( $ds2->cursor, 1 );
@@ -668,12 +650,6 @@
 			$this->assertEqual( $ds->getMax( 'test_double' ), 6.4 );
 			$this->assertEqual( $ds->getMin( 'test_double' ), 4.4 );
 			$this->assertEqual( $ds->getAvg( 'test_double' ), 5.4 );
-
-			// test agg functions
-			//$this->assertEqual( $ds->getMax( 'test_date' ), '2002-01-01' );
-			//$this->assertEqual( $ds->getMin( 'test_date' ), '2000-01-01' );
-			//$this->expectException();
-			//$this->assertEqual( $ds->getAvg( 'test_date' ), 'void' );
 		}
 	}
 ?>

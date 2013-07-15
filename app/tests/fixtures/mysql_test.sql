@@ -16,7 +16,6 @@
 	  `test_date` date,
 	  `test_time` time,
 	  `test_datetime` datetime,
-	  `test_timestamp` timestamp NOT NULL,
 
 	  PRIMARY KEY  (`test_id`),
 	  UNIQUE (`test_float`)
