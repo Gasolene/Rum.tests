@@ -10,7 +10,15 @@
 -->
 <application                   state = "debug">
 	<app-settings>
-		<add key="mssql_conn_str" value="adapter=mssql;uid=test;pwd=123456;server=DTOWN\SQLExpress;database=test;" />
+		<add key="mssql_conn_str" value="adapter=mssql;uid= test ;pwd=123456;server=DTOWN\SQLExpress;database=test;" />
+		<add key="mysql_conn_str" value="adapter=mysql;uid= root ;pwd=;server=127.0.0.1;database=test;" />
+		<add key="mysqli_conn_str" value="adapter=mysqli;port=3306;uid= root ;pwd=;server=127.0.0.1;database=test;" />
+		<add key="pdo_mssql_conn_str" value="dblib:host=DTOWN\SQLExpress;dbname=test" />
+		<add key="pdo_mssql_username" value="test" />
+		<add key="pdo_mssql_password" value="123456" />
+		<add key="pdo_mysql_conn_str" value="mysql:host=127.0.0.1;dbname=test" />
+		<add key="pdo_mysql_username" value="root" />
+		<add key="pdo_mysql_password" value="" />
 	</app-settings>
   <pages               default-theme = "green" />
 

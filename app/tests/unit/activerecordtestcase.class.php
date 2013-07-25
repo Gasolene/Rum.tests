@@ -13,7 +13,7 @@
 	class ActiveRecordTestCase extends \System\Testcase\UnitTestCaseBase {
 
 		function prepare() {
-			if( \System\AppServlet::getInstance()->dataAdapter instanceof \System\Data\MSSqlDataAdapter ) :
+			if( \System\AppServlet::getInstance()->dataAdapter instanceof \System\DB\MSSqlDataAdapter ) :
 				$this->loadFixtures( 'mssql_school.sql' );
 			else :
 				$this->loadFixtures( 'mysql_school.sql' );
@@ -259,9 +259,8 @@
 			$this->assertEqual($student->fields['student_age'], 'numeric');
 			$this->assertEqual(count($student->fields), 2);
 
-			//$this->assertEqual($student->rules['student_name'], array('required', 'length(0, 80)'));
-			$this->assertEqual($student->rules['student_name'], array('required', 'length(0, 240)'));
-			$this->assertEqual($student->rules['student_age'], array('required', 'numeric', 'length(0, 10)'));
+			$this->assertEqual($student->rules['student_name'], array('length(0, 240)'));
+			$this->assertEqual($student->rules['student_age'], array('numeric', 'length(0, 10)'));
 			$this->assertEqual(count($student->rules), 3);
 		}
 

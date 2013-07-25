@@ -7,23 +7,8 @@
 
 	class SQLAbstractionTestCase extends \System\Testcase\UnitTestCaseBase {
 
-		/**
-		 * mssql adapter
-		 * @var MSSQLDataAdapter
-		 */
-		protected $MSSQL;
-
 		function prepare() {
-
-			if(!$this->MSSQL) {
-				$conStr = \Rum::app()->config->appsettings["mssql_conn_str"];
-				$this->MSSQL = DataAdapter::create($conStr);
-			}
-
-			// load fixture(s)
-			$this->MSSQL->execute(file_get_contents(__ROOT__.'/app/tests/fixtures/mssql_school.sql'));
-
-			if( \System\AppServlet::getInstance()->dataAdapter instanceof \System\Data\MSSqlDataAdapter ) :
+			if( \System\AppServlet::getInstance()->dataAdapter instanceof \System\DB\MSSqlDataAdapter ) :
 				$this->loadFixtures( 'mssql_school.sql' );
 			else :
 				$this->loadFixtures( 'mysql_school.sql' );
@@ -89,15 +74,36 @@
 			$query->groupBy( 'table', 'col' );
 		}
 
-		function testMSSQLDriver() {
-			$query = $this->runDriverTest($this->MSSQL);
+		function testMySQLDriver() {
+			$conStr = \Rum::app()->config->appsettings["mysql_conn_str"];
+
+			$this->expectError();
+			$da = DataAdapter::create($conStr);
+
+			$da->executeBatch(file_get_contents(__ROOT__.'/app/tests/fixtures/mysql_test.sql'));
+			$this->runDriverTest($da);
 		}
 
 		function testMySQLiDriver() {
-			$query = $this->runDriverTest(\System\Base\ApplicationBase::getInstance()->dataAdapter);
+			$conStr = \Rum::app()->config->appsettings["mysqli_conn_str"];
+
+			$da = DataAdapter::create($conStr);
+
+			$da->executeBatch(file_get_contents(__ROOT__.'/app/tests/fixtures/mysql_test.sql'));
+			$this->runDriverTest($da);
 		}
 
-		function runDriverTest($da) {
+		function testMSSQLDriver() {
+			$conStr = \Rum::app()->config->appsettings["mssql_conn_str"];
+
+			$this->expectError();
+			$da = DataAdapter::create($conStr);
+
+			$da->executeBatch(file_get_contents(__ROOT__.'/app/tests/fixtures/mssql_school.sql'));
+			$this->runDriverTest($da);
+		}
+
+		private function runDriverTest($da) {
 			$query = $da->queryBuilder();
 
 			$query->insertInto( 'School', array( 'School_name' ));
@@ -189,7 +195,7 @@
 			$this->assertEqual( $this->getRows( $da, 'student' )->count, 0 );
 		}
 
-		function getRows( $da, $table ) {
+		private function getRows( $da, $table ) {
 			return $da->queryBuilder()->select()->from($table)->openDataSet();
 		}
 	}

@@ -2,74 +2,85 @@
     namespace MyApp\Models;
     use \System\DB\DataAdapter;
     use \System\DB\DataSet;
-    use \MyApp\App;
 
 	class DataAdapterTestCase extends \System\Testcase\UnitTestCaseBase {
 
-		/**
-		 * mssql adapter
-		 * @var MSSQLDataAdapter
-		 */
-		protected $MSSQL;
-
 		function prepare() {
 			\System\Base\Build::clean();
-
 			copy( \Rum::config()->fixtures . '/text.csv', __TMP_PATH__ . '/text.csv' );
-
-			if(!$this->MSSQL) {
-				$conStr = \Rum::app()->config->appsettings["mssql_conn_str"];
-				$this->MSSQL = DataAdapter::create($conStr);
-			}
-
-			// load fixture(s)
-			$this->MSSQL->execute(file_get_contents(__ROOT__.'/app/tests/fixtures/mssql_test.sql'));
-
-			if( \System\AppServlet::getInstance()->dataAdapter instanceof \System\DB\MSSQL\MSSQLDataAdapter ) :
-				$this->loadFixtures( 'mssql_test.sql' );
-			else :
-				$this->loadFixtures( 'mysql_test.sql' );
-			endif;
 		}
 
 		function cleanup() {
 			unlink( __TMP_PATH__ . '/text.csv' );
 		}
 
-		function testDeleteEmpty() {
-			$ds = \System\AppServlet::getInstance()->dataAdapter->openDataSet( 'select * from test' );
+		function testMSSql_DataAdapter() {
+			$conStr = \Rum::app()->config->appsettings["mssql_conn_str"];
 
-			$this->expectException();
-			$ds->delete();
+			$this->expectError();
+			$da = DataAdapter::create($conStr);
+
+			$da->executeBatch(file_get_contents(__ROOT__.'/app/tests/fixtures/mssql_test.sql'));
+			$this->SqlDataAdapterTest($da);
+			$da->executeBatch(file_get_contents(__ROOT__.'/app/tests/fixtures/mssql_test.sql'));
+			$this->DeleteEmptyTest($da);
+			$da->executeBatch(file_get_contents(__ROOT__.'/app/tests/fixtures/mssql_test.sql'));
+			//$this->DBCachingTest($da);
 		}
 
 		function testMySql_DataAdapter() {
+			$conStr = \Rum::app()->config->appsettings["mysql_conn_str"];
+
 			$this->expectError();
-			$da = DataAdapter::create(str_replace('mysqli', 'mysql', \Rum::config()->dsn));
-			$this->SqlDataAdapterTest( $da->openDataSet( 'select * from test' ));
+			$da = DataAdapter::create($conStr);
+
+			$da->executeBatch(file_get_contents(__ROOT__.'/app/tests/fixtures/mysql_test.sql'));
+			$this->SqlDataAdapterTest($da);
+			$da->executeBatch(file_get_contents(__ROOT__.'/app/tests/fixtures/mysql_test.sql'));
+			$this->DBCachingTest($da);
+			$da->executeBatch(file_get_contents(__ROOT__.'/app/tests/fixtures/mysql_test.sql'));
+			$this->DeleteEmptyTest($da);
 		}
 
 		function testMySqli_DataAdapter() {
-			$da = DataAdapter::create(str_replace('mysqli', 'mysqli', \Rum::config()->dsn));
-			$this->SqlDataAdapterTest( $da->openDataSet( 'select * from test' ));
+			$conStr = \Rum::app()->config->appsettings["mysqli_conn_str"];
+
+			$da = DataAdapter::create($conStr);
+
+			$da->executeBatch(file_get_contents(__ROOT__.'/app/tests/fixtures/mysql_test.sql'));
+			$this->SqlDataAdapterTest($da);
+			$da->executeBatch(file_get_contents(__ROOT__.'/app/tests/fixtures/mysql_test.sql'));
+			$this->DBCachingTest($da);
+			$da->executeBatch(file_get_contents(__ROOT__.'/app/tests/fixtures/mysql_test.sql'));
+			$this->DeleteEmptyTest($da);
 		}
 
-		function testMSSql_DataAdapter() {
-			$this->SqlDataAdapterTest( $this->MSSQL->openDataSet( 'select * from test' ));
-		}
+		function xtestPDOMSSQL_DataAdapter() {
+			$conStr = \Rum::app()->config->appsettings["pdo_mssql_conn_str"];
 
-		function testDBCaching_MySQLDataAdapter() {
 			$this->expectError();
-			$this->DBCachingTest(DataAdapter::create(str_replace('mysqli', 'mysql', \Rum::config()->dsn).';cache_enabled=true;cache_expires=300;'));
+			$da = DataAdapter::create($conStr, \Rum::app()->config->appsettings["pdo_mssql_username"], \Rum::app()->config->appsettings["pdo_mssql_password"]);
+
+			$da->executeBatch(file_get_contents(__ROOT__.'/app/tests/fixtures/mssql_test.sql'));
+			$this->SqlDataAdapterTest($da);
+			//$da->executeBatch(file_get_contents(__ROOT__.'/app/tests/fixtures/mssql_test.sql'));
+			//$this->DBCachingTest($da);
+			//$da->executeBatch(file_get_contents(__ROOT__.'/app/tests/fixtures/mssql_test.sql'));
+			//$this->DeleteEmptyTest($da);
 		}
 
-		function testDBCaching_MySQLiDataAdapter() {
-			$this->DBCachingTest(DataAdapter::create(str_replace('mysqli', 'mysqli', \Rum::config()->dsn).';cache_enabled=true;cache_expires=300;'));
-		}
+		function testPDOMySQL_DataAdapter() {
+			$conStr = \Rum::app()->config->appsettings["pdo_mysql_conn_str"];
 
-		function xtestDBCaching_MSSQLDataAdapter() {
-			$this->MSSQL->enableCaching(300);
-			$this->DBCachingTest($this->MSSQL);
+			$this->expectError();
+			$da = DataAdapter::create($conStr, \Rum::app()->config->appsettings["pdo_mysql_username"], \Rum::app()->config->appsettings["pdo_mysql_password"]);
+
+			$da->executeBatch(file_get_contents(__ROOT__.'/app/tests/fixtures/mysql_test.sql'));
+			$this->SqlDataAdapterTest($da);
+			$da->executeBatch(file_get_contents(__ROOT__.'/app/tests/fixtures/mysql_test.sql'));
+			//$this->DBCachingTest($da);
+			$da->executeBatch(file_get_contents(__ROOT__.'/app/tests/fixtures/mysql_test.sql'));
+			$this->DeleteEmptyTest($da);
 		}
 
 		function testDir_DataAdapter() {
@@ -243,39 +254,9 @@
 			$this->assertTrue( $conn->close() );
 		}
 
-		private function DBCachingTest($da) {
-			\Rum::app()->cache->flush();
+		private function SqlDataAdapterTest(\System\DB\DataAdapter &$da ) {
 
-			$ds_nocache = $da->openDataSet( 'select * from test' );
-			$da->disableCaching();
-			$ds = $da->openDataSet( 'select * from test' );
-			$this->assertEqual($ds->count, 0);
-
-			$ds_nocache["test_double"] = 4.4;
-			$ds_nocache["test_float"] = .555;
-			$ds_nocache->insert();
-
-			$ds = $da->openDataSet( 'select * from test' );
-			$this->assertEqual($ds->count, 1);
-			$da->enableCaching(3);
-			$this->assertEqual($ds->count, 1);
-			$ds = $da->openDataSet( 'select * from test' );
-			$this->assertEqual($ds->count, 1);
-
-			$ds_nocache["test_id"] = null;
-			$ds_nocache["test_double"] = 6.6;
-			$ds_nocache["test_float"] = .777;
-			$ds_nocache->insert();
-
-			$ds = $da->openDataSet( 'select * from test' );
-			$this->assertEqual($ds->count, 1);
-
-			$da->disableCaching();
-			$ds = $da->openDataSet( 'select * from test' );
-			$this->assertEqual($ds->count, 2);
-		}
-
-		protected function SqlDataAdapterTest( DataSet &$ds ) {
+			$ds = $da->queryBuilder()->select('*')->from('test')->openDataSet();
 
 			$this->assertEqual( $ds->fields[0]                , 'test_id' );
 			$this->assertEqual( $ds->fieldMeta[0]->name       , 'test_id' );
@@ -285,7 +266,6 @@
 			$this->assertEqual( $ds->fieldMeta[0]->integer    , TRUE );
 			$this->assertEqual( $ds->fieldMeta[0]->real       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[0]->boolean    , FALSE );
-			$this->assertEqual( $ds->fieldMeta[0]->year       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[0]->date       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[0]->time       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[0]->datetime   , FALSE );
@@ -293,9 +273,10 @@
 			$this->assertEqual( $ds->fieldMeta[0]->notNull    , TRUE );
 			$this->assertEqual( $ds->fieldMeta[0]->primaryKey , TRUE );
 			$this->assertEqual( $ds->fieldMeta[0]->unique     , FALSE );
-			$this->assertEqual( $ds->fieldMeta[0]->binary     , FALSE );
-			$this->assertEqual( $ds->fieldMeta[0]->autoIncrement , TRUE );
-
+			$this->assertEqual( $ds->fieldMeta[0]->blob       , FALSE );
+			if($da instanceof \System\DB\PDO\PDODataAdapter) {} else {
+				$this->assertEqual( $ds->fieldMeta[0]->autoIncrement , TRUE );
+			}
 			$this->assertEqual( $ds->fields[1]                , 'test_double' );
 			$this->assertEqual( $ds->fieldMeta[1]->name       , 'test_double' );
 			$this->assertEqual( $ds->fieldMeta[1]->table      , 'test' );
@@ -304,7 +285,6 @@
 			$this->assertEqual( $ds->fieldMeta[1]->integer    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[1]->real       , TRUE );
 			$this->assertEqual( $ds->fieldMeta[1]->boolean    , FALSE );
-			$this->assertEqual( $ds->fieldMeta[1]->year       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[1]->date       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[1]->time       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[1]->datetime   , FALSE );
@@ -312,7 +292,7 @@
 			$this->assertEqual( $ds->fieldMeta[1]->notNull    , TRUE );
 			$this->assertEqual( $ds->fieldMeta[1]->primaryKey , FALSE );
 			$this->assertEqual( $ds->fieldMeta[1]->unique     , FALSE );
-			$this->assertEqual( $ds->fieldMeta[1]->binary     , FALSE );
+			$this->assertEqual( $ds->fieldMeta[1]->blob       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[1]->autoIncrement , FALSE );
 
 			$this->assertEqual( $ds->fields[2]                , 'test_float' );
@@ -322,17 +302,16 @@
 			$this->assertEqual( $ds->fieldMeta[2]->integer    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[2]->real       , TRUE );
 			$this->assertEqual( $ds->fieldMeta[2]->boolean    , FALSE );
-			$this->assertEqual( $ds->fieldMeta[2]->year       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[2]->date       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[2]->time       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[2]->datetime   , FALSE );
 			$this->assertEqual( $ds->fieldMeta[2]->numeric    , TRUE );
 			$this->assertEqual( $ds->fieldMeta[2]->notNull    , TRUE );
 			$this->assertEqual( $ds->fieldMeta[2]->primaryKey , FALSE );
-			if($ds->dataAdapter instanceof \System\DB\MSSQL\MSSQLDataAdapter) {} else {
+			if($ds->dataAdapter instanceof \System\DB\MSSQL\MSSQLDataAdapter || $ds->dataAdapter instanceof \System\DB\PDO\PDODataAdapter) {} else {
 				$this->assertEqual( $ds->fieldMeta[2]->unique     , TRUE );
 			}
-			$this->assertEqual( $ds->fieldMeta[2]->binary     , FALSE );
+			$this->assertEqual( $ds->fieldMeta[2]->blob     , FALSE );
 			$this->assertEqual( $ds->fieldMeta[2]->autoIncrement , FALSE );
 
 			$this->assertEqual( $ds->fields[3]                , 'test_decimal' );
@@ -343,7 +322,6 @@
 			$this->assertEqual( $ds->fieldMeta[3]->integer    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[3]->real       , TRUE );
 			$this->assertEqual( $ds->fieldMeta[3]->boolean    , FALSE );
-			$this->assertEqual( $ds->fieldMeta[3]->year       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[3]->date       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[3]->time       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[3]->datetime   , FALSE );
@@ -351,7 +329,7 @@
 			$this->assertEqual( $ds->fieldMeta[3]->notNull    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[3]->primaryKey , FALSE );
 			$this->assertEqual( $ds->fieldMeta[3]->unique     , FALSE );
-			$this->assertEqual( $ds->fieldMeta[3]->binary     , FALSE );
+			$this->assertEqual( $ds->fieldMeta[3]->blob       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[3]->autoIncrement , FALSE );
 
 			$this->assertEqual( $ds->fields[4]                , 'test_bool' );
@@ -361,7 +339,6 @@
 			$this->assertEqual( $ds->fieldMeta[4]->integer    , TRUE );
 			$this->assertEqual( $ds->fieldMeta[4]->real       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[4]->boolean    , TRUE );
-			$this->assertEqual( $ds->fieldMeta[4]->year       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[4]->date       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[4]->time       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[4]->datetime   , FALSE );
@@ -369,7 +346,7 @@
 			$this->assertEqual( $ds->fieldMeta[4]->notNull    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[4]->primaryKey , FALSE );
 			$this->assertEqual( $ds->fieldMeta[4]->unique     , FALSE );
-			$this->assertEqual( $ds->fieldMeta[4]->binary     , FALSE );
+			$this->assertEqual( $ds->fieldMeta[4]->blob       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[4]->autoIncrement , FALSE );
 
 			$this->assertEqual( $ds->fields[5]                , 'test_char' );
@@ -383,7 +360,6 @@
 			$this->assertEqual( $ds->fieldMeta[5]->integer    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[5]->real       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[5]->boolean    , FALSE );
-			$this->assertEqual( $ds->fieldMeta[5]->year       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[5]->date       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[5]->time       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[5]->datetime   , FALSE );
@@ -391,7 +367,7 @@
 			$this->assertEqual( $ds->fieldMeta[5]->notNull    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[5]->primaryKey , FALSE );
 			$this->assertEqual( $ds->fieldMeta[5]->unique     , FALSE );
-			$this->assertEqual( $ds->fieldMeta[5]->binary     , FALSE );
+			$this->assertEqual( $ds->fieldMeta[5]->blob       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[5]->autoIncrement , FALSE );
 
 			$this->assertEqual( $ds->fields[6]                , 'test_varchar' );
@@ -402,7 +378,6 @@
 			$this->assertEqual( $ds->fieldMeta[6]->integer    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[6]->real       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[6]->boolean    , FALSE );
-			$this->assertEqual( $ds->fieldMeta[6]->year       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[6]->date       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[6]->time       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[6]->datetime   , FALSE );
@@ -410,7 +385,7 @@
 			$this->assertEqual( $ds->fieldMeta[6]->notNull    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[6]->primaryKey , FALSE );
 			$this->assertEqual( $ds->fieldMeta[6]->unique     , FALSE );
-			$this->assertEqual( $ds->fieldMeta[6]->binary     , FALSE );
+			$this->assertEqual( $ds->fieldMeta[6]->blob       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[6]->autoIncrement , FALSE );
 
 			$this->assertEqual( $ds->fields[7]                , 'test_blob' );
@@ -420,14 +395,13 @@
 			$this->assertEqual( $ds->fieldMeta[7]->integer    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[7]->real       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[7]->boolean    , FALSE );
-			$this->assertEqual( $ds->fieldMeta[7]->year       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[7]->date       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[7]->time       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[7]->datetime   , FALSE );
 			$this->assertEqual( $ds->fieldMeta[7]->notNull    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[7]->primaryKey , FALSE );
 			$this->assertEqual( $ds->fieldMeta[7]->unique     , FALSE );
-			$this->assertEqual( $ds->fieldMeta[7]->binary     , TRUE );
+			$this->assertEqual( $ds->fieldMeta[7]->blob       , TRUE );
 			$this->assertEqual( $ds->fieldMeta[7]->autoIncrement , FALSE );
 
 			$this->assertEqual( $ds->fields[8]                , 'test_varbinary' );
@@ -437,7 +411,6 @@
 			$this->assertEqual( $ds->fieldMeta[8]->integer    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[8]->real       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[8]->boolean    , FALSE );
-			$this->assertEqual( $ds->fieldMeta[8]->year       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[8]->date       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[8]->time       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[8]->datetime   , FALSE );
@@ -445,7 +418,12 @@
 			$this->assertEqual( $ds->fieldMeta[8]->notNull    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[8]->primaryKey , FALSE );
 			$this->assertEqual( $ds->fieldMeta[8]->unique     , FALSE );
-			$this->assertEqual( $ds->fieldMeta[8]->binary     , TRUE );
+			if($ds->dataAdapter instanceof \System\DB\PDO\PDODataAdapter) {
+				$this->assertEqual( $ds->fieldMeta[8]->blob       , FALSE );
+			}
+			else {
+				$this->assertEqual( $ds->fieldMeta[8]->blob       , TRUE );
+			}
 			$this->assertEqual( $ds->fieldMeta[8]->autoIncrement , FALSE );
 
 			$this->assertEqual( $ds->fields[9]                , 'test_date' );
@@ -455,8 +433,6 @@
 			$this->assertEqual( $ds->fieldMeta[9]->integer    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[9]->real       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[9]->boolean    , FALSE );
-			$this->assertEqual( $ds->fieldMeta[9]->year       , FALSE );
-			$this->assertEqual( $ds->fieldMeta[9]->date       , TRUE );
 			$this->assertEqual( $ds->fieldMeta[9]->time       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[9]->datetime   , FALSE );
 			$this->assertEqual( $ds->fieldMeta[9]->numeric    , FALSE );
@@ -472,7 +448,6 @@
 			$this->assertEqual( $ds->fieldMeta[10]->integer    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[10]->real       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[10]->boolean    , FALSE );
-			$this->assertEqual( $ds->fieldMeta[10]->year       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[10]->date       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[10]->time       , TRUE );
 			$this->assertEqual( $ds->fieldMeta[10]->datetime   , FALSE );
@@ -489,7 +464,6 @@
 			$this->assertEqual( $ds->fieldMeta[11]->integer    , FALSE );
 			$this->assertEqual( $ds->fieldMeta[11]->real       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[11]->boolean    , FALSE );
-			$this->assertEqual( $ds->fieldMeta[11]->year       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[11]->date       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[11]->time       , FALSE );
 			$this->assertEqual( $ds->fieldMeta[11]->datetime   , TRUE );
@@ -650,6 +624,45 @@
 			$this->assertEqual( $ds->getMax( 'test_double' ), 6.4 );
 			$this->assertEqual( $ds->getMin( 'test_double' ), 4.4 );
 			$this->assertEqual( $ds->getAvg( 'test_double' ), 5.4 );
+		}
+
+		private function DBCachingTest($da) {
+			\Rum::app()->cache->flush();
+
+			$ds_nocache = $da->openDataSet( 'select * from test' );
+			$da->disableCaching();
+			$ds = $da->openDataSet( 'select * from test' );
+			$this->assertEqual($ds->count, 0);
+
+			$ds_nocache["test_double"] = 4.4;
+			$ds_nocache["test_float"] = .555;
+			$ds_nocache->insert();
+
+			$ds = $da->openDataSet( 'select * from test' );
+			$this->assertEqual($ds->count, 1);
+			$da->enableCaching(3);
+			$this->assertEqual($ds->count, 1);
+			$ds = $da->openDataSet( 'select * from test' );
+			$this->assertEqual($ds->count, 1);
+
+			$ds_nocache["test_id"] = null;
+			$ds_nocache["test_double"] = 6.6;
+			$ds_nocache["test_float"] = .777;
+			$ds_nocache->insert();
+
+			$ds = $da->openDataSet( 'select * from test' );
+			$this->assertEqual($ds->count, 1);
+
+			$da->disableCaching();
+			$ds = $da->openDataSet( 'select * from test' );
+			$this->assertEqual($ds->count, 2);
+		}
+
+		private function DeleteEmptyTest(\System\DB\DataAdapter &$da) {
+			$ds = $da->openDataSet('select * from test');
+
+			$this->expectException();
+			$ds->delete();
 		}
 	}
 ?>

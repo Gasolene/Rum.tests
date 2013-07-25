@@ -12,7 +12,7 @@
 		test_char char(2),
 		test_varchar varchar(80),
 		test_blob BINARY,
-		test_varbinary VARBINARY,
+		test_varbinary VARBINARY(255),
 
 		test_date date,
 		test_time time,
