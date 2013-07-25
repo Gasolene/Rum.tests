@@ -255,7 +255,7 @@
 		}
 
 		private function SqlDataAdapterTest(\System\DB\DataAdapter &$da ) {
-
+strt();
 			$ds = $da->queryBuilder()->select('*')->from('test')->openDataSet();
 
 			$this->assertEqual( $ds->fields[0]                , 'test_id' );
@@ -624,6 +624,7 @@
 			$this->assertEqual( $ds->getMax( 'test_double' ), 6.4 );
 			$this->assertEqual( $ds->getMin( 'test_double' ), 4.4 );
 			$this->assertEqual( $ds->getAvg( 'test_double' ), 5.4 );
+stp();
 		}
 
 		private function DBCachingTest($da) {
