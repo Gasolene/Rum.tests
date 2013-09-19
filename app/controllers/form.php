@@ -26,7 +26,7 @@
 			$this->page->form->add( new WebControls\Fieldset( 'fieldset2' ));
 			$this->page->form->fieldset1->legend = 'Sample Fieldset';
 
-			$this->form->add( \MyApp\UI::TextBox( 'Name', '' ));
+			$this->form->add( new \System\Web\WebControls\Text( 'Name', '' ));
 			$this->form->autoFocus = true;
 			$this->fieldset1->add( new \CommonControls\AddressInput( 'Address' ));
 			$this->fieldset1->add( new \SuggestBox\SuggestBox( 'City', 'Calgary' ));
@@ -42,9 +42,9 @@
 			$this->fieldset2->add( new WebControls\CheckBoxList( 'favoritecolors' ));
 			$this->fieldset2->add( new \ColorPicker\ColorPicker( 'Favorite Color' ));
 			$this->fieldset2->add( new WebControls\CheckBox( 'Active', true ));
-			$this->fieldset2->add( \MyApp\UI::DateTimeSelector( 'DateTime' ));
-			$this->fieldset2->add( \MyApp\UI::DateSelector( 'Date' ));
-			$this->fieldset2->add( \MyApp\UI::TimeSelector( 'Time' ));
+			$this->fieldset2->add( new \System\Web\WebControls\DateTime( 'DateTime' ));
+			$this->fieldset2->add( new \System\Web\WebControls\Date( 'Date' ));
+			$this->fieldset2->add( new \System\Web\WebControls\Time( 'Time' ));
 			$this->fieldset2->add( new \System\Web\WebControls\TextArea( 'Comment' ));
 			$this->fieldset2->add( new \CommonControls\PercentInput( 'percent' ));
 			$this->fieldset2->add( new \CommonControls\MoneyInput( 'price' ));

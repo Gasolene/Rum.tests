@@ -5,7 +5,7 @@
 	 * @copyright		Copyright (c) 2011
 	 */
     namespace CommonControls;
-	use \System\Web\WebControls\TextBox;
+	use \System\Web\WebControls\Text;
 
 
 	/**
@@ -19,7 +19,7 @@
 	 * @package			PHPRum
 	 * @subpackage		CommonControls
 	 */
-	class ZipCodeInput extends TextBox
+	class ZipCodeInput extends Text
 	{
 		/**
 		 * Max Length of control when defined

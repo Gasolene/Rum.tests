@@ -45,9 +45,10 @@
 			$this->table2->dataSource = $db->openDataSet();
 		}
 
-		function onCompanyPost( &$col, $args ) {
+		function onCompanyAjaxPost( &$col, $args ) {
+//			dmp('ww');
 			\Rum::flash($args["Company"] . " Clicked");
-			\Rum::forward();
+//			\Rum::forward();
 		}
 	}
 ?>

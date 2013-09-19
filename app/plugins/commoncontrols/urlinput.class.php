@@ -5,7 +5,7 @@
 	 * @copyright		Copyright (c) 2011
 	 */
     namespace CommonControls;
-	use \System\Web\WebControls\TextBox;
+	use \System\Web\WebControls\Text;
 
 	/**
      * handles button element creation and event handling
@@ -18,7 +18,7 @@
 	 * @package			PHPRum
 	 * @subpackage		CommonControls
 	 */
-	class URLInput extends TextBox
+	class URLInput extends Text
 	{
 		/**
 		 * called when control is loaded

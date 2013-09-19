@@ -5,7 +5,7 @@
 	 * @copyright		Copyright (c) 2011
 	 */
     namespace CommonControls;
-	use \System\Web\WebControls\TextBox;
+	use \System\Web\WebControls\Text;
 
 	/**
      * handles email input element creation and event handling
@@ -18,10 +18,10 @@
 	 * @package			PHPRum
 	 * @subpackage		CommonControls
 	 */
-	class BuildingNumberInput extends TextBox
+	class BuildingNumberInput extends Text
 	{
 		/**
-		 * Specifies the size of a textbox
+		 * Specifies the size of a Text
 		 * @access public
 		 */
 		protected $size							= 8;

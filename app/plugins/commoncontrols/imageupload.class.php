@@ -5,7 +5,7 @@
 	 * @copyright		Copyright (c) 2011
 	 */
     namespace CommonControls;
-	use \System\Web\WebControls\FileBrowser;
+	use \System\Web\WebControls\File;
 
 	/**
      * handles element creation and event handling
@@ -18,7 +18,7 @@
 	 * @package			PHPRum
 	 * @subpackage		CommonControls
 	 */
-	class ImageUpload extends FileBrowser
+	class ImageUpload extends File
 	{
 		/**
 		 * called when control is loaded

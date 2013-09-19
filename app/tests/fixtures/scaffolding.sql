@@ -44,7 +44,7 @@ CREATE TABLE `customer` (
   `customer_name` varchar(50) NOT NULL,
   `customer_phone` varchar(20) NOT NULL,
   `customer_birthday` date NOT NULL,
-  `customer_details` mediumtext NOT NULL,
+  `customer_details` mediumtext NULL,
   `customer_active` tinyint(1) NOT NULL,
   PRIMARY KEY  (`customer_id`),
   KEY `category_id` (`category_id`)
@@ -55,8 +55,8 @@ CREATE TABLE `customer` (
 -- 
 
 INSERT INTO `customer` (`customer_id`, `category_id`, `customer_name`, `customer_phone`, `customer_birthday`, `customer_details`, `customer_active`) VALUES 
-(8, 1, 'Active', 'Active', '2008-10-09', 'Test', 1),
-(9, 2, 'Disabled', 'Disabled ', '2008-10-31', 'Blah Blah', 0);
+(3, 1, 'John Doe', '403-301-3883', '2008-10-09', 'Test', 1),
+(2, 2, 'Jane Doe', '', '2008-10-31', 'Blah Blah', 0);
 
 -- --------------------------------------------------------
 
@@ -97,9 +97,9 @@ CREATE TABLE `group_customer` (
 -- 
 
 INSERT INTO `group_customer` (`group_id`, `customer_id`) VALUES 
-(1, 8),
-(1, 9),
-(2, 8);
+(1, 2),
+(1, 3),
+(2, 2);
 
 -- --------------------------------------------------------
 
@@ -135,11 +135,3 @@ CREATE TABLE `customerlog` (
   PRIMARY KEY  (`customerlog_id`),
   KEY `customer_id` (`customer_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `customerlog`
---
-
-INSERT INTO `customerlog` (`customerlog_id`, `customer_id`) VALUES
-(1, 9),
-(2, 9);

@@ -11,7 +11,7 @@
 		function onPageInit(&$page, $args )
 		{
 			\Rum::db()->openDataSet("select * from test");
-
+\Rum::trace("Postback trace call");
 			// create Form
 			$this->page->add(\MyApp\UI::Form('form'));
 			$this->page->form->add(\MyApp\UI::TextBox('name'));
@@ -80,6 +80,7 @@
 		// Submit Ajax
 		function onSubmitAjaxClick($sender, $args)
 		{
+\Rum::trace("Async trace call");
 			if($this->form->validate($err))
 			{
 				$this->page->loadAjaxJScriptBuffer("alert('form submitted');");
@@ -93,6 +94,7 @@
 		// Cancel Ajax
 		function onCancelAjaxClick($sender, $args)
 		{
+\Rum::trace("Async trace call");
 			\Rum::forward();
 		}
 

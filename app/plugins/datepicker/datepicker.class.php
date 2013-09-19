@@ -5,7 +5,7 @@
 	 * @copyright		Copyright (c) 2011
 	 */
     namespace DatePicker;
-	use \System\Web\WebControls\TextBox;
+	use \System\Web\WebControls\Text;
 
 
 	/**
@@ -19,7 +19,7 @@
 	 * @package			PHPRum
 	 * @subpackage		DatePicker
 	 */
-	class DatePicker extends TextBox
+	class DatePicker extends Text
 	{
 		/**
 		 * Specifies whether to show image(s) or not (optional)

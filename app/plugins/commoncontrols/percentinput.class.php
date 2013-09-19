@@ -5,7 +5,7 @@
 	 * @copyright		Copyright (c) 2011
 	 */
     namespace CommonControls;
-	use \System\Web\WebControls\TextBox;
+	use \System\Web\WebControls\Text;
 
 	/**
      * handles button element creation and event handling
@@ -18,7 +18,7 @@
 	 * @package			PHPRum
 	 * @subpackage		CommonControls
 	 */
-	class PercentInput extends TextBox
+	class PercentInput extends Text
 	{
 		/**
 		 * Max Length of control when defined
@@ -27,7 +27,7 @@
 		protected $maxLength					= 8;
 
 		/**
-		 * Specifies the size of a textbox
+		 * Specifies the size of a Text
 		 * @access public
 		 */
 		protected $size							= 8;

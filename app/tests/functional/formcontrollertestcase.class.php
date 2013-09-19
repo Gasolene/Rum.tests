@@ -26,11 +26,6 @@
 			$this->assertResponse( ' my_class1' );
 			$this->assertResponse( ' my_class2' );
 			$this->assertResponse( 'Enter your name here tooltip' );
-			$this->assertResponse( 'textbox datepicker' );
-			$this->assertResponse( 'textbox colorpicker' );
-			$this->assertResponse( 'dateselector_month' );
-			$this->assertResponse( 'timeselector_hour' );
-			$this->assertResponse( 'dateselector_month' );
 			$this->assertResponse( '<label class=" required" for="page_form_fieldset1_City">' );
 		}
 
@@ -138,14 +133,8 @@
 								, 'page_form_fieldset2_Birthday' => '1980-12-30'
 								, 'page_form_fieldset2_Favorite_Color' => '#ff0000'
 								, 'page_form_fieldset2_Active' => '1'
-								, 'page_form_fieldset2_Date__month' => '01'
-								, 'page_form_fieldset2_Date__day' => '01'
-								, 'page_form_fieldset2_Date__year' => '2007'
-								, 'page_form_fieldset2_Date__null' => '1'
-								, 'page_form_fieldset2_Time__hour' => '3'
-								, 'page_form_fieldset2_Time__minute' => '15'
-								, 'page_form_fieldset2_Time__meridiem' => 'pm'
-								, 'page_form_fieldset2_Time__null' => '1'
+								, 'page_form_fieldset2_Date' => '2007-01-01'
+								, 'page_form_fieldset2_Time' => '15:15:00'
 								, 'page_form_fieldset2_title' => 'Mr'
 								, 'page_form_fieldset2_title__post' => '1'
 								));
@@ -159,6 +148,15 @@
 			// test CSV
 			$db = DataAdapter::create( 'driver=text;format=TabDelimited;source=' . \Rum::config()->root . '/app/data/Address Book.csv' );
 			$rs = $db->openDataSet( 'Address Book.csv' );
+
+
+$rs = $db->prepare( 'select * from users where user=@user', array('user'=>'Bob'))->openDataSet();
+
+$statement = $db->prepare( 'select * from users where user=@user' );
+$statement->bind('user', 'Tom');
+$statement->openDataSet();
+$statement->getQuery();
+
 
 			$this->assertEqual( $rs->count, 1 );
 			$this->assertEqual( $rs->row['Name'], 'George' );
@@ -192,14 +190,8 @@
 								, 'fieldset2_Favorite_Color' => '#ff0000'
 								, 'fieldset2_Active' => '1'
 								, 'fieldset2_title' => 'Mr'
-								, 'page_form_fieldset2_Date__month' => '01'
-								, 'page_form_fieldset2_Date__day' => '01'
-								, 'page_form_fieldset2_Date__year' => '2007'
-								, 'page_form_fieldset2_Date__null' => '1'
-								, 'page_form_fieldset2_Time__hour' => '3'
-								, 'page_form_fieldset2_Time__minute' => '15'
-								, 'page_form_fieldset2_Time__meridiem' => 'pm'
-								, 'page_form_fieldset2_Time__null' => '1'
+								, 'page_form_fieldset2_Date' => '2007-01-01'
+								, 'page_form_fieldset2_Time' => '15:15:00'
 								));
 
 			// test messages

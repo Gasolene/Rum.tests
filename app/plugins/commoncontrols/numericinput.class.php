@@ -5,7 +5,7 @@
 	 * @copyright		Copyright (c) 2011
 	 */
     namespace CommonControls;
-	use \System\Web\WebControls\TextBox;
+	use \System\Web\WebControls\Text;
 
 
 	/**
@@ -19,10 +19,10 @@
 	 * @package			PHPRum
 	 * @subpackage		CommonControls
 	 */
-	class NumericInput extends TextBox
+	class NumericInput extends Text
 	{
 		/**
-		 * Specifies the size of a textbox
+		 * Specifies the size of a Text
 		 * @access public
 		 */
 		protected $size							= 8;

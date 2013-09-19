@@ -5,7 +5,7 @@
 	 * @copyright		Copyright (c) 2011
 	 */
     namespace ColorPicker;
-	use \System\Web\WebControls\TextBox;
+	use \System\Web\WebControls\Text;
 
 
 	/**
@@ -19,7 +19,7 @@
 	 * @package			PHPRum
 	 * @subpackage		ColorPicker
 	 */
-	class ColorPicker extends TextBox
+	class ColorPicker extends Text
 	{
 		/**
 		 * called when control is loaded

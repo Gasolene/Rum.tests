@@ -5,7 +5,7 @@
 	 * @copyright		Copyright (c) 2011
 	 */
     namespace CommonControls;
-	use \System\Web\WebControls\TextBox;
+	use \System\Web\WebControls\Text;
 
 
 	/**
@@ -19,7 +19,7 @@
 	 * @package			PHPRum
 	 * @subpackage		CommonControls
 	 */
-	class PostalCodeInput extends TextBox
+	class PostalCodeInput extends Text
 	{
 		/**
 		 * Max Length of control when defined
@@ -28,7 +28,7 @@
 		protected $maxLength				= 7;
 
 		/**
-		 * Specifies the size of a textbox, default is 30
+		 * Specifies the size of a Text, default is 30
 		 * @var int
 		 */
 		protected $size						= 7;

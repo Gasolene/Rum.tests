@@ -30,7 +30,7 @@
 	 * @subpackage		SuggestBox
 	 * @since			3.1.2
 	 */
-	class SuggestBox extends \System\Web\WebControls\TextBox
+	class SuggestBox extends \System\Web\WebControls\Text
 	{
 		/**
 		 * Specifies whether textbox will accept multiple lines of text
