@@ -10,6 +10,7 @@
 			$this->table->showFooter = true;
 			$this->table->pageSize=4;
 			$this->page->table->columns->ajaxPostBack = true;
+			$this->page->table->enableViewState = false;
 			$this->page->form->table->columns->add(new \System\Web\WebControls\GridViewButton('customer_id', 'Delete', 'action', 'Are you sure you want to delete?', '', '', 'action', 'Add'));
 		}
 

@@ -55,8 +55,18 @@ CREATE TABLE `customer` (
 -- 
 
 INSERT INTO `customer` (`customer_id`, `category_id`, `customer_name`, `customer_phone`, `customer_birthday`, `customer_details`, `customer_active`) VALUES 
-(3, 1, 'John Doe', '403-301-3883', '2008-10-09', 'Test', 1),
-(2, 2, 'Jane Doe', '', '2008-10-31', 'Blah Blah', 0);
+(1, 1, 'John Doe', '403-301-3883', '2008-10-09', 'Test', 1),
+(2, 2, 'Jane Doe', '403-301-3883', '2008-10-31', 'Blah Blah', 0),
+(3, 1, 'Bill', '', '2010-10-09', 'Blah Blah', 1),
+(4, 1, 'Greg', '', '2008-10-31', 'Blah Blah', 1),
+(5, 1, 'Janet', '', '2013-10-09', 'Blah Blah', 1),
+(6, 1, 'Zoe', '', '2008-10-31', 'Blah Blah', 1),
+(7, 1, 'Cliff', '', '2008-09-07', 'Blah Blah', 1),
+(8, 2, 'Alana', '', '2008-10-31', 'Blah Blah', 1),
+(9, 1, 'James', '', '2008-10-09', 'Blah Blah', 1),
+(10, 1, 'Geff', '', '2008-10-31', 'Blah Blah', 1),
+(11, 1, 'Sarah', '', '2007-11-09', 'Blah Blah', 1),
+(12, 1, 'George', '', '2008-10-30', 'Blah Blah', 1);
 
 -- --------------------------------------------------------
 
