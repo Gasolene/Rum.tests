@@ -44,6 +44,7 @@
 		\System\Web\FormModelBase::registerFieldType('pdf', '\CommonControls\PDFView');
 		\System\Web\FormModelBase::registerFieldType('percent', '\CommonControls\PercentInput');
 		\System\Web\FormModelBase::registerFieldType('phonenumber', '\CommonControls\PhoneNumberInput');
+		\System\Web\FormModelBase::registerFieldType('price', '\CommonControls\MoneyInput');
 		\System\Web\FormModelBase::registerFieldType('money', '\CommonControls\MoneyInput');
 		\System\Web\FormModelBase::registerFieldType('title', '\CommonControls\TitleSelector');
 		\System\Web\FormModelBase::registerFieldType('url', '\CommonControls\URLInput');
