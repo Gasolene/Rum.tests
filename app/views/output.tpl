@@ -1,0 +1,1 @@
+<?php $this->my_output->render() ?>
