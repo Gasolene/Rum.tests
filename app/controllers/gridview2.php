@@ -11,6 +11,8 @@
 			$this->table->pageSize=4;
 			$this->page->table->columns->ajaxPostBack = true;
 			$this->page->table->enableViewState = false;
+			$this->page->table->columns[0]->valueField = 'category_id';
+			$this->page->table->columns[0]->textField = 'category';
 			$this->page->form->table->columns->add(new \System\Web\WebControls\GridViewButton('customer_id', 'Delete', 'action', 'Are you sure you want to delete?', '', '', 'action', 'Add'));
 		}
 

@@ -342,7 +342,7 @@
 				{
 					if( !$this->items->contains( $this->dataSource[$this->textField] ))
 					{
-						$this->items->add( $this->dataSource[$this->textField] );
+						$this->items->add( (string) $this->dataSource[$this->textField] );
 					}
 					$this->dataSource->next();
 				}

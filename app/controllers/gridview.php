@@ -27,7 +27,7 @@
 			$col->ondblclick = 'alert(\'Column click event triggered: %Last Activity%\');';
 			$this->table2->addColumn( $col );
 			// $this->table2->addActionColumn( \Rum::uri( 'form' ), 'Contact', 'contact' );
-			$this->table2->addColumn( new WebControls\GridViewButton( 'Company', 'Edit' ));
+			$this->table2->addColumn( new WebControls\GridViewButton( 'Company', 'Edit', 'Edit' ));
 			$this->table2->showFooter = true;
 
 			$this->table1->selected = array('Amazon.com');
@@ -45,7 +45,7 @@
 			$this->table2->dataSource = $db->openDataSet();
 		}
 
-		function onCompanyAjaxPost( &$col, $args ) {
+		function onEditAjaxPost( &$col, $args ) {
 //			dmp('ww');
 			\Rum::flash($args["Company"] . " Clicked");
 //			\Rum::forward();
