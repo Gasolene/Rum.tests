@@ -20,7 +20,7 @@
 			$this->assertResponse( '<tr class="row" id="page_table1__0" onclick' );
 
 			$this->assertResponse( '<td class="company_class"><a href="mailto:moore@adobe.com">Adobe</a></td>' );
-			$this->assertResponse( 'onclick="Rum.evalAsync(\'/test/public/\',\''.\Rum::config()->requestParameter.'=gridview&amp;Company=Microsoft\',\'POST\');"' );
+			$this->assertResponse( 'onclick="Rum.evalAsync(\'/test/public/\',\''.\Rum::config()->requestParameter.'=gridview&amp;Company=Microsoft' );
 			$this->assertResponse( '<td class="company_class">CompanyFooter</td>' );
 
 			$this->assertResponse( '<th class="company_class">' );
@@ -51,7 +51,7 @@
 		function testAjaxURL() {
 			$this->expectError();
 			$this->expectError();
-			$this->post( array( 'page' => 'gridview', 'Company' => 'Apple', 'async' => '1' ));
+			$this->post( array( 'page' => 'gridview', 'Company' => 'Apple', 'Edit'=>'Edit', 'async' => '1' ));
 
 			$this->assertMessage( 'Apple Clicked' );
 		}
@@ -92,8 +92,10 @@
 			$this->expectError();
 			$this->expectError();
 			$this->get(array('page_table1_Company__filter_value'=>'a'));
-			$this->assertResponse( 'showing 1 to 10 of 10' );
-			$this->assertResponse( 'name="page_table1_Company__filter_value" value="a" title="Enter a string and press enter" class="stringfilter" onchange="Rum.evalAsync(\'/test/public\',\'page_table1_Company__filter_value=a&amp;path=gridview&amp;page_table1_Company__filter_value=\'+this.value);" onkeypress="if(event.keyCode==13){event.returnValue=false;Rum.evalAsync(\'/test/public\',\'page_table1_Company__filter_value=a&amp;path=gridview&amp;page_table1_Company__filter_value=\'+this.value);};"');
+			$this->assertResponse( 'showing 1 to 10 of 10' ); 
+			$this->assertResponse( 'name="page_table1_Company__filter_value" value="a" title="Enter a string and press enter" class="stringfilter"');
+			$this->assertResponse( 'onchange="Rum.evalAsync(\'/test/public\',\'page_table1_Company__filter_value=a&amp;path=gridview&amp;page_table1_Company__filter_value=\'+this.value);"');
+			$this->assertResponse( 'onkeypress="if(event.keyCode==13){event.returnValue=false;Rum.evalAsync(\'/test/public\',\'page_table1_Company__filter_value=a&amp;path=gridview&amp;page_table1_Company__filter_value=\'+this.value);return false;}');
 
 			$this->expectError();
 			$this->expectError();

@@ -21,7 +21,7 @@
 			$this->assertResponse( 'onkeypress="if(event.keyCode==13){event.returnValue=false;blur();Rum.sendSync(\'/test/public\',\'path=gridview2&amp;page_form_table_customer_name__filter_value=\'+this.value);return false;}"' );
 
 			// test selected
-			$this->assertResponse( '<option value="2" selected="selected">2</option>' );
+			$this->assertResponse( '<option value="2" selected="selected">Disabled</option>' );
 		}
 
 		function testGetURL() {
