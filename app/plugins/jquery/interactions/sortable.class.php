@@ -111,7 +111,6 @@
 		{
 			$dom = new \System\XML\DomObject( 'ul' );
 			$dom->setAttribute( 'id', $this->getHTMLControlId() );
-			$dom->appendAttribute( 'class', ' sortable' );
 
 			for( $i = 0, $count = $this->items->count; $i < $count; $i++ )
 			{

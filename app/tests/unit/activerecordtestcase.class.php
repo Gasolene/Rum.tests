@@ -83,12 +83,12 @@
 			$this->assertEqual( Student::first(array('student_name'=>'sally'))->student_name, 'sally');
 			$this->assertEqual( Student::first()->student_name, 'george' );
 
-			// test ::findAll
-			$this->assertEqual( Student::findAll(array('student_name'=>'george'))->count, 1);
-			$this->assertEqual( Student::findAll()->itemAt(0)->student_name, 'george' );
-			$this->assertEqual( Student::findAll()->itemAt(2)->student_name, 'sally' );
-			$this->assertEqual( Student::findAll()->count, 4 );
-			$this->assertEqual( count(Student::findAll()->itemAt(0)->fields), 2 );
+			// test ::all
+			$this->assertEqual( Student::all(array('student_name'=>'george'))->count, 1);
+			$this->assertEqual( Student::all()->rows[0]["student_name"], 'george' );
+			$this->assertEqual( Student::all()->rows[2]["student_name"], 'sally' );
+			$this->assertEqual( Student::all()->count, 4 );
+			$this->assertEqual( count(Student::all()->fields), 3 );
 		}
 
 		function testCreateMethod() {
@@ -528,7 +528,7 @@
 			$query->select( '*' );
 			$query->from( $table );
 
-			return \System\AppServlet::getInstance()->dataAdapter->openDataSet( $query->getQuery() )->rows;
+			return \System\AppServlet::getInstance()->dataAdapter->openDataSet( $query->getPreparedStatement() )->rows;
 		}
 	}
 ?>

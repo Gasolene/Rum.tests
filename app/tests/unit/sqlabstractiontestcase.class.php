@@ -109,28 +109,28 @@
 			$query->insertInto( 'School', array( 'School_name' ));
 			$query->values( array( 'Northwind' ));
 
-			$da->execute( $query->getQuery() );
+			$da->execute( $query->getPreparedStatement() );
 
 			$query = $da->queryBuilder();
 
 			$query->insertInto( 'classrooms', array( 'name', 'School_id' ));
 			$query->values( array( 'Science', '1' ));
 
-			$da->execute( $query->getQuery() );
+			$da->execute( $query->getPreparedStatement() );
 
 			$query = $da->queryBuilder();
 
 			$query->insertInto( 'student', array( 'student_name', 'student_age' ));
 			$query->values( array( 'Bobby', '16' ));
 
-			$da->execute( $query->getQuery() );
+			$da->execute( $query->getPreparedStatement() );
 
 			$query = $da->queryBuilder();
 
 			$query->insertInto( 'student_classrooms', array( 'student_id', 'classroom_id' ));
 			$query->values( array( '1', '1' ));
 
-			$da->execute( $query->getQuery() );
+			$da->execute( $query->getPreparedStatement() );
 
 			$this->assertEqual( $this->getRows( $da, 'School' )->rows[0]['School_name'], 'Northwind' );
 			$this->assertEqual( $this->getRows( $da, 'classrooms' )->rows[0]['name'], 'Science' );
@@ -148,7 +148,7 @@
 			$query->leftJoin( 'classrooms', 'classroom_id', 'student_classrooms', 'classroom_id' );
 			$query->innerJoin( 'School', 'School_id', 'classrooms', 'School_id' );
 
-			$row = $da->openDataSet( $query->getQuery() )->row;
+			$row = $da->openDataSet( $query->getPreparedStatement() )->row;
 			$this->assertEqual( $row['School_name'], 'Northwind' );
 			$this->assertEqual( $row['name'], 'Science' );
 			$this->assertEqual( $row['student_name'], 'Bobby' );
@@ -160,7 +160,7 @@
 			$query->set( 'student', 'student_name', 'Sally' );
 			$query->where( 'student', 'student_name', '=', 'Alan' );
 
-			$da->execute( $query->getQuery() );
+			$da->execute( $query->getPreparedStatement() );
 
 			$this->assertEqual( $this->getRows( $da, 'student' )->rows[0]['student_name'], 'Bobby' );
 
@@ -170,7 +170,7 @@
 			$query->set( 'student', 'student_name', 'Sally' );
 			$query->where( 'student', 'student_name', '=', 'Bobby' );
 
-			$da->execute( $query->getQuery() );
+			$da->execute( $query->getPreparedStatement() );
 
 			$this->assertEqual( $this->getRows( $da, 'student' )->rows[0]['student_name'], 'Sally' );
 
@@ -180,7 +180,7 @@
 			$query->from( 'student' );
 			$query->where( 'student', 'student_name', '=', 'Bobby' );
 
-			$da->execute( $query->getQuery() );
+			$da->execute( $query->getPreparedStatement() );
 
 			$this->assertEqual( $this->getRows( $da, 'student' )->count, 1 );
 
@@ -190,7 +190,7 @@
 			$query->from( 'student' );
 			$query->where( 'student', 'student_name', '=', 'Sally' );
 
-			$da->execute( $query->getQuery() );
+			$da->execute( $query->getPreparedStatement() );
 
 			$this->assertEqual( $this->getRows( $da, 'student' )->count, 0 );
 		}

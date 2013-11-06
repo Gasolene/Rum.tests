@@ -20,7 +20,7 @@
 			$this->table->dataSource = \MyApp\Models\Customer::all();
 		}
 
-		public function onTablePost($sender, $args)
+		public function onPagePost($sender, $args)
 		{
 			if($this->isAjaxPostBack)
 			{

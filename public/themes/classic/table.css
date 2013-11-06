@@ -27,7 +27,7 @@ table td {
   background: none;
 }
 
-.gridview thead td {
+table thead td {
   white-space: nowrap;
 }
 
@@ -48,14 +48,14 @@ table tbody tr.row_alt td {
   border-bottom: 1px solid #E7E7E7;
 }
 
-.gridview th {
+table th {
 }
 
-.gridview td {
+table td {
 	/* white-space: nowrap; */
 }
 
-.gridview .move_up {
+table .move_up {
 	display: block;
 	text-indent: -3000px;
 	background-image: url(images/up.png);
@@ -64,7 +64,7 @@ table tbody tr.row_alt td {
 	padding-left: 15px;
 }
 
-.gridview .move_down {
+table .move_down {
 	display: block;
 	text-indent: -3000px;
 	background-image: url(images/down.png);
@@ -73,37 +73,37 @@ table tbody tr.row_alt td {
 	padding-left: 15px;
 }
 
-.gridview .sort_desc {
+table .sort_desc {
 	background-image: url(images/down.png);
 	background-position:left;
 	background-repeat:no-repeat;
 	padding-left: 15px;
 }
 
-.gridview .sort_asc {
+table .sort_asc {
 	background-image: url(images/up.png);
 	background-position:left;
 	background-repeat:no-repeat;
 	padding-left: 15px;
 }
 
-.gridview .listcolumn {
+table .listcolumn {
 	width: 20px;
 }
 
-.gridview .movecolumn {
+table .movecolumn {
 	width: 20px;
 }
 
-.gridview .filter input {
+table .filter input {
 	width:100%;
 }
 
-.gridview a.disabled {
+table a.disabled {
 	display: none;
 }
 
-.gridview .pages {
+table .pages {
 	float: right;
 }
 

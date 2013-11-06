@@ -67,7 +67,7 @@ form fieldset fieldset label {
   text-align: left;
 }
 
-form .textbox.watermark {
+form input[type="text"].watermark {
 	color: #AAAAAA;
 }
 

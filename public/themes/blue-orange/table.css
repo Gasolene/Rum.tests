@@ -1,18 +1,18 @@
 <!--/*--><![CDATA[/*><!--*/
 
-.gridview {
+table {
   width: 100%;
   border:1px solid #a6a6a6;
   margin-bottom: 20px;
   border-collapse: collapse;
 }
 
-.gridview thead a {
+table thead a {
   text-decoration: none;
   color: #7F7F7F;
 }
 
-.gridview caption {
+table caption {
   text-align: left;
   color: #ffffff;
   font-size: 24px;
@@ -25,8 +25,8 @@
   background-color: #47affd;
 }
 
-.gridview thead th,
-.gridview thead td {
+table thead th,
+table thead td {
   line-height: 18px;
   font-size: 13px;
   text-align: left;
@@ -36,8 +36,8 @@
   white-space: nowrap;
 }
 
-.gridview th,
-.gridview td {
+table th,
+table td {
   padding-top: 10px;
   padding-bottom: 10px;
   padding: 0px;
@@ -47,22 +47,22 @@
   padding-right: 10px;
 }
 
-.gridview tbody tr:hover {
+table tbody tr:hover {
   background-color: #DDDDDD;
   cursor: pointer;
 }
 
-.gridview .row_alt {
+table .row_alt {
   background-color: #F7F7F7;
 }
 
-.gridview tfoot {
+table tfoot {
   /*background-image: url(images/dot.png);*/
   background-position: 0 80px;
   background-repeat: repeat-x;
 }
 
-.gridview tfoot tr td {
+table tfoot tr td {
   height: 40px;
   line-height: 40px;
   padding-left: 10px;
@@ -70,41 +70,41 @@
   white-space: nowrap;
 }
 
-.gridview tfoot .footer td {
+table tfoot .footer td {
   /* border-bottom:1px dotted #aac9ce; */
 }
 
-.gridview .pagenumbers {
+table .pagenumbers {
 }
 
-.gridview tfoot .pages {
+table tfoot .pages {
 }
 
-.gridview tfoot .page {
+table tfoot .page {
 }
 
-.gridview tfoot a.disabled {
+table tfoot a.disabled {
   display: inline;
   color: #999999;
 }
 
-.gridview tfoot .prev {
+table tfoot .prev {
 }
 
-.gridview tfoot .next {
+table tfoot .next {
 }
 
-.gridview .summary {
+table .summary {
 }
 
-.gridview th {
+table th {
 }
 
-.gridview td {
+table td {
 	/* white-space: nowrap; */
 }
 
-.gridview .move_up {
+table .move_up {
 	display: block;
 	text-indent: -3000px;
 	background-image: url(images/up.png);
@@ -113,7 +113,7 @@
 	padding-left: 15px;
 }
 
-.gridview .move_down {
+table .move_down {
 	display: block;
 	text-indent: -3000px;
 	background-image: url(images/down.png);
@@ -122,52 +122,52 @@
 	padding-left: 15px;
 }
 
-.gridview .sort_desc {
+table .sort_desc {
 	background-image: url(images/down.png);
 	background-position:left;
 	background-repeat:no-repeat;
 	padding-left: 15px;
 }
 
-.gridview .sort_asc {
+table .sort_asc {
 	background-image: url(images/up.png);
 	background-position:left;
 	background-repeat:no-repeat;
 	padding-left: 15px;
 }
 
-.gridview .listcolumn {
+table .listcolumn {
 	width: 20px;
 }
 
-.gridview .movecolumn {
+table .movecolumn {
 	width: 20px;
 }
 
-.gridview .filter input {
+table .filter input {
 	width:100%;
 }
 
-.gridview a.disabled {
+table a.disabled {
 	display: none;
 }
 
-.gridview .pages {
+table .pages {
 	float: right;
 }
 
 /* Controls */
 
-.gridview .checkbox {
+table input[type="checkbox"] {
   width: 40px;
 }
 
-.gridview .edit,
-.gridview .delete {
+table .edit,
+table .delete {
   width: 1px;
 }
 
-.gridview thead .button {
+table thead input[type="button"],input[type="submit"] {
   background: none;
   border: none;
   background-image: url(images/funnel.png);
@@ -178,7 +178,7 @@
   height: 32px;
 }
 
-.gridview thead .textbox {
+table thead input[type="text"] {
   margin: 0px;
   width: 50%;
   height: 20px;

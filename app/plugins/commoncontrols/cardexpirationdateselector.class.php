@@ -104,9 +104,6 @@
 			$select_month->setAttribute( 'id', $this->getHTMLControlId() . '__month' );
 			$select_year->setAttribute( 'id', $this->getHTMLControlId() . '__year' );
 
-			$select_month->setAttribute( 'tabIndex', $this->tabIndex++ );
-			$select_year->setAttribute( 'tabIndex', $this->tabIndex );
-
 			// set onchange attribute
 			if( $this->autoPostBack )
 			{

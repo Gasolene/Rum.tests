@@ -1,53 +1,69 @@
 <?php
     namespace MyApp\Controllers;
-    use System\UI\WebControls;
-    use System\Data\DataAdapter;
-	use System\UI\Ajax\JScriptBuffer;
-    use MyApp\App;
-	use MyApp\UI;
+
+    use \System\Db\DataAdapter;
+	use \System\Web\WebControls;
+	use \System\Validators;
 
 	class Ajax extends \MyApp\ApplicationController
 	{
-		function onPageInit(&$page, $args )
+		protected $company;
+
+		function onPageInit($sender, $args)
 		{
-			\Rum::db()->openDataSet("select * from test");
-\Rum::trace("Postback trace call");
+			\Rum::trace("Postback trace call");
+
 			// create Form
-			$this->page->add(\MyApp\UI::Form('form'));
-			$this->page->form->add(\MyApp\UI::TextBox('name'));
+			$this->page->enableViewState = false;
+			$this->page->add(new WebControls\Form('form'));
+			$this->page->form->legend = 'Ajax Form';
+			$this->page->form->add(new WebControls\Text('name'));
 			$this->page->form->add(new \CommonControls\EmailAddressInput('email'));
 			$this->page->form->add(new \CommonControls\CountrySelector('country'));
-			$this->page->form->add(\MyApp\UI::DropDownList('city'));
-			$this->page->form->add(\MyApp\UI::Button('submit'));
-			$this->page->form->add(\MyApp\UI::Button('cancel'));
-			$this->page->form->add(\MyApp\UI::Button('show_only_active'));
-			$this->page->form->add(\MyApp\UI::Button('postback'));
-			$this->page->form->name->addValidator(\MyApp\UI::RequiredValidator('You must enter" a \'name!'));
-			$this->page->form->email->addValidator(\MyApp\UI::RequiredValidator('You must enter an email address!'));
+			$this->page->form->add(new WebControls\DropDownList('city'));
+			$this->page->form->add(new WebControls\Button('submit'));
+			$this->page->form->add(new WebControls\Button('cancel'));
+			$this->page->form->add(new WebControls\Button('show_only_active'));
+			$this->page->form->add(new WebControls\Button('postback'));
+			$this->page->form->name->addValidator(new Validators\RequiredValidator('You must enter" a \'name!'));
+			$this->page->form->email->addValidator(new Validators\RequiredValidator('You must enter an email address!'));
 			$this->page->form->ajaxValidation = true;
-			$this->page->form->name->watermark = 'Enter your username here...';
-			$this->page->form->email->watermark = 'Enter your email address here...';
+			$this->page->form->name->placeholder = 'Enter your username here...';
 			$this->page->form->name->tooltip = 'Enter your username here...';
 			$this->page->form->email->tooltip = 'Enter your email address here...';
+			$this->page->form->email->placeholder = 'Enter your email address here...';
+			$this->page->form->country->tooltip = 'Select your country here...';
+			$this->page->form->city->tooltip = 'Select your city here...';
 
 			// create GridView
 			$this->page->add( new WebControls\GridView( 'table' ));
-			$this->table->columns->add(new \System\UI\WebControls\GridViewTextBox('Company', 'Company', 'NewCompany', 'Company'));
-			$this->table->columns->add(new \System\UI\WebControls\GridViewCheckBox('Active', 'Company', '', 'Active'));
-			$this->table->columns->add(new \System\UI\WebControls\GridViewDropDownMenu('Objective', 'Company', array('Marketing relationship'=>'Marketing relationship'
+			$this->page->table->caption = 'Ajax GridView';
+			$this->table->columns->add(new WebControls\GridViewText('Company', 'Company', 'Company', 'Company'));
+			$this->table->columns->add(new WebControls\GridViewCheckBox('Active', 'Company', 'Active', 'Active'));
+			$this->table->columns->add(new WebControls\GridViewDropDownList('Objective', 'Company', array('Marketing relationship'=>'Marketing relationship'
 				, 'Distribution agreement'=>'Distribution agreement'
 				, 'Product integration'=>'Product integration'
 				, 'Co-sell situation'=>'Co-sell situation'
 				), '', 'Objective'));
-			$this->table->columns->add(new \System\UI\WebControls\GridViewButton('Company', 'Edit', 'CompanyName'));
+			$this->table->columns->add(new WebControls\GridViewButton('Company', 'Edit', 'ActionButton', '', '', '', '', 'Add'));
+			$this->table->columns[0]->setFilter(new WebControls\GridViewStringFilter());
+			$this->table->columns[1]->setFilter(new WebControls\GridViewBooleanFilter());
+			$this->table->columns[2]->setFilter(new WebControls\GridViewListFilter(DataAdapter::create( 'driver=text;format=CommaDelimited;source=' . \Rum::config()->root . '/app/data/Partner Tracking List.csv' )->openDataSet()->rows));
+			$this->table->columns[2]->filter->textField = 'Objective';
+			$this->table->columns[2]->filter->valueField = 'Objective';
+			$this->table->showFilters = true;
+			$this->table->showFooter = true;
+			$this->table->ajaxPostBack = true;
+			$this->table->columns->ajaxPostBack = true;
+			$this->table->pageSize = 5;
 		}
 
-		function onPageLoad( &$page, $args )
+		function onPageLoad($sender, $args)
 		{
-			$this->table->dataSource = DataAdapter::create( 'driver=text;format=CommaDelimited;source=' . \Rum::config()->root . '/app/data/Partner Tracking List.csv' )->openDataSet();
+			$this->table->bind(DataAdapter::create( 'driver=text;format=CommaDelimited;source=' . \Rum::config()->root . '/app/data/Partner Tracking List.csv' )->openDataSet());
 		}
 
-		function onPageRequest( &$page, $args )
+		function onPageRequest($sender, $args)
 		{
 			$ds = DataAdapter::create( 'driver=text;format=TabDelimited;source=' . \Rum::config()->root . '/app/data/Cities.csv' )->openDataSet();
 			$ds->filter('Country', '=', $this->country->value);
@@ -55,6 +71,10 @@
 			$this->city->textField = 'Name of city';
 			$this->city->valueField = 'code';
 			$this->city->dataSource = $ds;
+
+			if($this->isAjaxPostBack) {
+				\Rum::flash("AJAX post back detected");
+			}
 		}
 
 		function onCityChange($sender, $args)
@@ -63,7 +83,7 @@
 		}
 
 		// Form Ajax
-		function xonFormAjaxPost($sender, $args)
+		function onFormAjaxPost($sender, $args)
 		{
 		}
 
@@ -80,7 +100,8 @@
 		// Submit Ajax
 		function onSubmitAjaxClick($sender, $args)
 		{
-\Rum::trace("Async trace call");
+			\Rum::trace("Async trace call");
+
 			if($this->form->validate($err))
 			{
 				$this->page->loadAjaxJScriptBuffer("alert('form submitted');");
@@ -94,14 +115,8 @@
 		// Cancel Ajax
 		function onCancelAjaxClick($sender, $args)
 		{
-\Rum::trace("Async trace call");
+			\Rum::trace("Async trace call");
 			\Rum::forward();
-		}
-
-		// TextBox Ajax
-		function onNameAjaxChange($sender, $args)
-		{
-			//$this->page->loadAjaxJScriptBuffer("alert('name changed to {$this->name->value}');");
 		}
 
 		// ListBox Ajax
@@ -118,34 +133,17 @@
 		}
 
 		// GridView Ajax
-		function onNewCompanyAjaxPost($sender, $args)
+		function onCompanyAjaxPost($sender, $args)
 		{
-			$this->page->loadAjaxJScriptBuffer("alert('Company: {$args["Company"]} name changed to: {$args["NewCompany"]}');");
+			\Rum::flash("{$args["Company"]} posted");
+			$this->company = $args["Company"];
 		}
 
-		function onActiveAjaxPost($sender, $args)
+		// GridView Ajax
+		function onActionButtonAjaxPost($sender, $args)
 		{
-			$this->page->loadAjaxJScriptBuffer("alert('Company: {$args["Company"]} active changed to: ".($args["Active"]=='true'?'true':'false')."');");
-		}
-
-		function onObjectiveAjaxPost($sender, $args)
-		{
-			$this->page->loadAjaxJScriptBuffer("alert('Company: {$args["Company"]} objective changed to: {$args["Objective"]}');");
-		}
-
-		function onCompanyNameAjaxPost($sender, $args)
-		{
-			$this->page->loadAjaxJScriptBuffer("alert('Company: {$args["CompanyName"]} clicked');");
-		}
-
-		function onCompanyNamePost($sender, $args)
-		{
-			\Rum::flash("{$args["CompanyName"]} clicked");
-		}
-
-		function onEditClick($sender, $args)
-		{
-			\Rum::flash("deprecated:{$args["Company"]} clicked");
+			\Rum::flash("{$this->company} @set");
+			\Rum::flash("{$args["Company"]} @clicked");
 		}
 	}
 ?>

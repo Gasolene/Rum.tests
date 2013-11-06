@@ -167,20 +167,20 @@ textarea {
   width: 240px;
 }
 
-input.checkbox,
+inputinput[type="checkbox"],
 .dateselector_null,
-input.checkbox:hover,
+inputinput[type="checkbox"]:hover,
 .dateselector_null:hover {
   border: none;
 }
 
-input.textbox {
+inputinput[type="text"] {
   height: 20px;
   width: 160px;
   line-height: 20px !important;
 }
 
-input.checkbox {
+inputinput[type="checkbox"] {
   padding-top: 2px;
 }
 
@@ -218,7 +218,7 @@ input.watermark {
   right: 5px;
 }
 
-.buttons .button {
+.buttons input[type="button"],input[type="submit"] {
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -240,7 +240,7 @@ input.watermark {
 	cursor: pointer;
 }
 
-.buttons .button:hover {
+.buttons input[type="button"],input[type="submit"]:hover {
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -251,7 +251,7 @@ input.watermark {
 	background-color:#dfdfdf;
 }
 
-.buttons .button:active {
+.buttons input[type="button"],input[type="submit"]:active {
 	position:relative;
 	top:1px;
 }

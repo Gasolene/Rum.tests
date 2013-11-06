@@ -244,7 +244,6 @@
 
 			$input->setAttribute( 'id',           $this->getHTMLControlId() );
 			$input->setAttribute( 'name',         $this->getHTMLControlId() );
-			$input->setAttribute( 'tabIndex',     $this->tabIndex );
 			$input->appendAttribute( 'class',     ' textbox suggestbox' );
 
 			$input->appendAttribute( 'onkeydown',    'if(document.getElementById(\''.$this->getHTMLControlId().'__lookup\').style.display==\'block\')if(event.keyCode==13){return false;}' );

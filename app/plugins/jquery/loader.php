@@ -20,7 +20,7 @@
 	 */
 	function registerFieldAndRuleTypes()
 	{
-		//\System\Web\FormModelBase::registerFieldType('date', '\\JQuery\\Widgets\\DatePicker');
+		\System\Web\FormModelBase::registerFieldType('date', '\\JQuery\\DatePicker');
 	}
 
 	/**

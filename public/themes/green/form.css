@@ -92,11 +92,8 @@ fieldset textarea {
   background-size:100% 100%;
 }
 
-input.textbox {
+inputinput[type="text"] {
   height: 27px;
-}
-
-select.listbox {
 }
 
 textarea {
@@ -148,7 +145,7 @@ form .buttons {
   margin-left: 160px;
 }
 
-.button {
+input[type="button"],input[type="submit"] {
   margin-right: 10px;
   width: 94px;
   height: 36px;

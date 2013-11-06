@@ -34,7 +34,7 @@
 		}
 
 		function testSorting() {
-			$this->get( array( 'page' => 'gridview2', 'page_form_table__page' => '2', 'page_form_table__sort_by' => 'customer_name', 'page_form_table__sort_order' => 'desc' ));
+			$this->get( array( 'path' => 'gridview2', 'page_form_table__page' => '2', 'page_form_table__sort_by' => 'customer_name', 'page_form_table__sort_order' => 'desc' ));
 
 			$this->assertResponse( 'Jane Doe' );
 			$this->assertResponse( 'James' );
@@ -43,7 +43,7 @@
 			$this->assertResponse( '>showing 5 to 8 of 12</span>' );
 			$this->assertResponse( 'gridview2/?page_form_table__page=2&amp;page_form_table__sort_by=customer_name&amp;page_form_table__sort_order=asc' );
 
-			$this->get( array( 'page' => 'gridview2', 'page_form_table__page' => '3', 'page_form_table__sort_by' => 'customer_phone', 'page_form_table__sort_order' => 'asc' ));
+			$this->get( array( 'path' => 'gridview2', 'page_form_table__page' => '3', 'page_form_table__sort_by' => 'customer_phone', 'page_form_table__sort_order' => 'asc' ));
 			$this->assertResponse( 'Greg' );
 			$this->assertResponse( 'Janet' );
 			$this->assertResponse( 'Jane Doe' );
@@ -54,7 +54,7 @@
 		}
 
 		function testPaging() {
-			$this->get( array( 'page' => 'gridview2', 'page_form_table__page' => '2', 'page_form_table__sort_by' => 'customer_name', 'page_form_table__sort_order' => 'desc' ));
+			$this->get( array( 'path' => 'gridview2', 'page_form_table__page' => '2', 'page_form_table__sort_by' => 'customer_name', 'page_form_table__sort_order' => 'desc' ));
 			$this->assertResponse( '>showing 5 to 8 of 12</span>' );
 			$this->assertResponse( 'prev' );
 		}
@@ -63,7 +63,7 @@
 			$this->get(array('page_form_table_customer_name__filter_value'=>'g'));
 			$this->assertResponse( 'name="page_form_table_customer_name__filter_value" value="g"' );
 			$this->assertResponse( 'Rum.sendSync(\'/test/public\',\'page_form_table_customer_name__filter_value=g&amp;path=gridview2&amp;page_form_table_customer_name__filter_value=\'+this.value' );
-			$this->assertResponse( 'gridview2/?page_form_table__page=1&amp;page_form_table__sort_by=customer_name&amp;page_form_table__sort_order=asc&amp;page_form_table_customer_name__filter_value=g' );
+			$this->assertResponse( 'page_form_table_customer_name__filter_value=g&amp;path=gridview2&amp;page_form_table_category_id__filter_value=\'+this.value' );
 			$this->assertResponse( 'Greg' );
 			$this->assertResponse( 'Geff' );
 			$this->assertResponse( 'George' );
@@ -73,7 +73,8 @@
 			$this->get(array('page_form_table_customer_name__filter_value'=>'eG'));
 			$this->assertResponse( 'showing 1 to 1 of 1' );
 			$this->assertResponse( 'Greg' );
-			$this->assertResponse( 'gridview2/?page_form_table__page=1&amp;page_form_table__sort_by=customer_name&amp;page_form_table__sort_order=asc&amp;page_form_table_customer_name__filter_value=eG' );
+			$this->assertResponse( 'page_form_table_customer_name__filter_value=eG&amp;path=gridview2&amp;page_form_table_category_id__filter_value=\'+this.value' );
+			$this->assertResponse( 'gridview2/?page_form_table_customer_name__filter_value=eG&amp;page_form_table__page=1&amp;page_form_table__sort_by=category_id&amp;page_form_table__sort_order=asc' );
 
 			$this->get(array('page_form_table_customer_name__filter_value'=>'a','page_form_table_customer_phone__filter_value'=>'403'));
 			$this->assertResponse( 'Jane Doe' );
@@ -81,6 +82,23 @@
 
 			$this->get();
 			$this->assertResponse( 'showing 1 to 4 of 12' );
+		}
+
+		function testState() {
+			$this->get(array(
+				'page_form_table__page'=>'1',
+				'page_form_table__sort_by'=>'customer_phone',
+				'page_form_table__sort_order'=>'desc',
+				'page_form_table_customer_phone__filter_value'=>'403',
+				'page_form_table_customer_active__filter_value'=>'false',
+				));
+
+			$this->assertResponse( 'showing 1 to 1 of 1' );
+			$this->assertResponse( 'Jane Doe' );
+			$this->assertResponse( 'gridview2/?page_form_table__page=1&amp;page_form_table__sort_by=category_id&amp;page_form_table__sort_order=asc&amp;page_form_table_customer_phone__filter_value=403&amp;page_form_table_customer_active__filter_value=false' );
+			$this->assertResponse( 'gridview2/?page_form_table__page=1&amp;page_form_table__sort_by=customer_name&amp;page_form_table__sort_order=asc&amp;page_form_table_customer_phone__filter_value=403&amp;page_form_table_customer_active__filter_value=false' );
+			$this->assertResponse( 'page_form_table__page=1&amp;page_form_table__sort_by=customer_phone&amp;page_form_table__sort_order=desc&amp;page_form_table_customer_phone__filter_value=403&amp;page_form_table_customer_active__filter_value=false&amp;path=gridview2&amp;page_form_table_customer_name__filter_value=\'+this.value' );
+			$this->assertResponse( 'page_form_table__page=1&amp;page_form_table__sort_by=customer_phone&amp;page_form_table__sort_order=desc&amp;page_form_table_customer_phone__filter_value=403&amp;page_form_table_customer_active__filter_value=false&amp;path=gridview2&amp;page_form_table_customer_phone__filter_value=\'+this.value' );
 		}
 
 		function testAjaxURL() {

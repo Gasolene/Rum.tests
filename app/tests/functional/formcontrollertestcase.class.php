@@ -22,23 +22,8 @@
 			$this->assertTrue( $html->body->div->getChildByAttribute('id', 'body')->div->form->getChildrenByName( 'input' )->count <= 3 );
 			$this->assertEqual( $html->body->div->getChildByAttribute('id', 'body')->div->form->getChildByAttribute( 'name', \Rum::config()->requestParameter )->getAttribute( 'type' ), 'hidden' );
 			//$this->assertResponse( \Rum::config()->themes );
-			$this->assertResponse( '<legend><span>Sample Fieldset</span></legend>' );
-			$this->assertResponse( ' my_class1' );
-			$this->assertResponse( ' my_class2' );
+			$this->assertResponse( '<legend><span>Sample Form</span></legend>' );
 			$this->assertResponse( 'Enter your name here tooltip' );
-			$this->assertResponse( '<label class=" required" for="page_form_fieldset1_City">' );
-		}
-
-		function testFocus() {
-			$this->get();
-
-			// default focus to first control
-			$this->assertResponse( 'Rum.id(\'page_form_fieldset1_Address\').focus();' );
-
-			$this->post( array( 'page_form__gotcha'=>'', 'page_form__submit' => '1', 'page_form_Name'=>'foo', 'page_form_fieldset1_Address'=>'12345', 'page_form_fieldset1_City' => 'Boston', 'page_form_fieldset1_Province__post' => '1', 'page_form_fieldset1_Province' => 'CA', 'page_form_fieldset2_title' => 'Mr', 'page_form_fieldset1_E-Mail_Address' => 'a@b.c', 'page_form_fieldset2_Birthday' => '2005-09-32' ));
-
-			// default focus to first invalid control
-			$this->assertResponse( 'Rum.id(\'page_form_fieldset1_E-Mail_Address\').focus();' );
 		}
 
 		function testDefaults() {
@@ -49,15 +34,15 @@
 		}
 
 		function testCheckBoxList() {
-			$this->post( array( 'page_form__gotcha'=>'', 'page_form__gotcha'=>'', 'page_form__submit' => '1', 'page_form_fieldset2_favoritecolors__post' => '1', 'page_form_fieldset2_title' => 'Mr', 'page_form_fieldset2_favoritecolors' => array( '#00FF00', '#0000FF' )));
+			$this->post( array( 'page_form__gotcha'=>'', 'page_form__gotcha'=>'', 'page_form__submit' => '1', 'page_form_favoritecolors__post' => '1', 'page_form_title' => 'Mr', 'page_form_favoritecolors' => array( '#00FF00', '#0000FF' )));
 
-			$this->assertResponse( 'value="#FF0000" title="" type="checkbox" name="page_form_fieldset2_favoritecolors[]"' );
-			$this->assertResponse( 'value="#00FF00" title="" type="checkbox" name="page_form_fieldset2_favoritecolors[]" checked="checked"' );
-			$this->assertResponse( 'value="#0000FF" title="" type="checkbox" name="page_form_fieldset2_favoritecolors[]"' );
+			$this->assertResponse( 'value="#FF0000" title="" type="checkbox" name="page_form_favoritecolors[]"' );
+			$this->assertResponse( 'value="#00FF00" title="" type="checkbox" name="page_form_favoritecolors[]" checked="checked"' );
+			$this->assertResponse( 'value="#0000FF" title="" type="checkbox" name="page_form_favoritecolors[]"' );
 		}
 
 		function testState() {
-			$this->post( array( 'page_form'.\System\Web\WebControls\GOTCHAFIELD=>'', 'page_form__submit' => '1', 'page_form_fieldset1_Address' => '555' ));
+			$this->post( array( 'page_form'.\System\Web\WebControls\GOTCHAFIELD=>'', 'page_form__submit' => '1', 'page_form_Address' => '555' ));
 
 			$this->get();
 
@@ -65,11 +50,11 @@
 		}
 
 		function testValidation() {
-			$this->post( array( 'page_form__gotcha'=>'', 'page_form__submit' => '1', 'page_form_fieldset1_E-Mail_Address' => 'a@b.c', 'page_form_fieldset2_Birthday' => '2005-09-32', 'page_form_fieldset1_Province__post' => '1', 'page_form_fieldset1_Province' => '' ));
+			$this->post( array( 'page_form__gotcha'=>'', 'page_form__submit' => '1', 'page_form_E-Mail_Address' => 'a@b.c', 'page_form_Birthday' => '2005-09-32', 'page_form_Province__post' => '1', 'page_form_Province' => '' ));
 
 			// test validate()
 			$err = '';
-			$this->assertFalse( $this->controller->form->fieldset1->getControl( 'E-Mail_Address' )->validate($err) );
+			$this->assertFalse( $this->controller->form->getControl( 'E-Mail_Address' )->validate($err) );
 			$this->assertEqual(trim($err), 'E-Mail Address must be a valid email address');
 
 			// test messages
@@ -91,7 +76,7 @@
 			$this->assertFalse( $this->controller->City->changed );
 			$this->assertFalse( $this->controller->save->changed );
 
-			$this->post( array( 'page_form__gotcha'=>'', 'page_form__submit' => '1', 'page_form_Name' => 'foo-bar', 'page_form_fieldset1_Address' => '1234', 'page_form_save' => 'Save' ));
+			$this->post( array( 'page_form__gotcha'=>'', 'page_form__submit' => '1', 'page_form_Name' => 'foo-bar', 'page_form_Address' => '1234', 'page_form_save' => 'Save' ));
 
 			$this->assertMessage( 'Name was changed' );
 
@@ -104,7 +89,7 @@
 			$this->assertFalse( $this->controller->City->changed );
 			$this->assertTrue ( $this->controller->save->changed );
 
-			$this->post( array( 'page_form__gotcha'=>'', 'page_form__submit' => '1', 'page_form_Name' => 'xfoo-bar', 'page_form_fieldset1_Address' => '1234', 'page_form_save' => 'Save' ));
+			$this->post( array( 'page_form__gotcha'=>'', 'page_form__submit' => '1', 'page_form_Name' => 'xfoo-bar', 'page_form_Address' => '1234', 'page_form_save' => 'Save' ));
 
 			$this->assertTrue ( $this->controller->Name->submitted );
 			$this->assertTrue ( $this->controller->Address->submitted );
@@ -119,24 +104,24 @@
 		function testInsert() {
 			$this->post( array( 'page_form__submit' => '1'
                                 , 'page_form__gotcha' => ''
-								, 'page_form_fieldset1_Province__post' => '1'
-								, 'page_form_fieldset1_Country__post' => '1'
+								, 'page_form_Province__post' => '1'
+								, 'page_form_Country__post' => '1'
 								, 'page_form_Name' => 'George'
-								, 'page_form_fieldset1_Address' => '7 45ST SW'
-								, 'page_form_fieldset1_City' => 'Springfield'
-								, 'page_form_fieldset1_Province' => 'AB'
-								, 'page_form_fieldset1_Country' => 'CA'
-								, 'page_form_fieldset1_Postal_Zip_Code' => 'T4t-4t4'
-								, 'page_form_fieldset1_Sex' => 'm'
-								, 'page_form_fieldset1_Phone_No' => '4035551234'
-								, 'page_form_fieldset1_E-Mail_Address' => 'a@b.ca'
-								, 'page_form_fieldset2_Birthday' => '1980-12-30'
-								, 'page_form_fieldset2_Favorite_Color' => '#ff0000'
-								, 'page_form_fieldset2_Active' => '1'
-								, 'page_form_fieldset2_Date' => '2007-01-01'
-								, 'page_form_fieldset2_Time' => '15:15:00'
-								, 'page_form_fieldset2_title' => 'Mr'
-								, 'page_form_fieldset2_title__post' => '1'
+								, 'page_form_Address' => '7 45ST SW'
+								, 'page_form_City' => 'Springfield'
+								, 'page_form_Province' => 'AB'
+								, 'page_form_Country' => 'CA'
+								, 'page_form_Postal_Zip_Code' => 'T4t-4t4'
+								, 'page_form_Sex' => 'm'
+								, 'page_form_Phone_No' => '4035551234'
+								, 'page_form_E-Mail_Address' => 'a@b.ca'
+								, 'page_form_Birthday' => '1980-12-30'
+								, 'page_form_Favorite_Color' => '#ff0000'
+								, 'page_form_Active' => '1'
+								, 'page_form_Date' => '2007-01-01'
+								, 'page_form_Time' => '15:15:00'
+								, 'page_form_title' => 'Mr'
+								, 'page_form_title__post' => '1'
 								));
 
 			// test messages
@@ -155,7 +140,7 @@ $rs = $db->prepare( 'select * from users where user=@user', array('user'=>'Bob')
 $statement = $db->prepare( 'select * from users where user=@user' );
 $statement->bind('user', 'Tom');
 $statement->openDataSet();
-$statement->getQuery();
+$statement->getPreparedStatement();
 
 
 			$this->assertEqual( $rs->count, 1 );
@@ -178,20 +163,20 @@ $statement->getQuery();
 		function testInsertAgainWithTestCaseSubmit() {
 			$this->submit( 'form', array( 
 								  'Name' => 'George'
-								, 'fieldset1_Address' => '7 45ST SW'
-								, 'fieldset1_City' => 'Springfield'
-								, 'fieldset1_Province' => 'AB'
-								, 'fieldset1_Country' => 'CA'
-								, 'fieldset1_Postal_Zip_Code' => 'T4t-4t4'
-								, 'fieldset1_Sex' => 'm'
-								, 'fieldset1_Phone_No' => '4035551234'
-								, 'fieldset1_E-Mail_Address' => 'a@b.ca'
-								, 'fieldset2_Birthday' => '1980-12-30'
-								, 'fieldset2_Favorite_Color' => '#ff0000'
-								, 'fieldset2_Active' => '1'
-								, 'fieldset2_title' => 'Mr'
-								, 'page_form_fieldset2_Date' => '2007-01-01'
-								, 'page_form_fieldset2_Time' => '15:15:00'
+								, 'Address' => '7 45ST SW'
+								, 'City' => 'Springfield'
+								, 'Province' => 'AB'
+								, 'Country' => 'CA'
+								, 'Postal_Zip_Code' => 'T4t-4t4'
+								, 'Sex' => 'm'
+								, 'Phone_No' => '4035551234'
+								, 'E-Mail_Address' => 'a@b.ca'
+								, 'Birthday' => '1980-12-30'
+								, 'Favorite_Color' => '#ff0000'
+								, 'Active' => '1'
+								, 'title' => 'Mr'
+								, 'page_form_Date' => '2007-01-01'
+								, 'page_form_Time' => '15:15:00'
 								));
 
 			// test messages
@@ -246,31 +231,31 @@ $statement->getQuery();
 
 			$this->post( array( 'page_form__submit' => '1'
                                 , 'page_form__gotcha' => ''
-								, 'page_form_fieldset1_Province__post' => '1'
-								, 'page_form_fieldset1_Country__post' => '1'
+								, 'page_form_Province__post' => '1'
+								, 'page_form_Country__post' => '1'
 								, 'page_form_Name' => 'Jane'
-								, 'page_form_fieldset1_Address' => '5th AVE'
-								, 'page_form_fieldset1_City' => 'New York'
-								, 'page_form_fieldset1_Province' => 'NY'
-								, 'page_form_fieldset1_Country' => 'US'
-								, 'page_form_fieldset1_Postal_Zip_Code' => '90210'
-								, 'page_form_fieldset1_Sex' => 'f'
-								, 'page_form_fieldset1_Phone_No' => '5555551234'
-								, 'page_form_fieldset1_E-Mail_Address' => 'a@b.us'
-								, 'page_form_fieldset2_Birthday' => '1980-12-30'
-								, 'page_form_fieldset2_Favorite_Color' => '#ff0000'
-								, 'page_form_fieldset2_Active' => '0'
-                                , 'page_form_fieldset2_Active__post' => '1'
-								, 'page_form_fieldset2_Date__month' => '01'
-								, 'page_form_fieldset2_Date__day' => '01'
-								, 'page_form_fieldset2_Date__year' => '2007'
-								, 'page_form_fieldset2_Date__null' => '1'
-								, 'page_form_fieldset2_Time__hour' => '3'
-								, 'page_form_fieldset2_Time__minute' => '15'
-								, 'page_form_fieldset2_Time__meridiem' => 'pm'
-								, 'page_form_fieldset2_Time__null' => '1'
-								, 'page_form_fieldset2_title__post' => '1'
-								, 'page_form_fieldset2_title' => 'Mr'
+								, 'page_form_Address' => '5th AVE'
+								, 'page_form_City' => 'New York'
+								, 'page_form_Province' => 'NY'
+								, 'page_form_Country' => 'US'
+								, 'page_form_Postal_Zip_Code' => '90210'
+								, 'page_form_Sex' => 'f'
+								, 'page_form_Phone_No' => '5555551234'
+								, 'page_form_E-Mail_Address' => 'a@b.us'
+								, 'page_form_Birthday' => '1980-12-30'
+								, 'page_form_Favorite_Color' => '#ff0000'
+								, 'page_form_Active' => '0'
+                                , 'page_form_Active__post' => '1'
+								, 'page_form_Date__month' => '01'
+								, 'page_form_Date__day' => '01'
+								, 'page_form_Date__year' => '2007'
+								, 'page_form_Date__null' => '1'
+								, 'page_form_Time__hour' => '3'
+								, 'page_form_Time__minute' => '15'
+								, 'page_form_Time__meridiem' => 'pm'
+								, 'page_form_Time__null' => '1'
+								, 'page_form_title__post' => '1'
+								, 'page_form_title' => 'Mr'
 								, 'id' => 'Jane'
 								));
 
@@ -292,30 +277,30 @@ $statement->getQuery();
 			$this->post( array( 'page_form__submit' => '1'
                                 , 'page_form__gotcha' => ''
 								, 'page_form_Name' => '\'\'\'\'////""""\\\\\\\\' // ''''////""""\\\\
-								, 'page_form_fieldset1_Address' => '&&&&&amp;'
-								, 'page_form_fieldset1_City' => "''''"
-								, 'page_form_fieldset1_Province' => 'AB'
-								, 'page_form_fieldset1_Country' => 'CA'
-								, 'page_form_fieldset1_Postal_Zip_Code' => 'T4t-4t4'
-								, 'page_form_fieldset1_Sex' => 'm'
-								, 'page_form_fieldset1_Phone_No' => '4035551234'
-								, 'page_form_fieldset1_E-Mail_Address' => 'a@b.ca'
-								, 'page_form_fieldset2_Birthday' => '1980-12-30'
-								, 'page_form_fieldset2_Favorite_Color' => '#ff0000'
-								, 'page_form_fieldset2_Active__post' => '1'
-								, 'page_form_fieldset1_Province__post' => '1'
-								, 'page_form_fieldset1_Country__post' => '1'
-								, 'page_form_fieldset2_Active' => '1'
-								, 'page_form_fieldset2_Date__month' => '01'
-								, 'page_form_fieldset2_Date__day' => '01'
-								, 'page_form_fieldset2_Date__year' => '2007'
-								, 'page_form_fieldset2_Date__null' => '1'
-								, 'page_form_fieldset2_Time__hour' => '3'
-								, 'page_form_fieldset2_Time__minute' => '15'
-								, 'page_form_fieldset2_Time__meridiem' => 'pm'
-								, 'page_form_fieldset2_Time__null' => '1'
-								, 'page_form_fieldset2_title__post' => '1'
-								, 'page_form_fieldset2_title' => 'Mr'
+								, 'page_form_Address' => '&&&&&amp;'
+								, 'page_form_City' => "''''"
+								, 'page_form_Province' => 'AB'
+								, 'page_form_Country' => 'CA'
+								, 'page_form_Postal_Zip_Code' => 'T4t-4t4'
+								, 'page_form_Sex' => 'm'
+								, 'page_form_Phone_No' => '4035551234'
+								, 'page_form_E-Mail_Address' => 'a@b.ca'
+								, 'page_form_Birthday' => '1980-12-30'
+								, 'page_form_Favorite_Color' => '#ff0000'
+								, 'page_form_Active__post' => '1'
+								, 'page_form_Province__post' => '1'
+								, 'page_form_Country__post' => '1'
+								, 'page_form_Active' => '1'
+								, 'page_form_Date__month' => '01'
+								, 'page_form_Date__day' => '01'
+								, 'page_form_Date__year' => '2007'
+								, 'page_form_Date__null' => '1'
+								, 'page_form_Time__hour' => '3'
+								, 'page_form_Time__minute' => '15'
+								, 'page_form_Time__meridiem' => 'pm'
+								, 'page_form_Time__null' => '1'
+								, 'page_form_title__post' => '1'
+								, 'page_form_title' => 'Mr'
 								));
 
 			// test CSV
@@ -326,10 +311,6 @@ $statement->getQuery();
 			$this->assertEqual( $rs->row['Name'], "''''////" . '""""\\\\\\\\' );
 			$this->assertEqual( $rs->row['Address'], '&&&&&amp;' );
 			$this->assertEqual( $rs->row['City'], '\'\'\'\'' );
-
-			// $this->assertResponse( 'tabindex="1" value="\'\'\'\'////&quot;&quot;&quot;&quot;\\\\\\\\"' );
-			// $this->assertResponse( 'tabindex="2" value="&amp;&amp;&amp;&amp;&amp;amp;' );
-			// $this->assertResponse( 'tabindex="3" value="\'\'\'\'' );
 
 			$this->assertResponse( 'value="\'\'\'\'////&quot;&quot;&quot;&quot;\\\\\\\\"' );
 			$this->assertResponse( 'value="&amp;&amp;&amp;&amp;&amp;amp;' );

@@ -1,18 +1,18 @@
 <!--/*--><![CDATA[/*><!--*/
 
-.gridview {
+table {
   width: 100%;
   margin-bottom: 20px;
   border-collapse: collapse;
   clear: left;
 }
 
-.gridview a {
+table a {
   text-decoration: none;
   color: #7F7F7F;
 }
 
-.gridview caption {
+table caption {
   text-align: left;
   color: #333333;
   font-size: 24px;
@@ -26,7 +26,7 @@
   display: none;
 }
 
-.gridview thead th {
+table thead th {
   line-height: 50px;
   height: 50px;
   font-size: 13px;
@@ -40,7 +40,7 @@
   border-left:1px solid #3D5B98;
 }
 
-.gridview thead td {
+table thead td {
   line-height: 50px;
   height: 50px;
   font-size: 13px;
@@ -55,12 +55,12 @@
   border-bottom:1px solid #e6e6e6;
 }
 
-.gridview thead th a {
+table thead th a {
   color: #FFFFFF;
 }
 
-.gridview th,
-.gridview td {
+table th,
+table td {
   padding-top: 10px;
   padding-bottom: 10px;
   padding: 0px;
@@ -72,71 +72,71 @@
   border-right:1px solid #e6e6e6;
 }
 
-.gridview tr {
+table tr {
   border-left:1px solid #e6e6e6;
   border-bottom:1px solid #e6e6e6 !important;
 }
 
-.gridview tr:hover {
+table tr:hover {
   background-color: #DDDDDD;
   /* cursor: pointer; */
 }
 
-.gridview .row_alt {
+table .row_alt {
   background-color: #f2f2f3;
 }
 
-.gridview tfoot {
+table tfoot {
   background-image: url(images/dot.png);
   background-position: 0 80px;
   background-repeat: repeat-x;
 }
 
-.gridview tfoot tr td {
+table tfoot tr td {
   height: 40px;
   line-height: 40px;
   padding-left: 20px;
   padding-right: 20px;
 }
 
-.gridview tfoot .footer td {
+table tfoot .footer td {
   /* border-bottom:1px dotted #aac9ce; */
 }
 
-.gridview .pagenumbers td {
+table .pagenumbers td {
   padding: 0px;
 }
 
-.gridview tfoot .pages {
+table tfoot .pages {
   margin-left: 20px;
   margin-right: 20px;
 }
 
-.gridview tfoot .page {
+table tfoot .page {
 }
 
-.gridview tfoot a.disabled {
+table tfoot a.disabled {
   display: inline;
   color: #999999;
 }
 
-.gridview tfoot .prev {
+table tfoot .prev {
 }
 
-.gridview tfoot .next {
+table tfoot .next {
 }
 
-.gridview .summary {
+table .summary {
 }
 
-.gridview th {
+table th {
 }
 
-.gridview td {
+table td {
 	/* white-space: nowrap; */
 }
 
-.gridview .move_up {
+table .move_up {
 	display: block;
 	text-indent: -3000px;
 	background-image: url(images/up.png);
@@ -145,7 +145,7 @@
 	padding-left: 15px;
 }
 
-.gridview .move_down {
+table .move_down {
 	display: block;
 	text-indent: -3000px;
 	background-image: url(images/down.png);
@@ -154,47 +154,47 @@
 	padding-left: 15px;
 }
 
-.gridview .sort_desc {
+table .sort_desc {
 	background-image: url(images/down.png);
 	background-position:left;
 	background-repeat:no-repeat;
 	padding-left: 15px;
 }
 
-.gridview .sort_asc {
+table .sort_asc {
 	background-image: url(images/up.png);
 	background-position:left;
 	background-repeat:no-repeat;
 	padding-left: 15px;
 }
 
-.gridview .listcolumn {
+table .listcolumn {
 	width: 20px;
 }
 
-.gridview .movecolumn {
+table .movecolumn {
 	width: 20px;
 }
 
-.gridview .filter input {
+table .filter input {
 	width:100%;
 }
 
-.gridview a.disabled {
+table a.disabled {
 	display: none;
 }
 
-.gridview .pages {
+table .pages {
 	float: right;
 }
 
 /* Controls */
 
-.gridview .checkbox {
+table input[type="checkbox"] {
   width: 40px;
 }
 
-.gridview thead .button {
+table thead input[type="button"],input[type="submit"] {
   background: none;
   border: none;
   background-image: url(images/filter.png);
@@ -205,7 +205,7 @@
   height: 25px;
 }
 
-.gridview thead .textbox {
+table thead input[type="text"] {
   margin: 0px;
   width: 50%;
   height: 20px;
@@ -216,23 +216,23 @@
 
 /* Custom classes */
 
-.gridview .active {
+table .active {
   width: 60px;
 }
 
-.gridview .edit {
+table .edit {
   width: 60px;
 }
 
-.gridview .delete {
+table .delete {
   width: 60px;
 }
 
-.gridview .button {
+table input[type="button"],input[type="submit"] {
   padding: 0px;
 }
 
-.gridview .edit .button {
+table .edit input[type="button"],input[type="submit"] {
   background: none;
   border: none;
   background-image: url(icons/edit-icon.png);
@@ -243,7 +243,7 @@
   -moz-box-shadow:inset 0 0px 0 rgba(255,255,255,0.5);-webkit-box-shadow:inset 0 0px 0 rgba(255,255,255,0.5);box-shadow:inset 0 0px 0 rgba(255,255,255,0.5);
 }
 
-.gridview .delete .button {
+table .delete input[type="button"],input[type="submit"] {
   background: none;
   border: none;
   background-image: url(icons/delete-icon.png);
@@ -254,7 +254,7 @@
   -moz-box-shadow:inset 0 0px 0 rgba(255,255,255,0.5);-webkit-box-shadow:inset 0 0px 0 rgba(255,255,255,0.5);box-shadow:inset 0 0px 0 rgba(255,255,255,0.5);
 }
 
-.gridview tfoot .button.add {
+table tfoot input[type="button"],input[type="submit"].add {
   display: block;
   background: none;
   border: none;
@@ -269,36 +269,36 @@
 
 /* Fixing whitespace/table overflow */
 
-.gridview thead th {
+table thead th {
   white-space: normal;
   padding-left: 0;
   padding-right: 0;
 }
 
-.gridview thead td {
+table thead td {
     white-space:normal;
     padding-left: 0;
     padding-right: 0;
     
     
 }
-.gridview .button, .gridview .textbox {
+table input[type="button"],input[type="submit"], table input[type="text"] {
     /*float:left;*/
     display: inline;
 
     
 }
-.gridview thead .textbox{
+table thead input[type="text"]{
     width:40%;
     height:19px;
 }
 
-.gridview tbody th, .gridview tbody td {
+table tbody th, table tbody td {
     padding-left: 10px;
     padding-right: 10px;
 }
 
-.gridview thead .id, .gridview tr .id  {
+table thead .id, table tr .id  {
     padding-left: 20px;
 }
 /*]]>*/-->

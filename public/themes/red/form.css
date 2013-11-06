@@ -125,7 +125,7 @@ textarea {
   border: 1px solid #a6a6a6;
 }
 
-input.textbox {
+inputinput[type="text"] {
   height: 27px;
   padding: 2px !important;
   line-height: auto !important;
@@ -159,11 +159,11 @@ input.watermark {
   right: 0px;
 }
 
-.buttons .button {
+.buttons input[type="button"],input[type="submit"] {
   margin-left: 20px;
 }
 
-.button {
+input[type="button"],input[type="submit"] {
   display: block;
   float: left;
   height: 24px;
@@ -182,10 +182,10 @@ input.watermark {
   -webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;
 }
 
-.button:hover {
+input[type="button"],input[type="submit"]:hover {
 }
 
-.button:active {
+input[type="button"],input[type="submit"]:active {
 }
 
 /*]]>*/-->

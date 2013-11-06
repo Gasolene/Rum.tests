@@ -8,9 +8,9 @@
 
 
 	/**
-	 * handles text control element creation
+     * handles text control element creation
 	 * abstracts away the presentation logic and data access layer
-	 * the server-side control for WebWidgets
+     * the server-side control for WebWidgets
 	 *
 	 * @author			Darnell Shinbine
 	 * @copyright		Copyright (c) 2011
@@ -34,6 +34,24 @@
 
 
 		/**
+		 * process the HTTP request array
+		 *
+		 * @param  array		&$request	request data
+		 * @return void
+		 */
+		protected function onRequest( array &$request )
+		{
+			if( isset( $request[$this->getHTMLControlId()] ))
+			{
+				// format
+				$request[$this->getHTMLControlId()] = date("Y-m-d H:i:s",  strtotime($request[$this->getHTMLControlId()]));
+			}
+
+			parent::onRequest($request);
+		}
+
+
+		/**
 		 * returns widget object
 		 *
 		 * @param  none
@@ -44,12 +62,23 @@
 		{
 			$input = parent::getDomObject();
 
-			if(!is_null($this->value))
+			if(strtotime($this->value)!==false)
 			{
-				$input->setAttribute( 'value', $this->value );
+				$input->setAttribute( 'value', date("m/d/Y",  strtotime($this->value)) );
 			}
 
 			return $input;
+		}
+
+
+		/**
+		 * Event called on ajax callback
+		 *
+		 * @return void
+		 */
+		protected function onUpdateAjax()
+		{
+			$this->getParentByType('\System\Web\WebControls\Page')->loadAjaxJScriptBuffer("Rum.id('{$this->getHTMLControlId()}').value='".date("m/d/Y",  strtotime($this->value))."';");
 		}
 	}
 ?>

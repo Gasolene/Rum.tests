@@ -46,9 +46,7 @@
 		}
 
 		function onEditAjaxPost( &$col, $args ) {
-//			dmp('ww');
 			\Rum::flash($args["Company"] . " Clicked");
-//			\Rum::forward();
 		}
 	}
 ?>
