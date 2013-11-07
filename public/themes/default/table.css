@@ -2,12 +2,11 @@
 
 table {
   width: 100%;
-  border:1px solid #a6a6a6;
-  margin-bottom: 20px;
   border-collapse: collapse;
+  margin-bottom: 20px;
 }
 
-table a {
+table a:link {
   text-decoration: none;
   color: #7F7F7F;
 }
@@ -20,9 +19,19 @@ table caption {
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 20px;
-  border: 1px solid #a6a6a6;
+  border: 1px solid #A6A6A6;
   border-bottom: 0px solid;
-  background-color: #c6d9f1;
+  background-color: #C6D9F1;
+}
+
+table thead {
+  border:1px solid #A6A6A6;
+  border-bottom:none;
+}
+
+table tbody {
+  border:1px solid #A6A6A6;
+  border-top:none;
 }
 
 table thead th,
@@ -32,7 +41,7 @@ table thead td {
   text-align: left;
   color: #7F7F7F;
   font-weight: normal;
-  border-bottom:1px dotted #a6a6a6;
+  border-bottom:1px dotted #A6A6A6;
   white-space: nowrap;
 }
 
@@ -43,12 +52,31 @@ table td {
   padding: 0px;
   line-height: 27px;
   height: 40px;
+}
+
+table thead th:last-child,
+table tbody td:last-child {
+	width: 1%;
+}
+
+table tbody .footer td {
+  border-top:1px dotted #A6A6A6;
+  background-color: #FFFFCC;
+}
+
+table td:first-child,
+table th:first-child {
   padding-left: 20px;
 }
 
-table tbody tr:hover {
-  background-color: #DDDDDD;
-  cursor: pointer;
+table td:last-child,
+table th:last-child {
+  padding-right: 20px;
+}
+
+table tfoot td:first-child,
+table tfoot td:last-child {
+  padding: 0px;
 }
 
 table .row_alt {
@@ -58,31 +86,25 @@ table .row_alt {
 table tfoot {
 }
 
-table tfoot .summary {
-  float: left;
+table tfoot a {
+  border: 1px solid #A6A6A6;
+  padding: 2px;
+  background-color: #F7F7F7;
 }
 
-table tfoot .pagination {
-  float: right;
+table tfoot a:link {
+  background-color: #C6D9F1;
+  color: #1f497d;
 }
 
-table tfoot tr td {
-  height: 40px;
-  line-height: 40px;
-  padding-left: 20px;
-  padding-right: 20px;
+table tfoot a:hover {
+  background-color: #F7F7F7;
 }
 
-table tfoot .disabled {
-  display: inline;
+/* Classes */
+
+table .disabled {
   color: #999999;
-}
-
-table th {
-}
-
-table td {
-	/* white-space: nowrap; */
 }
 
 table .sort_desc {
@@ -109,31 +131,32 @@ table thead input[type="text"] {
   margin: 0px;
   width: 50%;
   height: 20px;
-  text-shadow: #ffffff 0px 0px 4px;
-  border: 1px solid #677d81;
+}
+
+table input[type="button"],
+table input[type="submit"] {
   background: none;
+  border: none;
+  padding: 0px;
+  background-position: center;
+  text-indent: -10000px;
+  width: 32px;
+  height: 32px;
+}
+
+table input[type="button"]:hover ,
+table input[type="submit"]:hover {
+  background-color: transparent;
 }
 
 table tbody input[type="button"],
 table tbody input[type="submit"] {
-  background: none;
-  border: none;
-  background-image: url(icons/delete-icon.png);
-  background-position: center;
-  text-indent: -10000px;
-  width: 32px;
-  height: 32px;
+  background-image: url(icons/Remove.png);
 }
 
-table tfoot input[type="button"],
-table tfoot input[type="submit"] {
-  background: none;
-  border: none;
-  background-image: url(icons/new-icon.png);
-  background-position: center;
-  text-indent: -10000px;
-  width: 32px;
-  height: 32px;
+table tbody .footer input[type="button"],
+table tbody .footer input[type="submit"] {
+  background-image: url(icons/Add.png);
 }
 
 /*]]>*/-->

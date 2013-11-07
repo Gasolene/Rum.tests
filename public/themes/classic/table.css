@@ -55,24 +55,6 @@ table td {
 	/* white-space: nowrap; */
 }
 
-table .move_up {
-	display: block;
-	text-indent: -3000px;
-	background-image: url(images/up.png);
-	background-position:left;
-	background-repeat:no-repeat;
-	padding-left: 15px;
-}
-
-table .move_down {
-	display: block;
-	text-indent: -3000px;
-	background-image: url(images/down.png);
-	background-position:left;
-	background-repeat:no-repeat;
-	padding-left: 15px;
-}
-
 table .sort_desc {
 	background-image: url(images/down.png);
 	background-position:left;
@@ -87,24 +69,8 @@ table .sort_asc {
 	padding-left: 15px;
 }
 
-table .listcolumn {
-	width: 20px;
-}
-
-table .movecolumn {
-	width: 20px;
-}
-
-table .filter input {
-	width:100%;
-}
-
 table a.disabled {
 	display: none;
-}
-
-table .pages {
-	float: right;
 }
 
 /*]]>*/-->
