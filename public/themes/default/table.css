@@ -59,7 +59,7 @@ table tbody td:last-child {
 	width: 1%;
 }
 
-table tbody .footer td {
+table tbody .insert td {
   border-top:1px dotted #A6A6A6;
   background-color: #FFFFCC;
 }
@@ -154,8 +154,8 @@ table tbody input[type="submit"] {
   background-image: url(icons/Remove.png);
 }
 
-table tbody .footer input[type="button"],
-table tbody .footer input[type="submit"] {
+table tbody .insert input[type="button"],
+table tbody .insert input[type="submit"] {
   background-image: url(icons/Add.png);
 }
 

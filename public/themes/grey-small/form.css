@@ -118,7 +118,7 @@ fieldset .invalid {
   border: 1px solid #ff0000;
 }
 
-fieldset .err_msg {
+fieldset .warning {
   position: absolute;
   top: 0px;
   left: 200px;
@@ -129,7 +129,7 @@ fieldset .err_msg {
   background-position: top left;
 }
 
-fieldset .err_msg span {
+fieldset .warning span {
   display: block;
   width: 200px;
   line-height: 22px;

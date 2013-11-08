@@ -52,7 +52,8 @@
 			$this->table->columns[2]->filter->textField = 'Objective';
 			$this->table->columns[2]->filter->valueField = 'Objective';
 			$this->table->showFilters = true;
-			$this->table->showFooter = true;
+			$this->table->showFooter = false;
+			$this->table->showInsertRow = true;
 			$this->table->ajaxPostBack = true;
 			$this->table->columns->ajaxPostBack = true;
 			$this->table->pageSize = 5;
