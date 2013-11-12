@@ -74,7 +74,7 @@
 			$this->city->dataSource = $ds;
 
 			if($this->isAjaxPostBack) {
-				\Rum::flash("AJAX post back detected");
+//				\Rum::flash("AJAX post back detected");
 			}
 		}
 

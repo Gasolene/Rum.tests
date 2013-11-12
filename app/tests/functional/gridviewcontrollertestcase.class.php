@@ -29,7 +29,6 @@
 
 			// test selected
 			$this->assertResponse( 'onclick="if(this.checked)this.checked=false;else this.checked=true;" id="page_table1__item_' );
-			$this->assertResponse( 'class="page_table1__checkbox" />' );
 		}
 
 		function testGetURL() {
