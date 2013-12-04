@@ -17,15 +17,16 @@
 			$this->assertResponse( '?page_table2__page=1&amp;page_table2__sort_by=Company&amp;page_table2__sort_order=asc">Company</a>' );
 			$this->assertResponse( '?page_table2__page=1&amp;page_table2__sort_by=ContactPhone&amp;page_table2__sort_order=asc">Contact Phone</a>' );
 			$this->assertResponse( '>showing 1 to 10 of 18</span>' );
-			$this->assertResponse( '<tr class="row" id="page_table1__0" onclick' );
+			$this->assertResponse( '<tr class="row" onclick' );
 
-			$this->assertResponse( '<td class="company_class"><a href="mailto:moore@adobe.com">Adobe</a></td>' );
+			$this->assertResponse( '<td data-field="Company" class="company_class"><a href="mailto:moore@adobe.com">Adobe</a></td>' );
 			$this->assertResponse( 'onclick="Rum.evalAsync(\'/test/public/\',\''.\Rum::config()->requestParameter.'=gridview&amp;Company=Microsoft' );
 			$this->assertResponse( '<td class="company_class">CompanyFooter</td>' );
 
-			$this->assertResponse( '<th class="company_class">' );
+			$this->assertResponse( '<th data-field="Company" class="company_class">' );
+			$this->assertResponse( '<td data-field="Company" class="company_class">' );
 			$this->assertResponse( '<td class="company_class">' );
-			$this->assertResponse( '<tbody><tr class="row" id="page_table2__0"><td class="company_class">' );
+			$this->assertResponse( '<tbody><tr class="row"><td data-field="Company" class="company_class">' );
 
 			// test selected
 			$this->assertResponse( 'onclick="if(this.checked)this.checked=false;else this.checked=true;" id="page_table1__item_' );
