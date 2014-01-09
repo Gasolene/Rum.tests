@@ -26,18 +26,18 @@
 			$this->form->add( new \System\Web\WebControls\Text( 'Name', '' ));
 			$this->page->Name->autoFocus = true;
 			$this->form->add( new \CommonControls\AddressInput( 'Address' ));
-			$this->form->add( new \SuggestBox\SuggestBox( 'City', 'Calgary' ));
+			$this->form->add( new \System\Web\WebControls\Search( 'City', 'Calgary' ));
 			$this->form->add( new \CommonControls\ProvinceStateSelector( 'Province', 'AB' ));
 			$this->form->add( new \CommonControls\CountrySelector( 'Country', 'CA' ));
 			$this->form->add( new \CommonControls\PostalZipCodeInput( 'Postal/Zip Code' ));
 			$this->form->add( new WebControls\RadioGroup( 'Sex', 'f' ));
 			$this->Sex->add( new WebControls\RadioButton( 'f', true ));
 			$this->Sex->add( new WebControls\RadioButton( 'm' ));
-			$this->form->add( new \CommonControls\PhoneNumberInput( 'Phone No' ));
-			$this->form->add( new \CommonControls\EmailAddressInput( 'E-Mail Address' ));
-			$this->form->add( new \DatePicker\DatePicker( 'Birthday' ));
+			$this->form->add( new \System\Web\WebControls\Tel( 'Phone No' ));
+			$this->form->add( new \System\Web\WebControls\Email( 'E-Mail Address' ));
+			$this->form->add( new \System\Web\WebControls\Date( 'Birthday' ));
 			$this->form->add( new WebControls\CheckBoxList( 'favoritecolors' ));
-			$this->form->add( new \ColorPicker\ColorPicker( 'Favorite Color' ));
+			$this->form->add( new \System\Web\WebControls\Color( 'Favorite Color' ));
 			$this->form->add( new WebControls\CheckBox( 'Active', true ));
 			$this->form->add( new \System\Web\WebControls\DateTime( 'DateTime' ));
 			$this->form->add( new \System\Web\WebControls\Date( 'Date' ));
@@ -45,7 +45,7 @@
 			$this->form->add( new \System\Web\WebControls\TextArea( 'Comment' ));
 			$this->form->add( new \CommonControls\PercentInput( 'percent' ));
 			$this->form->add( new \CommonControls\MoneyInput( 'price' ));
-			$this->form->add( new \CommonControls\URLInput( 'URL' ));
+			$this->form->add( new \System\Web\WebControls\URL( 'URL' ));
 			$this->form->add( new \CommonControls\TitleSelector( 'title' ));
 			$this->form->add( new \CommonControls\YearInput( 'year' ));
 			$this->form->add( new \CommonControls\ZipCodeInput( 'zip' ));
@@ -62,6 +62,10 @@
 
 			$this->City->addValidator(new \System\UI\Validators\RequiredValidator());
 			$this->Province->addValidator(new \System\UI\Validators\RequiredValidator());
+			$this->form->getControl( 'E-Mail_Address' )->addValidator(new \System\Validators\EmailValidator());
+			$this->form->Birthday->addValidator(new \System\Validators\DateTimeValidator());
+			$this->form->Date->addValidator(new \System\Validators\DateTimeValidator());
+			$this->form->Time->addValidator(new \System\Validators\DateTimeValidator());
 
 			$this->title->items->add( '', '' );
 			$this->Province->validators[0]->errorMessage = 'blast off';
@@ -97,8 +101,8 @@
 			}
 
 			// data binding
-			$this->City->textField  = 'City';
-			$this->City->dataSource = clone $rs;
+//			$this->City->textField  = 'City';
+//			$this->City->dataSource = clone $rs;
 
 			$this->table->dataSource = $rs;
 

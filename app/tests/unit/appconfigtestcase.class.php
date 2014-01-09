@@ -162,7 +162,6 @@
 			$this->assertTrue( $config->cacheEnabled === true );
 			$this->assertTrue( $config->cacheExpires === 0 );
 			$this->assertTrue( $config->dsn === '' );
-			$this->assertTrue( $config->test_dsn === '' );
 			$this->assertTrue( $config->errors === array() );
 		}
 

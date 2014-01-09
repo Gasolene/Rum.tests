@@ -34,26 +34,18 @@
 		\System\Web\FormModelBase::registerFieldType('cardnumber', '\CommonControls\CardNumberInput');
 		\System\Web\FormModelBase::registerFieldType('cardsecuritycode', '\CommonControls\CardSecurityCodeInput');
 		\System\Web\FormModelBase::registerFieldType('cardtype', '\CommonControls\CardTypeSelector');
-		
-		\System\Web\FormModelBase::registerFieldType('csv', '\CommonControls\CSVView');
-		\System\Web\FormModelBase::registerFieldType('email', '\CommonControls\EmailAddressInput');
+
 		\System\Web\FormModelBase::registerFieldType('gender', '\CommonControls\GenderSelector');
 		\System\Web\FormModelBase::registerFieldType('image', '\CommonControls\ImageUpload');
-		\System\Web\FormModelBase::registerFieldType('numeric', '\CommonControls\NumericInput');
-		\System\Web\FormModelBase::registerFieldType('password', '\CommonControls\PasswordInput');
-		\System\Web\FormModelBase::registerFieldType('pdf', '\CommonControls\PDFView');
 		\System\Web\FormModelBase::registerFieldType('percent', '\CommonControls\PercentInput');
-		\System\Web\FormModelBase::registerFieldType('phonenumber', '\CommonControls\PhoneNumberInput');
 		\System\Web\FormModelBase::registerFieldType('price', '\CommonControls\MoneyInput');
 		\System\Web\FormModelBase::registerFieldType('money', '\CommonControls\MoneyInput');
 		\System\Web\FormModelBase::registerFieldType('title', '\CommonControls\TitleSelector');
-		\System\Web\FormModelBase::registerFieldType('url', '\CommonControls\URLInput');
 		\System\Web\FormModelBase::registerFieldType('year', '\CommonControls\YearInput');
 
 		\System\Web\FormModelBase::registerRuleType('cardexpiration', '\CommonControls\CardExpirationDateValidator');
 		\System\Web\FormModelBase::registerRuleType('cardnumber', '\CommonControls\CardNumberValidator');
 		\System\Web\FormModelBase::registerRuleType('cardsecuritycode', '\CommonControls\CardSecurityCodeValidator');
-		\System\Web\FormModelBase::registerRuleType('phonenumber', '\CommonControls\PhoneNumberValidator');
 		\System\Web\FormModelBase::registerRuleType('postalzipcode', '\CommonControls\PostalZipCodeValidator');
 	}
 ?>
