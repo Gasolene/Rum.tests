@@ -17,7 +17,7 @@
 		function testMSSql_DataAdapter() {
 			$conStr = \Rum::app()->config->appsettings["mssql_conn_str"];
 
-			$this->expectError();
+//			$this->expectError();
 			$da = DataAdapter::create($conStr);
 
 			$da->executeBatch(file_get_contents(__ROOT__.'/app/tests/fixtures/mssql_test.sql'));
@@ -58,7 +58,7 @@
 		function xtestPDOMSSQL_DataAdapter() {
 			$conStr = \Rum::app()->config->appsettings["pdo_mssql_conn_str"];
 
-			$this->expectError();
+//			$this->expectError();
 			$da = DataAdapter::create($conStr, \Rum::app()->config->appsettings["pdo_mssql_username"], \Rum::app()->config->appsettings["pdo_mssql_password"]);
 
 			$da->executeBatch(file_get_contents(__ROOT__.'/app/tests/fixtures/mssql_test.sql'));
@@ -72,7 +72,7 @@
 		function testPDOMySQL_DataAdapter() {
 			$conStr = \Rum::app()->config->appsettings["pdo_mysql_conn_str"];
 
-			$this->expectError();
+//			$this->expectError();
 			$da = DataAdapter::create($conStr, \Rum::app()->config->appsettings["pdo_mysql_username"], \Rum::app()->config->appsettings["pdo_mysql_password"]);
 
 			$da->executeBatch(file_get_contents(__ROOT__.'/app/tests/fixtures/mysql_test.sql'));

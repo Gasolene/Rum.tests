@@ -17,7 +17,7 @@
 			$this->assertResponse( 'gridview2/?page_form_table__page=1&amp;page_form_table__sort_by=category_id&amp;page_form_table__sort_order=asc' );
 			$this->assertResponse( '>showing 1 to 4 of 12</span>' );
 
-			$this->assertResponse( 'onchange="Rum.sendSync(\'/test/public\', \'path=gridview2&amp;page_form_table_category_id__filter_value=\'+this.value);' );
+			$this->assertResponse( 'onchange="Rum.sendSync(\'/test/public/\', \'path=gridview2&amp;page_form_table_category_id__filter_value=\'+this.value);' );
 			$this->assertResponse( 'onkeypress="if(event.keyCode==13){event.returnValue=false;blur();Rum.sendSync(\'/test/public\',\'path=gridview2&amp;page_form_table_customer_name__filter_value=\'+this.value);return false;}"' );
 
 			// test selected

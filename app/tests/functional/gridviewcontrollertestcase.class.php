@@ -94,7 +94,7 @@
 			$this->get(array('page_table1_Company__filter_value'=>'a'));
 			$this->assertResponse( 'showing 1 to 10 of 10' ); 
 			$this->assertResponse( 'name="page_table1_Company__filter_value" value="a" title="Enter a string and press enter"');
-			$this->assertResponse( 'onchange="Rum.evalAsync(\'/test/public\',\'page_table1_Company__filter_value=a&amp;path=gridview&amp;page_table1_Company__filter_value=\'+this.value);"');
+			$this->assertResponse( 'onchange="Rum.evalAsync(\'/test/public/\',\'page_table1_Company__filter_value=a&amp;path=gridview&amp;page_table1_Company__filter_value=\'+this.value);"');
 			$this->assertResponse( 'onkeypress="if(event.keyCode==13){event.returnValue=false;Rum.evalAsync(\'/test/public\',\'page_table1_Company__filter_value=a&amp;path=gridview&amp;page_table1_Company__filter_value=\'+this.value);return false;}');
 
 			$this->expectError();
