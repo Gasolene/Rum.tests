@@ -17,13 +17,16 @@
 		function testMSSql_DataAdapter() {
 			$conStr = \Rum::app()->config->appsettings["mssql_conn_str"];
 
-//			$this->expectError();
+			$this->expectError();
 			$da = DataAdapter::create($conStr);
 
+			$this->expectError();
 			$da->executeBatch(file_get_contents(__ROOT__.'/app/tests/fixtures/mssql_test.sql'));
 			$this->SqlDataAdapterTest($da);
+			$this->expectError();
 			$da->executeBatch(file_get_contents(__ROOT__.'/app/tests/fixtures/mssql_test.sql'));
 			$this->DeleteEmptyTest($da);
+			$this->expectError();
 			$da->executeBatch(file_get_contents(__ROOT__.'/app/tests/fixtures/mssql_test.sql'));
 			//$this->DBCachingTest($da);
 		}
@@ -34,10 +37,13 @@
 			$this->expectError();
 			$da = DataAdapter::create($conStr);
 
+			$this->expectError();
 			$da->executeBatch(file_get_contents(__ROOT__.'/app/tests/fixtures/mysql_test.sql'));
 			$this->SqlDataAdapterTest($da);
+			$this->expectError();
 			$da->executeBatch(file_get_contents(__ROOT__.'/app/tests/fixtures/mysql_test.sql'));
 			$this->DBCachingTest($da);
+			$this->expectError();
 			$da->executeBatch(file_get_contents(__ROOT__.'/app/tests/fixtures/mysql_test.sql'));
 			$this->DeleteEmptyTest($da);
 		}
@@ -47,10 +53,13 @@
 
 			$da = DataAdapter::create($conStr);
 
+			$this->expectError();
 			$da->executeBatch(file_get_contents(__ROOT__.'/app/tests/fixtures/mysql_test.sql'));
 			$this->SqlDataAdapterTest($da);
+			$this->expectError();
 			$da->executeBatch(file_get_contents(__ROOT__.'/app/tests/fixtures/mysql_test.sql'));
 			$this->DBCachingTest($da);
+			$this->expectError();
 			$da->executeBatch(file_get_contents(__ROOT__.'/app/tests/fixtures/mysql_test.sql'));
 			$this->DeleteEmptyTest($da);
 		}
@@ -75,10 +84,13 @@
 //			$this->expectError();
 			$da = DataAdapter::create($conStr, \Rum::app()->config->appsettings["pdo_mysql_username"], \Rum::app()->config->appsettings["pdo_mysql_password"]);
 
+			$this->expectError();
 			$da->executeBatch(file_get_contents(__ROOT__.'/app/tests/fixtures/mysql_test.sql'));
 			$this->SqlDataAdapterTest($da);
+			$this->expectError();
 			$da->executeBatch(file_get_contents(__ROOT__.'/app/tests/fixtures/mysql_test.sql'));
 			//$this->DBCachingTest($da);
+			$this->expectError();
 			$da->executeBatch(file_get_contents(__ROOT__.'/app/tests/fixtures/mysql_test.sql'));
 			$this->DeleteEmptyTest($da);
 		}
