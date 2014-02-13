@@ -524,11 +524,9 @@
 		}
 
 		function getArray( $table ) {
-			$query = \System\AppServlet::getInstance()->dataAdapter->queryBuilder();
-			$query->select( '*' );
-			$query->from( $table );
-
-			return \System\AppServlet::getInstance()->dataAdapter->openDataSet( $query->getPreparedStatement() )->rows;
+			return \System\AppServlet::getInstance()->dataAdapter->queryBuilder()
+			->select( '*' )
+			->from( $table )->openDataSet()->rows;
 		}
 	}
 ?>

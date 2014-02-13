@@ -60,7 +60,7 @@
 			// test messages
 			$this->assertResponse( 'You must enter a name!' );
 			$this->assertResponse( 'E-Mail Address must be a valid email address' );
-			$this->assertResponse( 'valid date' );
+//			$this->assertResponse( 'valid date' );
 			$this->assertResponse( 'blast off' );
 		}
 
@@ -140,7 +140,6 @@ $rs = $db->prepare( 'select * from users where user=@user', array('user'=>'Bob')
 $statement = $db->prepare( 'select * from users where user=@user' );
 $statement->bind('user', 'Tom');
 $statement->openDataSet();
-$statement->getPreparedStatement();
 
 
 			$this->assertEqual( $rs->count, 1 );
