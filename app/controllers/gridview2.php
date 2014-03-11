@@ -4,20 +4,19 @@
 	class GridView2 extends \MyApp\ApplicationController {
 
 		function onPageInit($sender, $args) {
-			$this->page->add(new \System\Web\WebControls\Form('form'));
-			$this->page->form->add(\MyApp\Models\Customer::gridview('table'));
-			$this->table->showFilters = true;
-			$this->table->showFooter = true;
-			$this->table->pageSize=4;
+			$this->page->add(\MyApp\Models\Customer::gridview('table'));
+			$this->page->table->showFilters = true;
+			$this->page->table->showFooter = true;
+			$this->page->table->pageSize=4;
 			$this->page->table->columns->ajaxPostBack = true;
 			$this->page->table->enableViewState = false;
 			$this->page->table->columns[0]->valueField = 'category_id';
 			$this->page->table->columns[0]->textField = 'category';
-			$this->page->form->table->columns->add(new \System\Web\WebControls\GridViewButton('customer_id', 'Delete', 'action', 'Are you sure you want to delete?', '', '', 'action', 'Add'));
+			$this->page->table->columns->add(new \System\Web\WebControls\GridViewButton('customer_id', 'Delete', 'action', 'Are you sure you want to delete?', '', '', 'action', 'Add'));
 		}
 
 		function onPageLoad($sender, $args) {
-			$this->table->dataSource = \MyApp\Models\Customer::all();
+			$this->page->table->dataSource = \MyApp\Models\Customer::all();
 		}
 
 		public function onPagePost($sender, $args)
@@ -34,12 +33,18 @@
 					{
 						if(isset(\System\Web\HTTPRequest::$post[$field]))
 						{
-							$entity[$field] = \System\Web\HTTPRequest::$post[$field];
+							if($this->table->columns->findColumn($field)->validate($err))
+							{
+								$entity[$field] = \System\Web\HTTPRequest::$post[$field];
+								$entity->save();
+								\Rum::flash("s:Customer {$entity["customer_id"]} has been updated");
+							}
+							else
+							{
+								\Rum::flash("f:{$err}");
+							}
 						}
 					}
-
-					$entity->save();
-					\Rum::flash("s:Customer {$entity["customer_id"]} has been updated");
 				}
 			}
 		}
@@ -48,7 +53,7 @@
 		{
 			\Rum::flash("Try Action on Record #{$args["action"]}");
 
-			if((int)$args["action"])
+			if($args["action"]=="Delete")
 			{
 				\Rum::flash("Try Delete Action on Record #{$args["action"]}");
 
@@ -61,8 +66,17 @@
 				\Rum::flash("Try Insert Action");
 
 				// Insert
-				$this->table->insertRow();
-				\Rum::flash("s:Customer {$this->table->dataSource["customer_id"]} added");
+				if($this->table->validate($err))
+				{
+					$object = \MyApp\Models\Customer::create();
+					$this->table->fill($object);
+					$object->save();
+					\Rum::flash("s:Customer {$this->table->dataSource["customer_id"]} added");
+				}
+				else
+				{
+					\Rum::flash("f:{$err}");
+				}
 			}
 			\Rum::forward();
 		}

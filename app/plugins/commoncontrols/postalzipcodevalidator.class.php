@@ -35,30 +35,24 @@
 		/**
 		 * sets the controlId and prepares the control attributes
 		 *
+		 * @param  string	$value	value to validate
 		 * @return void
 		 */
-		public function validate()
+		public function validate($value)
 		{
-			if($this->controlToValidate)
+			if(!$value)
 			{
-				if(!$this->controlToValidate->value)
-				{
-					return true;
-				}
-				elseif(0 !== preg_match('^[0-9][0-9][0-9][0-9][0-9]$^', $this->controlToValidate->value))
-				{
-					return true;
-				}
-				elseif(0 !== preg_match('^[A-Za-z][0-9][A-Za-z]( )?[0-9][A-Za-z][0-9]$^', $this->controlToValidate->value))
-				{
-					return true;
-				}
-				return false;
+				return true;
 			}
-			else
+			elseif(0 !== preg_match('^[0-9][0-9][0-9][0-9][0-9]$^', $value))
 			{
-				throw new \System\Base\InvalidOperationException("no control to validate");
+				return true;
 			}
+			elseif(0 !== preg_match('^[A-Za-z][0-9][A-Za-z]( )?[0-9][A-Za-z][0-9]$^', $value))
+			{
+				return true;
+			}
+			return false;
 		}
 	}
 ?>

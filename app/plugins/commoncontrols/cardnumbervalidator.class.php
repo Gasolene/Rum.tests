@@ -34,66 +34,51 @@
 
 
 		/**
-		 * validates control data, returns true on success
+		 * sets the controlId and prepares the control attributes
 		 *
-		 * @param  none
+		 * @param  string	$value	value to validate
 		 * @return void
-		 * @access public
 		 */
-		public function validate()
+		public function validate($value)
 		{
-			if($this->controlToValidate)
-			{
-				if($this->controlToValidate->value)
-				{
-					$cardType = '';
-					$cardName = '';
+			$cardType = '';
+			$cardName = '';
 
-					foreach( $this->controlToValidate->parent->controls as $control )
+//					foreach( $value->parent->controls as $control )
+//					{
+//						if( $control instanceof CardTypeSelector )
+//						{
+//							$index = $control->items->indexOfItem($control->value);
+//							if($index > -1)
+//							{
+//								$cardType = $control->value;
+//								$cardName = $control->items->keyAt($index);
+//							}
+//						}
+//					}
+
+			$prefixes = array();
+			foreach($this->cardTypes as $cardTypeInfo)
+			{
+				$prefixes = array_merge($prefixes, $cardTypeInfo[1]);
+
+				if($cardType === $cardTypeInfo[0])
+				{
+					if($cardTypeInfo[2]==$cardTypeInfo[3])
 					{
-						if( $control instanceof CardTypeSelector )
-						{
-							$index = $control->items->indexOfItem($control->value);
-							if($index > -1)
-							{
-								$cardType = $control->value;
-								$cardName = $control->items->keyAt($index);
-							}
-						}
+						$this->errorMessage = $this->errorMessage?$this->errorMessage:"{$value} " . str_replace('%x', $cardTypeInfo[2], str_replace('%y', $cardName, \System\Base\ApplicationBase::getInstance()->translator->get('must_be_a_valid_x_digit_card_number_for_y', 'must be a valid %x digit card number for %y')));
+					}
+					else
+					{
+						$this->errorMessage = $this->errorMessage?$this->errorMessage:"{$value} " . str_replace('%x', $cardTypeInfo[2], str_replace('%y', $cardTypeInfo[3], str_replace('%z', $cardName, \System\Base\ApplicationBase::getInstance()->translator->get('must_be_a_valid_x_to_y_digit_card_number_for_z', 'must be a valid %x to %y digit card number for %z'))));
 					}
 
-					$prefixes = array();
-					foreach($this->cardTypes as $cardTypeInfo)
-					{
-						$prefixes = array_merge($prefixes, $cardTypeInfo[1]);
-
-						if($cardType === $cardTypeInfo[0])
-						{
-							if($cardTypeInfo[2]==$cardTypeInfo[3])
-							{
-								$this->errorMessage = $this->errorMessage?$this->errorMessage:"{$this->controlToValidate->label} " . str_replace('%x', $cardTypeInfo[2], str_replace('%y', $cardName, \System\Base\ApplicationBase::getInstance()->translator->get('must_be_a_valid_x_digit_card_number_for_y', 'must be a valid %x digit card number for %y')));
-							}
-							else
-							{
-								$this->errorMessage = $this->errorMessage?$this->errorMessage:"{$this->controlToValidate->label} " . str_replace('%x', $cardTypeInfo[2], str_replace('%y', $cardTypeInfo[3], str_replace('%z', $cardName, \System\Base\ApplicationBase::getInstance()->translator->get('must_be_a_valid_x_to_y_digit_card_number_for_z', 'must be a valid %x to %y digit card number for %z'))));
-							}
-
-							return $this->validateCardNumber($this->controlToValidate->value, $cardTypeInfo[1], $cardTypeInfo[2], $cardTypeInfo[3], $cardTypeInfo[4]);
-						}
-					}
-
-					$this->errorMessage = $this->errorMessage?$this->errorMessage:"{$this->controlToValidate->label} " . \System\Base\ApplicationBase::getInstance()->translator->get('must_be_a_valid_card_number', 'must be a valid card number');
-					return $this->validateCardNumber($this->controlToValidate->value, $prefixes);
-				}
-				else
-				{
-					return true;
+					return $this->validateCardNumber($value, $cardTypeInfo[1], $cardTypeInfo[2], $cardTypeInfo[3], $cardTypeInfo[4]);
 				}
 			}
-			else
-			{
-				throw new \System\Base\InvalidOperationException("no control to validate");
-			}
+
+			$this->errorMessage = $this->errorMessage?$this->errorMessage:"{$value} " . \System\Base\ApplicationBase::getInstance()->translator->get('must_be_a_valid_card_number', 'must be a valid card number');
+			return $this->validateCardNumber($value->value, $prefixes);
 		}
 
 

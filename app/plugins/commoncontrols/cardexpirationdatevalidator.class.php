@@ -27,7 +27,7 @@
 		{
 			if($this->controlToValidate)
 			{
-				$this->errorMessage = $this->errorMessage?$this->errorMessage:"{$this->controlToValidate->label} " . \System\Base\ApplicationBase::getInstance()->translator->get('must_be_a_valid_date_in_the_future', 'must be a valid date in the future');
+				$this->errorMessage = \System\Base\ApplicationBase::getInstance()->translator->get('must_be_a_valid_date_in_the_future', 'must be a valid date in the future');
 			}
 		}
 
@@ -35,18 +35,12 @@
 		/**
 		 * sets the controlId and prepares the control attributes
 		 *
+		 * @param  string	$value	value to validate
 		 * @return void
 		 */
-		public function validate()
+		public function validate($value)
 		{
-			if($this->controlToValidate)
-			{
-				return !$this->controlToValidate->value || (time() <= strtotime($this->controlToValidate->value));
-			}
-			else
-			{
-				throw new \System\Base\InvalidOperationException("no control to validate");
-			}
+			return !$value || (time() <= strtotime($value));
 		}
 	}
 ?>
