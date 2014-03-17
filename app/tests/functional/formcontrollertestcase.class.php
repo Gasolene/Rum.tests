@@ -14,6 +14,14 @@
 		}
 
 		function testOutput() {
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
 			$this->get();
 
 			$html = $this->responseAsXMLEntity();
@@ -27,6 +35,14 @@
 		}
 
 		function testDefaults() {
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
 			$this->get();
 
             // test for radio default
@@ -34,6 +50,14 @@
 		}
 
 		function testCheckBoxList() {
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
 			$this->post( array( 'page_form__gotcha'=>'', 'page_form__gotcha'=>'', 'page_form__submit' => '1', 'page_form_favoritecolors__post' => '1', 'page_form_title' => 'Mr', 'page_form_favoritecolors' => array( '#00FF00', '#0000FF' )));
 
 			$this->assertResponse( 'value="#FF0000" title="" type="checkbox" name="page_form_favoritecolors[]"' );
@@ -42,29 +66,77 @@
 		}
 
 		function testState() {
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
 			$this->post( array( 'page_form'.\System\Web\WebControls\GOTCHAFIELD=>'', 'page_form__submit' => '1', 'page_form_Address' => '555' ));
 
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
 			$this->get();
 
 			$this->assertEqual( $this->controller->Address->value, '555' );
 		}
 
 		function testValidation() {
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
 			$this->post( array( 'page_form__gotcha'=>'', 'page_form__submit' => '1', 'page_form_E-Mail_Address' => 'a@b.c', 'page_form_Birthday' => '2005-09-32', 'page_form_Province__post' => '1', 'page_form_Province' => '' ));
 
 			// test validate()
 			$err = '';
 			$this->assertFalse( $this->controller->form->getControl( 'E-Mail_Address' )->validate($err) );
-			$this->assertEqual(trim($err), 'E-Mail Address must be a valid email address');
+			$this->assertEqual(trim($err), 'must be a valid email address');
 
 			// test messages
 			$this->assertResponse( 'You must enter a name!' );
-			$this->assertResponse( 'E-Mail Address must be a valid email address' );
+			$this->assertResponse( 'be a valid email address' );
 //			$this->assertResponse( 'valid date' );
 			$this->assertResponse( 'blast off' );
 		}
 
 		function testEvents() {
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
 			$this->get();
 
 			$this->assertFalse( $this->controller->Name->submitted );
@@ -102,6 +174,14 @@
 		}
 
 		function testInsert() {
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
 			$this->post( array( 'page_form__submit' => '1'
                                 , 'page_form__gotcha' => ''
 								, 'page_form_Province__post' => '1'
@@ -160,6 +240,14 @@ $statement->openDataSet();
 		}
 
 		function testInsertAgainWithTestCaseSubmit() {
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
 			$this->submit( 'form', array( 
 								  'Name' => 'George'
 								, 'Address' => '7 45ST SW'
@@ -222,12 +310,28 @@ $statement->openDataSet();
 			$rs['Sex']  = 'f';
 			$rs->insert();
 
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
 			$this->get( array( 'id' => 'Jane' ));
 
 			$this->assertEqual( $this->controller->form->Name->value, 'Jane' );
 			$this->assertEqual( $this->controller->form->City->value, 'Calgary' );
 			$this->assertEqual( $this->controller->form->Sex->value, 'f' );
 
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
 			$this->post( array( 'page_form__submit' => '1'
                                 , 'page_form__gotcha' => ''
 								, 'page_form_Province__post' => '1'
@@ -273,6 +377,14 @@ $statement->openDataSet();
 		}
 
 		function testEscaping() {
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
 			$this->post( array( 'page_form__submit' => '1'
                                 , 'page_form__gotcha' => ''
 								, 'page_form_Name' => '\'\'\'\'////""""\\\\\\\\' // ''''////""""\\\\

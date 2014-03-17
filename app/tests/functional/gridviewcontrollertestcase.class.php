@@ -12,6 +12,7 @@
 		function testOnLoad() {
 			$this->expectError();
 			$this->expectError();
+			$this->expectError();
 			$this->get();
 
 			$this->assertResponse( '?page_table2__page=1&amp;page_table2__sort_by=Company&amp;page_table2__sort_order=asc">Company</a>' );
@@ -35,12 +36,14 @@
 		function testGetURL() {
 			$this->expectError();
 			$this->expectError();
+			$this->expectError();
 			$this->get( array( 'page' => 'gridview' ));
 			$this->assertResponse( '>showing 1 to 10 of 18</span>' );
 			$this->assertResponse( 'next' );
 		}
 
 		function xtestPostURL() {
+			$this->expectError();
 			$this->expectError();
 			$this->expectError();
 			$this->post( array( 'page' => 'gridview', 'Company' => 'Apple' ));
@@ -51,12 +54,15 @@
 		function testAjaxURL() {
 			$this->expectError();
 			$this->expectError();
+			$this->expectError();
 			$this->post( array( 'page' => 'gridview', 'Company' => 'Apple', 'Edit'=>'Edit', 'async' => '1' ));
 
 			$this->assertMessage( 'Apple Clicked' );
 		}
 
 		function testSorting() {
+			$this->expectError();
+			$this->expectError();
 			$this->expectError();
 			$this->expectError();
 			$this->get( array( 'page' => 'gridview', 'page_table1__page' => '2', 'page_table1__sort_by' => 'Contact', 'page_table1__sort_order' => 'desc' ));
@@ -75,6 +81,7 @@
 		function testPaging() {
 			$this->expectError();
 			$this->expectError();
+			$this->expectError();
 			$this->get( array( 'page' => 'gridview', 'page_table1__page' => '2', 'page_table1__sort_by' => 'Contact', 'page_table1__sort_order' => 'desc' ));
 			$this->assertResponse( '>showing 11 to 18 of 18</span>' );
 			$this->assertResponse( 'prev' );
@@ -83,20 +90,30 @@
 		function testFiltering() {
 			$this->expectError();
 			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
+			$this->expectError();
 			$this->get(array('id'=>'7'));
 
-			$this->assertResponse( 'Rum.evalAsync(\'/test/public\',\'id=7&amp;'.\Rum::config()->requestParameter.'=gridview&amp;page_table1_Company__filter_value=\'+this.value)' );
+			$this->assertResponse( 'Rum.evalAsync(\'/test/public\',\'id=7&amp;'.\Rum::config()->requestParameter.'=gridview&amp;page_table1_Company__filter_value=\'+encodeURIComponent(this.value)' );
 			$this->assertResponse( 'showing 1 to 10 of 18' );
 			$this->assertEqual($this->controller->table1->dataSource->count, 18);
 
 			$this->expectError();
 			$this->expectError();
+			$this->expectError();
 			$this->get(array('page_table1_Company__filter_value'=>'a'));
 			$this->assertResponse( 'showing 1 to 10 of 10' ); 
 			$this->assertResponse( 'name="page_table1_Company__filter_value" value="a" title="Enter a string and press enter"');
-			$this->assertResponse( 'onchange="Rum.evalAsync(\'/test/public/\',\'page_table1_Company__filter_value=a&amp;path=gridview&amp;page_table1_Company__filter_value=\'+this.value);"');
-			$this->assertResponse( 'onkeypress="if(event.keyCode==13){event.returnValue=false;Rum.evalAsync(\'/test/public\',\'page_table1_Company__filter_value=a&amp;path=gridview&amp;page_table1_Company__filter_value=\'+this.value);return false;}');
+			$this->assertResponse( 'onchange="Rum.evalAsync(\'/test/public/\',\'page_table1_Company__filter_value=a&amp;path=gridview&amp;page_table1_Company__filter_value=\'+encodeURIComponent(this.value)');
+			$this->assertResponse( 'onkeypress="if(event.keyCode==13){event.returnValue=false;Rum.evalAsync(\'/test/public\',\'page_table1_Company__filter_value=a&amp;path=gridview&amp;page_table1_Company__filter_value=\'+encodeURIComponent(this.value');
 
+			$this->expectError();
 			$this->expectError();
 			$this->expectError();
 			$this->get(array('page_table1_Company__filter_value'=>'a', 'page_table1_Objective__filter_value'=>'Marketing Relationship'));
