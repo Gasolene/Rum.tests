@@ -18,7 +18,7 @@
 			$this->page->add(new WebControls\Form('form'));
 			$this->page->form->legend = 'Ajax Form';
 			$this->page->form->add(new WebControls\Text('name'));
-			$this->page->form->add(new \CommonControls\EmailAddressInput('email'));
+			$this->page->form->add(new WebControls\Email('email'));
 			$this->page->form->add(new \CommonControls\CountrySelector('country'));
 			$this->page->form->add(new WebControls\DropDownList('city'));
 			$this->page->form->add(new WebControls\Button('submit'));
