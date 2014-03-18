@@ -43,6 +43,7 @@
 
 			$this->table1->dataSource = $ds;
 			$this->table2->dataSource = $db->openDataSet();
+			$this->table1->ajaxPostBack = true;
 		}
 
 		function onEditAjaxPost( &$col, $args ) {
