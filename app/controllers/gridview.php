@@ -23,6 +23,7 @@
 			$this->page->add( new WebControls\GridView( 'table2' ));
 			$this->table2->addColumn( new WebControls\GridViewColumn( 'Company', 'Company', '"<a href=\"mailto:".%ContactEmail%."\">".%Company%."</a>"', '\'CompanyFooter\'', 'company_class' ));
 			$this->table2->addColumn( new WebControls\GridViewColumn( 'ContactPhone', 'Contact Phone' ));
+//			$this->table1->addColumn( new WebControls\GridViewColumn( 'Test', 'Test', '\'0\'' ));
 			$col = new WebControls\GridViewColumn( 'Last Activity' );
 			$col->ondblclick = 'alert(\'Column click event triggered: %Last Activity%\');';
 			$this->table2->addColumn( $col );

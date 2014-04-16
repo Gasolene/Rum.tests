@@ -34,6 +34,7 @@
 			$this->page->form->email->placeholder = 'Enter your email address here...';
 			$this->page->form->country->tooltip = 'Select your country here...';
 			$this->page->form->city->tooltip = 'Select your city here...';
+			$this->page->form->email->addValidator(new \System\Validators\EmailValidator());
 
 			// create GridView
 			$this->page->add( new WebControls\GridView( 'table' ));
@@ -61,7 +62,8 @@
 
 		function onPageLoad($sender, $args)
 		{
-			$this->table->bind(DataAdapter::create( 'driver=text;format=CommaDelimited;source=' . \Rum::config()->root . '/app/data/Partner Tracking List.csv' )->openDataSet());
+			$ds = DataAdapter::create( 'driver=text;format=CommaDelimited;source=' . \Rum::config()->root . '/app/data/Partner Tracking List.csv' )->openDataSet();
+			$this->table->bind($ds);
 		}
 
 		function onPageRequest($sender, $args)
