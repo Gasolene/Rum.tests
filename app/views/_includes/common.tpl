@@ -17,7 +17,6 @@
 
 	<div id="body">
 		<div id="content" class="wide">
-			<?=Rum::messages()?>
 			<?php $this->content() ?>
 		</div>
 		<div style="clear:both"></div>

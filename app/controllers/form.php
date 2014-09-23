@@ -68,7 +68,7 @@
 			$this->form->Time->addValidator(new \System\Validators\DateTimeValidator());
 
 			$this->title->items->add( '', '' );
-			$this->Province->validators[0]->errorMessage = 'blast off';
+//			$this->Province->validators[0]->errorMessage = 'blast off';
 
 			$this->favoritecolors->items->add( 'Red', '#FF0000' );
 			$this->favoritecolors->items->add( 'Green', '#00FF00' );

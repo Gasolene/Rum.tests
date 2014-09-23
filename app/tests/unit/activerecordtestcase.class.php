@@ -55,9 +55,9 @@
 			$michael->save();
 
 			// test ::count
-			$this->assertEqual( Student::count(array('student_name'=>'george')), 1);
-			$this->assertEqual( Student::count(), 4 );
-			$this->assertEqual( Classrooms::count(), 0 );
+			$this->assertEqual( Student::countAll(array('student_name'=>'george')), 1);
+			$this->assertEqual( Student::countAll(), 4 );
+			$this->assertEqual( Classrooms::countAll(), 0 );
 
 			// test ::all
 			$this->assertEqual( Student::all(array('student_name'=>'george'))->count, 1);
@@ -469,7 +469,7 @@
 			// test _getAllByType 1 to many and many to many
 			$classes = $george->findAllClassrooms();
 			$this->assertEqual( $classes->count, 2 );
-			$this->assertEqual( Classrooms::count(), 3 );
+			$this->assertEqual( Classrooms::countAll(), 3 );
 			$this->assertEqual( $george->getCountClassrooms(), 2 );
 
 			$this->assertTrue( $classes[0]->name   == 'science' );
