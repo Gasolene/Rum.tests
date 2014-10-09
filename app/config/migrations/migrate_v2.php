@@ -14,15 +14,19 @@
 
 		public function up()
 		{
-			$this->db->executeBatch("
-				ALTER TABLE `test_migrations` CHANGE `textfield` `rename` VARCHAR( 255 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL ;
+			$this->db->prepare("
+				ALTER TABLE `test_migrations` CHANGE `textfield` `rename` VARCHAR( 255 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL ;")->execute();
+
+			return $this->db->prepare("
 				ALTER TABLE `test_migrations` ADD `newfield` INT NOT NULL AFTER `rename` ;");
 		}
 
 		public function down()
 		{
-			$this->db->executeBatch("
-				ALTER TABLE `test_migrations` DROP `newfield`  ;
+			$this->db->prepare("
+				ALTER TABLE `test_migrations` DROP `newfield`  ;")->execute();
+
+			return $this->db->prepare("
 				ALTER TABLE `test_migrations` CHANGE `rename` `textfield` VARCHAR( 255 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL  ;");
 		}
 	}

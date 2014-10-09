@@ -14,12 +14,12 @@
 
 		public function up()
 		{
-			$this->db->execute("ALTER TABLE `test_migrations` CHANGE `newfield` `renamefield` INT( 11 ) NOT NULL ;");
+			return $this->db->prepare("ALTER TABLE `test_migrations` CHANGE `newfield` `renamefield` INT( 11 ) NOT NULL ;");
 		}
 
 		public function down()
 		{
-			$this->db->execute("ALTER TABLE `test_migrations` CHANGE `renamefield` `newfield` INT( 11 ) NOT NULL ;");
+			return $this->db->prepare("ALTER TABLE `test_migrations` CHANGE `renamefield` `newfield` INT( 11 ) NOT NULL ;");
 		}
 	}
 ?>
