@@ -57,6 +57,14 @@
 		 * @var array
 		**/
 		protected $relationships	= array(
+			array(
+				'relationship' => 'has_many_and_belongs_to',
+				'type' => 'MyApp\Models\Classrooms',
+				'table' => 'student_classrooms',
+				'columnRef' => 'classroom_id',
+				'columnKey' => 'student_id',
+				'notNull' => '1'
+			)
 		);
 	}
 ?>

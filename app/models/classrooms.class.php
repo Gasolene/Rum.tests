@@ -64,6 +64,14 @@
 				'columnRef' => 'School_id',
 				'columnKey' => 'School_id',
 				'notNull' => '0'
+			),
+			array(
+				'relationship' => 'has_many_and_belongs_to',
+				'type' => 'MyApp\Models\Student',
+				'table' => 'student_classrooms',
+				'columnRef' => 'student_id',
+				'columnKey' => 'classroom_id',
+				'notNull' => '1'
 			)
 		);
 	}
