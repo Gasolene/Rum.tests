@@ -77,12 +77,12 @@
 				{
 					if($cardType === $cardTypeInfo[0])
 					{
-						$this->errorMessage = $this->errorMessage?$this->errorMessage:"{$this->controlToValidate->label} " . str_replace('%x', $cardTypeInfo[1], str_replace('%y', $cardName, \System\Base\ApplicationBase::getInstance()->translator->get('must_be_a_valid_x_digit_card_security_code_for_y', 'must be a valid %x digit card security code for %y')));
+//						$this->errorMessage = $this->errorMessage?$this->errorMessage:"{$this->controlToValidate->label} " . str_replace('%x', $cardTypeInfo[1], str_replace('%y', $cardName, \System\Base\ApplicationBase::getInstance()->translator->get('must_be_a_valid_x_digit_card_security_code_for_y', 'must be a valid %x digit card security code for %y')));
 						return $this->validateCVV2($this->controlToValidate->value, $cardTypeInfo[1]);
 					}
 				}
 
-				$this->errorMessage = $this->errorMessage?$this->errorMessage:"{$this->controlToValidate->label} " . \System\Base\ApplicationBase::getInstance()->translator->get('must_be_a_valid_card_security_code', 'must be a valid card security code');
+//				$this->errorMessage = $this->errorMessage?$this->errorMessage:"{$this->controlToValidate->label} " . \System\Base\ApplicationBase::getInstance()->translator->get('must_be_a_valid_card_security_code', 'must be a valid card security code');
 				return $this->validateCVV2($this->controlToValidate->value);
 			}
 			else

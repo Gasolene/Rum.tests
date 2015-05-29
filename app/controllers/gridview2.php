@@ -88,7 +88,7 @@
 			// Ajax Delete
 			$this->table->deleteRow($args["customer_id"]);
 			\Rum::flash("s:Customer #{$args["customer_id"]} has been deleted");
-			$this->table->updateAjax();
+			$this->table->needsUpdating = true;
 		}
 	}
 ?>

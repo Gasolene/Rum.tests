@@ -44,7 +44,7 @@
 	class FileTypeValidator extends \System\Validators\FileTypeValidator {}
 	class IntegerValidator extends \System\Validators\IntegerValidator {}
 	class LengthValidator extends \System\Validators\LengthValidator {}
-	class MatchValidator extends \System\Validators\MatchValidator {}
+	class MatchValidator extends \System\Validators\PatternValidator {}
 	class NumericValidator extends \System\Validators\NumericValidator {}
 	class PatternValidator extends \System\Validators\PatternValidator {}
 	class RangeValidator extends \System\Validators\RangeValidator {}
@@ -55,31 +55,29 @@
 	class CheckBox extends \System\Web\WebControls\CheckBox {}
 	class CheckBoxList extends \System\Web\WebControls\CheckBoxList {}
 	class ComboBox extends \System\Web\WebControls\DropDownList {}
-	class DateSelector extends \System\Web\WebControls\DateSelector {}
-	class DateTimeSelector extends \System\Web\WebControls\DateTimeSelector {}
+	class DateSelector extends \System\Web\WebControls\Date {}
+	class DateTimeSelector extends \System\Web\WebControls\DateTime {}
 	class DropDownList extends \System\Web\WebControls\DropDownList {}
-	class FileBrowser extends \System\Web\WebControls\FileBrowser {}
-	class Fieldset extends \System\Web\WebControls\Fieldset {}
+	class FileBrowser extends \System\Web\WebControls\File {}
 	class Form extends \System\Web\WebControls\Form {}
 	class GridView extends \System\Web\WebControls\GridView {}
 	class GridViewButton extends \System\Web\WebControls\GridViewButton {}
 	class GridViewCheckBox extends \System\Web\WebControls\GridViewCheckBox {}
 	class GridViewColumn extends \System\Web\WebControls\GridViewColumn {}
-	class GridViewDropDownMenu extends \System\Web\WebControls\GridViewDropDownMenu {}
+	class GridViewDropDownMenu extends \System\Web\WebControls\GridViewDropDownList {}
 	class GridViewImage extends \System\Web\WebControls\GridViewImage {}
 	class GridViewLink extends \System\Web\WebControls\GridViewLink {}
-	class GridViewTextBox extends \System\Web\WebControls\GridViewTextBox {}
+	class GridViewTextBox extends \System\Web\WebControls\GridViewText {}
 	class ListBox extends \System\Web\WebControls\ListBox {}
 	class LoginForm extends \System\Web\WebControls\LoginForm {}
 	class MasterView extends \System\Web\WebControls\MasterView {}
 	class Page extends \System\Web\WebControls\Page {}
 	class RadioButton extends \System\Web\WebControls\RadioButton {}
 	class RadioButtonList extends \System\Web\WebControls\RadioButtonList {}
-	class RadioGroup extends \System\Web\WebControls\RadioGroup {}
 	class ReportView extends \System\Web\WebControls\ReportView {}
-	class TextBox extends \System\Web\WebControls\TextBox {}
+	class TextBox extends \System\Web\WebControls\Text {}
 	class TextArea extends \System\Web\WebControls\TextArea {}
-	class TimeSelector extends \System\Web\WebControls\TimeSelector {}
+	class TimeSelector extends \System\Web\WebControls\Time {}
 	class TreeNode extends \System\Web\WebControls\TreeNode {}
 	class TreeView extends \System\Web\WebControls\TreeView {}
 	class View extends \System\Web\WebControls\View {}

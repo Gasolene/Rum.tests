@@ -24,7 +24,7 @@
 
 			$message = new HttpWebRequest();
 			$message->setData( array( 'data' => $note->getXMLString() ));
-            $message->url = \Rum::config()->protocol . '://' . \Rum::config()->host . str_replace( ' ', '%20', \Rum::config()->uri ) . '/resources/listener.php';
+            $message->url = \Rum::config()->protocol . '://' . \Rum::config()->host . str_replace( ' ', '%20', \Rum::config()->uri ) . '/assets/php/listener.php';
 
 			$view = new View( 'xml' );
 			$view->contentType = 'text/xml';

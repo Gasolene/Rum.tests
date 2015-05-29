@@ -76,7 +76,7 @@
 		{
 			parent::onLoad();
 
-			$this->addValidator(new PostalZipCodeValidator($this->label . ' ' . \System\Base\ApplicationBase::getInstance()->translator->get('must_be_a_valid_zip_postal', 'must be a valid zip/postal code')));
+//			$this->addValidator(new PostalZipCodeValidator($this->label . ' ' . \System\Base\ApplicationBase::getInstance()->translator->get('must_be_a_valid_zip_postal', 'must be a valid zip/postal code')));
 		}
 	}
 ?>

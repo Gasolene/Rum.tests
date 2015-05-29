@@ -20,7 +20,6 @@
     <add                         key = "test-key2"
                                value = "test-value2" />
   </app-settings>
-  <pages               default-theme = "test-theme" />
   <request                   default = "test-default"
                                param = "test-param"
                        friendly-uris = "true" />
@@ -131,7 +130,6 @@
 
 			$this->assertTrue( $config->state == \System\Base\AppState::On() );
 			$this->assertTrue( $config->appsettings instanceof \System\Base\AppSettingsCollection );
-			$this->assertTrue( $config->defaultTheme === 'default' );
 			$this->assertTrue( $config->root === __ROOT__ );
 			$this->assertTrue( $config->htdocs === __HTDOCS_PATH__ );
 			$this->assertTrue( $config->protocol === __PROTOCOL__ );
@@ -210,7 +208,6 @@
 			$this->assertNull( $config->loadAppConfig( __TMP_PATH__ . '/incomplete-config.xml' ));
 
 			$this->assertTrue( $config->appsettings instanceof AppSettingsCollection );
-			$this->assertTrue( $config->defaultTheme === 'default' );
 			$this->assertTrue( $config->root === __ROOT__ );
 			$this->assertTrue( $config->htdocs === __HTDOCS_PATH__ );
 			$this->assertTrue( $config->protocol === __PROTOCOL__ );

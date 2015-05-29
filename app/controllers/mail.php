@@ -12,7 +12,7 @@
 			$this->page->form->add(\MyApp\UI::Button('SmtpClient'));
 		}
 
-		function onPHPMailClientClick( &$page, $args )
+		function onPHPMailClientPost( &$page, $args )
 		{
 			$message = $this->getMailMessage('PHPMailer test');
 
@@ -23,7 +23,7 @@
 			\Rum::forward();
 		}
 
-		function onSendMailClientClick( &$page, $args )
+		function onSendMailClientPost( &$page, $args )
 		{
 			$message = $this->getMailMessage('Sendmail test');
 
@@ -34,7 +34,7 @@
 			\Rum::forward();
 		}
 
-		function onSmtpClientClick( &$page, $args )
+		function onSmtpClientPost( &$page, $args )
 		{
 			$message = $this->getMailMessage('SMTP test');
 

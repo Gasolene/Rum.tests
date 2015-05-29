@@ -1,5 +1,4 @@
 <?php
-
 	$_SERVER["APP_ENV"] = "dev";
 
 	define('__TMP_PATH__', '../.tmp');

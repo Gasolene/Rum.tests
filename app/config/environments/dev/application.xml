@@ -10,8 +10,6 @@
 -->
 <application                   state = "debug">
 
-  <pages               default-theme = "default" />
-
   <authorization             allow = "User, Admin , Group1, Group2"
                               deny = "">
     <page                     path = "form"

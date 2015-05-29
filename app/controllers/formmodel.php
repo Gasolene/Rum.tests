@@ -14,7 +14,7 @@
 			$this->page->form->attachDataSource($ds);
 		}
 
-		function onSaveClick( &$sender, $args )
+		function onSavePost( &$sender, $args )
 		{
 			if($this->page->form->validate($err))
 			{

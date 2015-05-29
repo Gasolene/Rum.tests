@@ -57,7 +57,7 @@
 		{
 			parent::onLoad();
 
-			$this->addValidator(new \System\Validators\PatternValidator('^[0-9][0-9][0-9][0-9][0-9]$^', $this->label . ' ' . \System\Base\ApplicationBase::getInstance()->translator->get('must_be_a_valid_zip_code', 'must be a valid zip code NNNNN')));
+//			$this->addValidator(new \System\Validators\PatternValidator('^[0-9][0-9][0-9][0-9][0-9]$^', $this->label . ' ' . \System\Base\ApplicationBase::getInstance()->translator->get('must_be_a_valid_zip_code', 'must be a valid zip code NNNNN')));
 		}
 	}
 ?>

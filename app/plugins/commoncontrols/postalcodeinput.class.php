@@ -43,7 +43,7 @@
 			parent::onLoad();
 
 			// include external resources
-			$this->addValidator(new \System\Validators\PatternValidator('^[A-Za-z][0-9][A-Za-z]( )?[0-9][A-Za-z][0-9]$^', $this->label . ' ' . \System\Base\ApplicationBase::getInstance()->translator->get('must_be_a_valid_postal_code', 'must be a valid postal code')));
+//			$this->addValidator(new \System\Validators\PatternValidator('^[A-Za-z][0-9][A-Za-z]( )?[0-9][A-Za-z][0-9]$^', $this->label . ' ' . \System\Base\ApplicationBase::getInstance()->translator->get('must_be_a_valid_postal_code', 'must be a valid postal code')));
 		}
 
 

@@ -14,7 +14,7 @@
 			$this->page->form->dataSource = \MyApp\Models\Customer::create();
 		}
 
-		function onSaveAjaxClick( &$sender, $args )
+		function onSaveAjaxPost( &$sender, $args )
 		{
 			if($this->page->form->validate($err))
 			{

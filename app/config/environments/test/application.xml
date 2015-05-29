@@ -20,7 +20,6 @@
 		<add key="pdo_mysql_username" value="root" />
 		<add key="pdo_mysql_password" value="" />
 	</app-settings>
-  <pages               default-theme = "green" />
 
   <viewstate                 enabled = "true"
                               method = "session"

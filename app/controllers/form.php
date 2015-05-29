@@ -18,10 +18,7 @@
 			// create form
 			$this->page->enableViewState = true;
 			$this->page->add( new WebControls\Form( 'form' ));
-			//$this->page->form->legend = 'Sample Form';
 			$this->page->form->enableViewState = true;
-
-			$this->page->form->legend = 'Sample Form';
 
 			$this->form->add( new \System\Web\WebControls\Text( 'Name', '' ));
 			$this->page->Name->autoFocus = true;
@@ -30,9 +27,8 @@
 			$this->form->add( new \CommonControls\ProvinceStateSelector( 'Province', 'AB' ));
 			$this->form->add( new \CommonControls\CountrySelector( 'Country', 'CA' ));
 			$this->form->add( new \CommonControls\PostalZipCodeInput( 'Postal/Zip Code' ));
-			$this->form->add( new WebControls\RadioGroup( 'Sex', 'f' ));
-			$this->Sex->add( new WebControls\RadioButton( 'f', true ));
-			$this->Sex->add( new WebControls\RadioButton( 'm' ));
+			$this->form->add( new WebControls\RadioButton( 'f', 'Sex', true ));
+			$this->form->add( new WebControls\RadioButton( 'm', 'Sex' ));
 			$this->form->add( new \System\Web\WebControls\Tel( 'Phone No' ));
 			$this->form->add( new \System\Web\WebControls\Email( 'E-Mail Address' ));
 			$this->form->add( new \System\Web\WebControls\Date( 'Birthday' ));
@@ -74,18 +70,10 @@
 			$this->favoritecolors->items->add( 'Green', '#00FF00' );
 			$this->favoritecolors->items->add( 'Blue', '#0000FF' );
 
-			$this->Sex->m->label = 'Male';
-			$this->Name->tooltip = 'Enter your name here tooltip';
-
-			$this->Sex->f->label = 'Female';
-
 			$this->form->add( new WebControls\Button( 'save', 'Save' ));
 
-			//$this->Name->ajaxPostBack = true;
-			//$this->form->ajaxPostBack = true;
-			$this->Date->ajaxValidation = true;
-			$this->Time->ajaxValidation = true;
-			$this->DateTime->ajaxValidation = true;
+			$this->Name->ajaxPostBack = true;
+			$this->form->ajaxPostBack = true;
 		}
 
 		function onPageLoad( &$page, $args ) {

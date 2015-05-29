@@ -14,9 +14,7 @@
 			\Rum::trace("Postback trace call");
 
 			// create Form
-			$this->page->enableViewState = false;
 			$this->page->add(new WebControls\Form('form'));
-			$this->page->form->legend = 'Ajax Form';
 			$this->page->form->add(new WebControls\Text('name'));
 			$this->page->form->add(new WebControls\Email('email'));
 			$this->page->form->add(new \CommonControls\CountrySelector('country'));
@@ -27,13 +25,7 @@
 			$this->page->form->add(new WebControls\Button('postback'));
 			$this->page->form->name->addValidator(new Validators\RequiredValidator('You must enter" a \'name!'));
 			$this->page->form->email->addValidator(new Validators\RequiredValidator('You must enter an email address!'));
-			$this->page->form->ajaxValidation = true;
-			$this->page->form->name->placeholder = 'Enter your username here...';
-			$this->page->form->name->tooltip = 'Enter your username here...';
-			$this->page->form->email->tooltip = 'Enter your email address here...';
-			$this->page->form->email->placeholder = 'Enter your email address here...';
-			$this->page->form->country->tooltip = 'Select your country here...';
-			$this->page->form->city->tooltip = 'Select your city here...';
+			$this->page->form->add(new WebControls\ValidationMessage('email_error', $this->form->email));
 			$this->page->form->email->addValidator(new \System\Validators\EmailValidator());
 
 			// create GridView
@@ -55,8 +47,6 @@
 			$this->table->showFilters = true;
 			$this->table->showFooter = false;
 			$this->table->showInsertRow = true;
-			$this->table->ajaxPostBack = true;
-			$this->table->columns->ajaxPostBack = true;
 			$this->table->pageSize = 5;
 		}
 
@@ -76,6 +66,7 @@
 			$this->city->dataSource = $ds;
 
 			if($this->isAjaxPostBack) {
+				\Rum::trace("AjaxPost");
 //				\Rum::flash("AJAX post back detected");
 			}
 		}
@@ -86,22 +77,22 @@
 		}
 
 		// Form Ajax
-		function onFormAjaxPost($sender, $args)
-		{
-		}
+//		function onFormAjaxPost($sender, $args)
+//		{
+//		}
 
 		// show_only_active Ajax
-		function onShow_only_activeAjaxClick($sender, $args)
+		function onShow_only_activeAjaxPost($sender, $args)
 		{
 			$ds = DataAdapter::create( 'driver=text;format=CommaDelimited;source=' . \Rum::config()->root . '/app/data/Partner Tracking List.csv' )->openDataSet('', \System\DB\DataSetType::openStatic());
 			$ds->filter('Active', '=', true);
 			$this->table->dataSource = $ds;
 
-			$this->table->updateAjax();
+			$this->table->needsUpdating = true;
 		}
 
 		// Submit Ajax
-		function onSubmitAjaxClick($sender, $args)
+		function onSubmitAjaxPost($sender, $args)
 		{
 			\Rum::trace("Async trace call");
 
@@ -116,7 +107,7 @@
 		}
 
 		// Cancel Ajax
-		function onCancelAjaxClick($sender, $args)
+		function onCancelAjaxPost($sender, $args)
 		{
 			\Rum::trace("Async trace call");
 			\Rum::forward();
@@ -125,14 +116,14 @@
 		// ListBox Ajax
 		function onCountryAjaxChange($sender, $args)
 		{
-			$this->name->updateAjax();
-			$this->city->updateAjax();
+			$this->name->needsUpdating = true;
+			$this->city->needsUpdating = true;
 		}
 
 		// City Ajax
 		function onCityAjaxChange($sender, $args)
 		{
-			$this->name->updateAjax();
+			$this->name->needsUpdating = true;
 		}
 
 		// GridView Ajax
