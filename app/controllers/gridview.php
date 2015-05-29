@@ -18,14 +18,12 @@
 			$this->table1->valueField = 'Company';
 			$this->table1->canChangeOrder = true;
 			$this->table1->orderByField = 'Sort Order';
-			$this->table1->ajaxPostBack = true;
 
 			$this->page->add( new WebControls\GridView( 'table2' ));
 			$this->table2->addColumn( new WebControls\GridViewColumn( 'Company', 'Company', '"<a href=\"mailto:".%ContactEmail%."\">".%Company%."</a>"', '\'CompanyFooter\'', 'company_class' ));
 			$this->table2->addColumn( new WebControls\GridViewColumn( 'ContactPhone', 'Contact Phone' ));
 //			$this->table1->addColumn( new WebControls\GridViewColumn( 'Test', 'Test', '\'0\'' ));
 			$col = new WebControls\GridViewColumn( 'Last Activity' );
-			$col->ondblclick = 'alert(\'Column click event triggered: %Last Activity%\');';
 			$this->table2->addColumn( $col );
 			// $this->table2->addActionColumn( \Rum::uri( 'form' ), 'Contact', 'contact' );
 			$this->table2->addColumn( new WebControls\GridViewButton( 'Company', 'Edit', 'Edit' ));
@@ -34,7 +32,7 @@
 			$this->table1->selected = array('Amazon.com');
 			$this->table1->showFilters = true;
 
-			$this->table1->setFilterValues( 'Last Activity', array('Phone call', 'Webinar', 'Meeting' ));
+//			$this->table1->setFilterValues( 'Last Activity', array('Phone call', 'Webinar', 'Meeting' ));
 		}
 
 		function onPageLoad( &$page, $args ) {
@@ -44,7 +42,6 @@
 
 			$this->table1->dataSource = $ds;
 			$this->table2->dataSource = $db->openDataSet();
-			$this->table1->ajaxPostBack = true;
 		}
 
 		function onEditAjaxPost( &$col, $args ) {

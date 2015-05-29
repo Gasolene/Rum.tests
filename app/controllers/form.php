@@ -21,7 +21,6 @@
 			$this->page->form->enableViewState = true;
 
 			$this->form->add( new \System\Web\WebControls\Text( 'Name', '' ));
-			$this->page->Name->autoFocus = true;
 			$this->form->add( new \CommonControls\AddressInput( 'Address' ));
 			$this->form->add( new \System\Web\WebControls\Search( 'City', 'Calgary' ));
 			$this->form->add( new \CommonControls\ProvinceStateSelector( 'Province', 'AB' ));
@@ -35,7 +34,6 @@
 			$this->form->add( new WebControls\CheckBoxList( 'favoritecolors' ));
 			$this->form->add( new \System\Web\WebControls\Color( 'Favorite Color' ));
 			$this->form->add( new WebControls\CheckBox( 'Active', true ));
-			$this->form->add( new \System\Web\WebControls\DateTime( 'DateTime' ));
 			$this->form->add( new \System\Web\WebControls\Date( 'Date' ));
 			$this->form->add( new \System\Web\WebControls\Time( 'Time' ));
 			$this->form->add( new \System\Web\WebControls\TextArea( 'Comment' ));
@@ -73,7 +71,6 @@
 			$this->form->add( new WebControls\Button( 'save', 'Save' ));
 
 			$this->Name->ajaxPostBack = true;
-			$this->form->ajaxPostBack = true;
 		}
 
 		function onPageLoad( &$page, $args ) {

@@ -8,7 +8,6 @@
 			$this->page->table->showFilters = true;
 			$this->page->table->showFooter = true;
 			$this->page->table->pageSize=4;
-			$this->page->table->columns->ajaxPostBack = true;
 			$this->page->table->enableViewState = false;
 			$this->page->table->columns[0]->valueField = 'category_id';
 			$this->page->table->columns[0]->textField = 'category';
